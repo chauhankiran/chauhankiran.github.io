@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>GTK Chapter 0.</title>
+
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap');
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background-color: #f8f8f8;
+        color: #222;
+        font-family: "PT Serif", Georgia, Times, "Times New Roman", serif;
+        font-size: 1rem;
+        width: 100%;
+        max-width: 1000px;
+        margin: 5rem auto;
+        padding-right: 55px;
+        padding-left: 55px;
+      }
+      h1,
+      h2,
+      h3 {
+        font-weight: bold;
+        text-rendering: optimizelegibility;
+      }
+      h1 {
+        font-size: 2.2em;
+        line-height: 1.2em;
+      }
+      h3 {
+        margin-bottom: .3rem;
+      }
+      a {
+        color: #1863a1;
+        text-decoration: none;
+      }
+      header h1 {
+        margin-bottom: 0;
+      }
+      header p {
+        margin-top: 0;
+        color: #aaa;
+      }
+      .post {
+        margin-top: 2rem;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid #ddd;
+      }
+      .post-header h2 {
+        margin-bottom: 0;
+      }
+      time {
+        color: #aaa;
+        font-size: 1.1rem;
+      }
+      .post-content {
+        margin-top: 1.4rem;
+      }
+      footer {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        color: #aaa;
+      }
+      footer a {
+        color: #888 !important;
+      }
+      .note {
+        color: #666;
+      }
+      code,
+      pre {
+        font-family: 'Source Code Pro', monospace;
+        color: #C52551;
+      }
+      pre {
+        border-top: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+        padding-top: .5rem;
+        padding-bottom: .5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>GTK Chapter 0.</h1>
+      <p>
+        Jul 2020
+      </p>
+    </header>
+    <main>
+      <div class="post">
+        <div class="post-content">
+          <p class="note">
+            This book is written while learning. It might contains errors. You're welcome to do the corrections! Enjoy!
+          </p>
+
+          <p>
+            <a href="https://www.gtk.org/">GTK+</a> or <a href="https://mail.gnome.org/archives/gtk-devel-list/2019-February/msg00000.html">GTK</a> is <a href="https://stackoverflow.com/a/12717284">GUI</a> toolkit (written in <a href="https://www.gtk.org/docs/getting-started/hello-world/#getting-started">C</a>) for developing <a href="https://www.gnu.org/gnu/linux-and-gnu.en.html">GNU/Linux</a> (or <a href="https://www.gtk.org/docs/installations/windows/">other</a> <a href="https://www.gtk.org/docs/installations/macos/">platforms</a>, if you care) desktop applications. There are two popular versions of GTK - <a href="https://developer.gnome.org/gtk2/">2</a> & <a href="https://developer.gnome.org/gtk3/stable/">3</a>. 2 is stable but old. 3 is new but <a href="https://en.wikipedia.org/wiki/GTK#Criticism">occasionally</a> <a href="https://blogs.gnome.org/mortenw/2014/06/23/how-does-one-create-a-gtk-application/">breaks</a>! (even version <a href="https://gnome.pages.gitlab.gnome.org/gtk/gtk/">4</a> is coming). The focus of this book is - 3 and in C. Due to this, this book assume that you know C.
+          </p>
+
+          <p>
+            Here is the simple hello, world program (<code>hello.c</code>) in C.
+          </p>
+
+          <pre>#include&lt;stdio.h&gt;
+
+int main(int argc, char *argv[]) {
+  printf("hello, world\n");
+
+  return 0;
+}</pre>
+
+          <p>
+            To compile this program, we're going to use <a href="https://gcc.gnu.org/">gcc</a>. Following is a command to compile this program.
+          </p>
+
+          <pre>$ gcc hello.c -o hello</pre>
+
+          <p>
+            <code>gcc</code> is a command that invoke compiler on <code>hello.c</code> and after successful compilation, it will generate the object file (<code>-o</code>) <code>hello</code>. This object file can be execute using following command:
+          </p>
+
+          <pre>$ ./hello
+hello, world</pre>
+
+          <p>
+            But, we're talking about GUI applications using GTK. So, we first need to install the development libraries for GTK. Almost, <a href="https://developer.fedoraproject.org/tech/languages/c/gtk.html" title="Install on Fedora">all</a> <a href="https://packages.debian.org/stretch/libgtk-3-dev" title="Install on Debian">popular</a> <a href="https://wiki.archlinux.org/index.php/GTK#Installation" title="Install on Arch">package</a> <a href="https://askubuntu.com/a/243636" title="Install on Ubuntu">managers</a> have entry for GTK development libraries. You just need to run the appropriate command(s) to install these development libraries. Go ahead and do first!
+          </p>
+
+        </div>
+      </div>
+    </main>
+    <footer>
+      <a href="w.html">&#8592; Back</a>. <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a>
+    </footer>
+  </body>
+</html>
