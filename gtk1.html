@@ -134,7 +134,7 @@ int main(int argc, char *argv[]) {
 }</pre>
 
           <p>
-            Within this <code>main()</code> function, we first need to initiate the GTK using <code>gkt_init()</code> function. This function do all the needed configurations and initial setup before our GUI render on screen. This function takes passed parameters.
+            Within this <code>main()</code> function, we first need to initiate the GTK using <code><a href="https://developer.gnome.org/gtk3/stable/gtk3-General.html#gtk-init">gkt_init()</a></code> function. This function do all the needed configurations and initial setup before our GUI render on screen. This function takes passed parameters.
           </p>
 
           <pre>#include&lt;gtk/gtk.h&gt;
@@ -160,7 +160,7 @@ int main(int argc, char *argv[]) {
 }</pre>
 
           <p>
-            Once we complete with out application code, we need to invoke, at the end but before the <code>return</code> statement - <code>gtk_main()</code> function. This method take the control of our application and continue run until we terminate the application or process. This is called <em>main loop</em> and continue run while having the control of application.
+            Once we complete with out application code, we need to invoke, at the end but before the <code>return</code> statement - <code><a href="https://developer.gnome.org/gtk3/stable/gtk3-General.html#gtk-main">gtk_main()</a></code> function. This method take the control of our application and continue run until we terminate the application or process. This is called <em>main loop</em> and continue run while having the control of application.
           </p>
 
           <pre>#include&lt;gtk/gtk.h&gt;
