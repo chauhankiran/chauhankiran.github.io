@@ -16,6 +16,7 @@ body {
   width: 100%;
   max-width: 768px;
   margin: 5rem auto;
+  padding: 1rem;
   text-rendering: optimizelegibility;
 }
 h1,
@@ -79,4 +80,8 @@ pre {
 }
 mark {
   background-color: #B2AC28;
+}
+u {
+  text-decoration: none;
+  border-bottom: 1px solid rgba(143,155,168,0.4);
 }
