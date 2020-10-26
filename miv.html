@@ -1,0 +1,265 @@
+  <!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, height=device-height, viewport-fit=cover, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Let's Build miv - Mini Image Viewer</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet">
+    <link href="k.css" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+      <h1>Let's Build miv - Mini Image Viewer</h1>
+      <p>
+        Oct 2020
+      </p>
+    </header>
+
+    <main>
+      <div class="post">
+        <div class="post-content">
+
+          <p>In this mini-book, we're going to build miv - mini image viewer using <a href="https://gtk.org/">GTK3</a> and <a href="https://wiki.gnome.org/Projects/Vala">Vala</a>. In order to follow this tutorial, you need</p>
+
+          <ul>
+            <li><a href="https://wiki.gnome.org/Projects/Vala/ValaPlatforms">Vala</a> compiler</li>
+            <li><a href="https://www.gtk.org/docs/installations/">GTK3 development libraries</a></li>
+            <li><a href="https://mesonbuild.com/">Meson</a></li>
+            <li>Terminal</li>
+            <li>Text editor</li>
+          </ul>
+
+          <p>I haven't mentioned the steps to install these software, but you can communicate with me in case of trouble while doing installation. That being said, let's get started.</p>
+
+          <p>Let's create a folder with name <code>miv</code> and inside this we're going to create a file with name <code>Application.vala</code>.</p>
+
+          <pre><code>$ mkdir miv
+$ cd miv
+$ touch Application.vala</code></pre>
+
+          <p>Let's open this <code>Application.vala</code> in your favorite text-editor and write the following <a href="https://wiki.gnome.org/Projects/Vala/BasicSample#Hello_World">code</a> to test the Vala development environment.</p>
+
+          <pre><code>int main(string[] args) {
+  print(&quot;hello, world\n&quot;);
+
+  return 0;
+}</code></pre>
+
+          <p>Vala is one of the language that requires <code>main ()</code> method and semicolon at the end. To compile this program, following command is used.</p>
+
+          <pre><code>$ valac Application.vala
+$ ./Application</code></pre>
+
+          <p><code>valac</code> is a compiler that compiles the Vala program and after successful compilation, it'll generate executable with same name e.g. <code>Application</code>. We can easily run this executable by prefixing it with <code>./</code>.</p>
+
+          <p>Let's import GTK library using <code>using</code> statement at the top of our <code>Application.vala</code> program.</p>
+
+          <pre><code><mark>using Gtk;</mark>
+
+int main(string[] args) {
+  print(&quot;hello, world\n&quot;);
+
+  return 0;
+}</code></pre>
+
+          <p>Now, if we compile the program again, we'll get the following error.</p>
+
+          <pre><code>$ valac Application.vala
+Application.vala:1.7-1.9: error: The namespace name <mark>`Gtk' could not be found</mark>
+using Gtk;
+      ^^^
+Compilation failed: 1 error(s), 0 warning(s)</code></pre>
+
+          <p>Because, GTK is not standard library comes with Vala instead consider it as third-party library that you can use it in your program to develop GUI application! In such a case, you need to use <code>--pkg</code> option with <code>valac</code> as follow.</p>
+
+          <pre><code>$ valac <mark>--pkg gtk+-3.0</mark> Application.vala</code></pre>
+
+          <p>And now, you should not see any error! After GTK import, you can use methods from GTK library such as <a href="https://valadoc.org/gtk+-3.0/Gtk.init.html"><code>init ()</code></a>. This method initialize all sort of essentials things for you to render GUI. It access the passed argument as <code>ref</code>.</p>
+
+          <pre><code>using Gtk;
+
+int main(string[] args) {
+  <mark>init(ref args);</mark>
+
+  print(&quot;hello, world\n&quot;);
+
+  return 0;
+}</code></pre>
+
+          <p>At the end (but before return statement), we should call <a href="https://valadoc.org/gtk+-3.0/Gtk.main.html"><code>main ()</code></a> method and it'll continue execute our application.</p>
+
+          <pre><code>using Gtk;
+
+int main(string[] args) {
+  init(ref args);
+
+  print(&quot;hello, world\n&quot;);
+
+  <mark>Gtk.main();</mark>
+  return 0;
+}</code></pre>
+
+          <p>Play attention on how I call the <code>main ()</code> method. instead of directly writing <code>main ()</code> method I prefixed it using <code>Gtk</code> because it'll cause the problem if you get what mean!</p>
+
+          <p>You can even prefix the <code>init ()</code> method as <code>Gtk.init ()</code>.</p>
+
+          <pre><code>using Gtk;
+
+int main(string[] args) {
+  <mark>Gtk.init(ref args);</mark>
+
+  print(&quot;hello, world\n&quot;);
+
+  Gtk.main();
+  return 0;
+}</code></pre>
+
+          <p>If this is the case, we don't have to write <code>using Gtk</code> statement at the top and still compilation happen correctly.</p>
+
+          <pre><code>int main(string[] args) {
+  Gtk.init(ref args);
+
+  print(&quot;hello, world\n&quot;);
+
+  Gtk.main();
+  return 0;
+}</code></pre>
+
+          <p>Between these <code>init ()</code> and <code>main ()</code> methods, you can write your application code. Let's create a simple window and display it.</p>
+
+          <p><a href="https://valadoc.org/gtk+-3.0/Gtk.Window.html"><code>Gtk.Window ()</code></a> class is used to create an instance of <code>window</code> widget. We also need to use <code>new</code> keyword to create an instance.</p>
+
+          <pre><code>int main(string[] args) {
+  Gtk.init(ref args);
+
+  <mark>var window = new Gtk.Window();</mark>
+
+  print(&quot;hello, world\n&quot;);
+
+  Gtk.main();
+  return 0;
+}</code></pre>
+
+          <p>Being static typed programming language, I have used <code>var</code> keyword to define a variable. Next, let's set the <code>title</code> using title attribute.</p>
+
+          <pre><code>int main(string[] args) {
+  Gtk.init(ref args);
+
+  <mark>var</mark> window = new Gtk.Window();
+  window.title = &quot;This is window&quot;;
+
+  print(&quot;hello, world\n&quot;);
+
+  Gtk.main();
+  return 0;
+}</code></pre>
+
+          <p>Finally, we can display it using <a href="https://valadoc.org/gtk+-3.0/Gtk.Widget.show.html"><code>show ()</code></a> method.</p>
+
+          <pre><code>int main(string[] args) {
+  Gtk.init(ref args);
+
+  var window = new Gtk.Window();
+  window.title = &quot;This is window&quot;;
+  <mark>window.show();</mark>
+
+  print(&quot;hello, world\n&quot;);
+
+  Gtk.main();
+  return 0;
+}
+</code></pre>
+
+          <p>Let's remove this <code>printf ()</code> method call as we do not needed it for now.</p>
+
+          <pre><code>int main(string[] args) {
+  Gtk.init(ref args);
+
+  var window = new Gtk.Window();
+  window.title = &quot;This is window&quot;;
+  window.show();
+
+  Gtk.main();
+  return 0;
+}</code></pre>
+
+          <p>This marks our simple window program in Vala using GTK. Let's run it and confirm our code.</p>
+
+          <pre><code>$ valac --pkg gtk+-3.0 Application.vala
+$ ./Application</code></pre>
+
+          <p>You should see a small 200x200 window with title 'This is window' at top-left corner. If this is the case, then congratulation, you just created your very first Vala GUI program (the program is continue running in terminal which you can terminate using <code>ctrl+c</code>).</p>
+
+          <p>We can write our whole application within <code>main ()</code> method and between <code>Gtk.init ()</code> and <code>Gtk.main ()</code> methods. But, that's not recommended way and you'll not see such type of code over the Internet. Why? Because, Vala is object-oriented programming language and due to this, developers utilize this feature to better manage their code.</p>
+
+          <p>Let's remove all the code we just wrote within <code>Application.vala</code> file and we're going to write the same code but this time with object-oriented programming.</p>
+
+          <p>Let's define a class with name <code>Application</code> (now you know what I named the file with this name!).</p>
+
+          <pre><code>class Application {
+
+}</code></pre>
+
+          <p>We're going to extend this <code>Application</code> class with <code>Gtk.Application</code> because we're going to write GUI application using GTK! This inheritance or extend can be done using <code>:</code> operator.</p>
+
+          <pre><code>class Application <mark>: Gtk.Application</mark> {
+
+}</code></pre>
+
+          <p>We extend our <code>Application</code> class with <code>Gtk.Application</code> class because this <code>Gtk.Application</code> class is the important one and it do many needed things for us such as GTK initialization, application uniqueness, desktop integration and many many more.</p>
+
+          <p>Let's write the default constructor which has same name as the class.</p>
+
+          <pre><code>class Application : Gtk.Application {
+  <mark>Application() {</mark>
+
+  <mark>}</mark>
+}</code></pre>
+
+          <p>This constructor accepts two arguments via <code>Object()</code> as follow.</p>
+
+          <pre><code>class Application : Gtk.Application {
+  Application() {
+    <mark>Object(</mark>
+
+    <mark>);</mark>
+  }
+}</code></pre>
+
+          <p>In this <code>Object()</code> we need to pass, <code>application_id</code> and <code>flags</code>. The value of <code>application_id</code> is string with unique name in most of the case reverse domain name and <code>flags</code> is GTK flag which is <code>GLib.ApplicationFlags.FLAGS_NONE</code>.</p>
+
+          <pre><code>class Application : Gtk.Application {
+  Application() {
+    Object(
+      <mark>application_id: &quot;com.github.chauhankiran.test&quot;,</mark>
+      <mark>flags: GLib.ApplicationFlags.FLAGS_NONE</mark>
+    );
+  }
+}</code></pre>
+
+          <p>GLib is already there for you to use in Vala and due to this, we can remove it.</p>
+
+          <pre><code>class Application : Gtk.Application {
+  Application() {
+    Object(
+      application_id: &quot;com.github.chauhankiran.test&quot;,
+      flags: <mark>ApplicationFlags.FLAGS_NONE</mark>
+    );
+  }
+}</code></pre>
+
+          <p>Now, we're going to override activate() method.</p>
+
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <a href="w.html">&#8592; Back</a>. <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a>
+    </footer>
+  </body>
+</html>
