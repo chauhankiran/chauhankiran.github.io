@@ -4,11 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, height=device-height, viewport-fit=cover, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
     <title>GTK Chapter 0.</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet">
     <link href="k.css" rel="stylesheet">
   </head>
   <body>
@@ -19,21 +16,19 @@
       </p>
     </header>
     <main>
-      <div class="post">
-        <div class="post-content">
-          <p class="note">
-            This book is written while learning. It might contains errors. You're welcome to do the corrections! Enjoy!
-          </p>
+      <p class="note">
+        This book is written while learning. It might contains errors. You're welcome to do the corrections! Enjoy!
+      </p>
 
-          <p>
-            <a href="https://www.gtk.org/">GTK+</a> or <a href="https://mail.gnome.org/archives/gtk-devel-list/2019-February/msg00000.html">GTK</a> is <a href="https://stackoverflow.com/a/12717284">GUI</a> toolkit (written in <a href="https://www.gtk.org/docs/getting-started/hello-world/#getting-started">C</a>) for developing <a href="https://www.gnu.org/gnu/linux-and-gnu.en.html">GNU/Linux</a> (or <a href="https://www.gtk.org/docs/installations/windows/">other</a> <a href="https://www.gtk.org/docs/installations/macos/">platforms</a>, if you care) desktop applications. There are two popular versions of GTK - <a href="https://developer.gnome.org/gtk2/">2</a> & <a href="https://developer.gnome.org/gtk3/stable/">3</a>. 2 is stable but old. 3 is new but <a href="https://en.wikipedia.org/wiki/GTK#Criticism">occasionally</a> <a href="https://blogs.gnome.org/mortenw/2014/06/23/how-does-one-create-a-gtk-application/">breaks</a>! (even version <a href="https://gnome.pages.gitlab.gnome.org/gtk/gtk/">4</a> is coming). The focus of this book is - 3 and in C. Due to this, this book assume that you know C.
-          </p>
+      <p>
+        <a href="https://www.gtk.org/">GTK+</a> or <a href="https://mail.gnome.org/archives/gtk-devel-list/2019-February/msg00000.html">GTK</a> is <a href="https://stackoverflow.com/a/12717284">GUI</a> toolkit (written in <a href="https://www.gtk.org/docs/getting-started/hello-world/#getting-started">C</a>) for developing <a href="https://www.gnu.org/gnu/linux-and-gnu.en.html">GNU/Linux</a> (or <a href="https://www.gtk.org/docs/installations/windows/">other</a> <a href="https://www.gtk.org/docs/installations/macos/">platforms</a>, if you care) desktop applications. There are two popular versions of GTK - <a href="https://developer.gnome.org/gtk2/">2</a> & <a href="https://developer.gnome.org/gtk3/stable/">3</a>. 2 is stable but old. 3 is new but <a href="https://en.wikipedia.org/wiki/GTK#Criticism">occasionally</a> <a href="https://blogs.gnome.org/mortenw/2014/06/23/how-does-one-create-a-gtk-application/">breaks</a>! (even version <a href="https://gnome.pages.gitlab.gnome.org/gtk/gtk/">4</a> is coming). The focus of this book is - 3 and in C. Due to this, this book assume that you know C.
+      </p>
 
-          <p>
-            Here is the simple hello, world program (<code>hello.c</code>) in C.
-          </p>
+      <p>
+        Here is the simple hello, world program (<code>hello.c</code>) in C.
+      </p>
 
-          <pre>#include&lt;stdio.h&gt;
+      <pre>#include&lt;stdio.h&gt;
 
 int main(int argc, char *argv[]) {
   printf("hello, world\n");
@@ -41,28 +36,25 @@ int main(int argc, char *argv[]) {
   return 0;
 }</pre>
 
-          <p>
-            To compile this program, we're going to use <a href="https://gcc.gnu.org/">gcc</a>. Following is a command to compile this program.
-          </p>
+      <p>
+        To compile this program, we're going to use <a href="https://gcc.gnu.org/">gcc</a>. Following is a command to compile this program.
+      </p>
 
-          <pre>$ gcc hello.c -o hello</pre>
+      <pre>$ gcc hello.c -o hello</pre>
 
-          <p>
-            <code>gcc</code> is a command that invoke compiler on <code>hello.c</code> and after successful compilation, it will generate the object file (<code>-o</code>) <code>hello</code>. This object file can be execute using following command:
-          </p>
+      <p>
+        <code>gcc</code> is a command that invoke compiler on <code>hello.c</code> and after successful compilation, it will generate the object file (<code>-o</code>) <code>hello</code>. This object file can be execute using following command:
+      </p>
 
-          <pre>$ ./hello
+      <pre>$ ./hello
 hello, world</pre>
 
-          <p>
-            But, we're talking about GUI applications using GTK. So, we first need to install the development libraries for GTK. Almost, <a href="https://developer.fedoraproject.org/tech/languages/c/gtk.html" title="Install on Fedora">all</a> <a href="https://packages.debian.org/stretch/libgtk-3-dev" title="Install on Debian">popular</a> <a href="https://wiki.archlinux.org/index.php/GTK#Installation" title="Install on Arch">package</a> <a href="https://askubuntu.com/a/243636" title="Install on Ubuntu">managers</a> have entry for GTK development libraries. You just need to run the appropriate command(s) to install these development libraries. Go ahead and do first! Then let's meet in <a href="gtk1.html">next chapter</a>.
-          </p>
-
-        </div>
-      </div>
+      <p>
+        But, we're talking about GUI applications in GTK. So, we first need to install the development libraries for GTK. Almost, <a href="https://developer.fedoraproject.org/tech/languages/c/gtk.html" title="Install on Fedora">all</a> <a href="https://packages.debian.org/stretch/libgtk-3-dev" title="Install on Debian">popular</a> <a href="https://wiki.archlinux.org/index.php/GTK#Installation" title="Install on Arch">package</a> <a href="https://askubuntu.com/a/243636" title="Install on Ubuntu">managers</a> have entry for GTK development libraries. You just need to run the appropriate command(s) to install these development libraries. Go ahead and do first! Then let's meet in <a href="gtk1.html">next chapter</a>.
+      </p>
     </main>
     <footer>
-      <a href="w.html">&#8592; Back</a>. <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a>
+      <a href="w.html">&#8592; Back</a>.
     </footer>
   </body>
 </html>
