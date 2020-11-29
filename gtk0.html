@@ -50,11 +50,154 @@ int main(int argc, char *argv[]) {
 hello, world</pre>
 
       <p>
-        But, we're talking about GUI applications in GTK. So, we first need to install the development libraries for GTK. Almost, <a href="https://developer.fedoraproject.org/tech/languages/c/gtk.html" title="Install on Fedora">all</a> <a href="https://packages.debian.org/stretch/libgtk-3-dev" title="Install on Debian">popular</a> <a href="https://wiki.archlinux.org/index.php/GTK#Installation" title="Install on Arch">package</a> <a href="https://askubuntu.com/a/243636" title="Install on Ubuntu">managers</a> have entry for GTK development libraries. You just need to run the appropriate command(s) to install these development libraries. Go ahead and do first! Then let's meet in <a href="gtk1.html">next chapter</a>.
+        But, we're talking about GUI applications in GTK. So, we first need to install the development libraries for GTK. Almost, <a href="https://developer.fedoraproject.org/tech/languages/c/gtk.html" title="Install on Fedora">all</a> <a href="https://packages.debian.org/stretch/libgtk-3-dev" title="Install on Debian">popular</a> <a href="https://wiki.archlinux.org/index.php/GTK#Installation" title="Install on Arch">package</a> <a href="https://askubuntu.com/a/243636" title="Install on Ubuntu">managers</a> have entry for GTK development libraries. You just need to run the appropriate command(s) to install these development libraries. Go ahead and do first! Then let's meet in next section.
+      </p>
+
+      <hr>
+
+      <p>
+        In order to build GUI application using GTK, we need to include one header file <code>gtk/gtk.h</code> in our program. For example, if I'm creating <code>hello, world</code> application within <code>hello.c</code>, then following will be the first line I have to write (create a <code>hello.c</code> program or delete everything from <code>hello.c</code>, if you already have).
+      </p>
+
+      <pre>#include&lt;gtk/gtk.h&gt;</pre>
+
+      <p>
+        After this, as obvious you need a <code>main()</code> function to initiate the execution.
+      </p>
+
+      <pre>#include&lt;gtk/gtk.h&gt;
+
+int <mark>main</mark>(int argc, char *argv[]) {
+
+}</pre>
+
+      <p>
+        Optionally, we can <code>return</code> something at the end of <code>main()</code> function.
+      </p>
+
+      <pre>#include&lt;gtk/gtk.h&gt;
+
+int main(int argc, char *argv[]) {
+
+  <mark>return 0;</mark>
+}</pre>
+
+      <p>
+        Within this <code>main()</code> function, we first need to initiate the GTK using <code><a href="https://developer.gnome.org/gtk3/stable/gtk3-General.html#gtk-init">gkt_init()</a></code> function. This function do all the needed configurations and initial setup before our GUI render on screen. This function takes passed parameters.
+      </p>
+
+      <pre>#include&lt;gtk/gtk.h&gt;
+
+int main(int argc, char *argv[]) {
+  <mark>gtk_init(&argc, &argv);</mark>
+
+  return 0;
+}</pre>
+
+      <p>
+        Then we can write our application code that might have window, button, menu, icon, and so on.
+      </p>
+
+      <pre>#include&lt;gtk/gtk.h&gt;
+
+int main(int argc, char *argv[]) {
+  gtk_init(&argc, &argv);
+
+  <mark>/* application code should be written here */</mark>
+
+  return 0;
+}</pre>
+
+      <p>
+        Once we complete with out application code, we need to invoke, at the end but before the <code>return</code> statement - <code><a href="https://developer.gnome.org/gtk3/stable/gtk3-General.html#gtk-main">gtk_main()</a></code> function. This method take the control of our application and continue run until we terminate the application or process. This is called <em>main loop</em> and continue run while having the control of application.
+      </p>
+
+      <pre>#include&lt;gtk/gtk.h&gt;
+
+int main(int argc, char *argv[]) {
+  gtk_init(&argc, &argv);
+
+  /* application code should be written here */
+
+  <mark>gtk_main();</mark>
+
+  return 0;
+}</pre>
+
+      <p>
+        What we just wrote here is the boilerplate code for the GTK GUI application for next few chapters. In future chapters, whenever I ask you to write the boilerplate code, this is what you have to write. Let's clear the program and re-write these few lines again but now in little different order.
+      </p>
+
+      <p>
+        Let's first include the needed header file.
+      </p>
+
+      <pre>#include&lt;gtk/gtk.h&gt;</pre>
+
+      <p>
+        Then write a <code>main()</code> function with <code>return</code> statement at the end.
+      </p>
+
+      <pre>#include&lt;gtk/gtk.h&gt;
+
+int <mark>main</mark>(int argc, char *argv[]) {
+
+  <mark>return 0;</mark>
+}</pre>
+
+      <p>
+        Next, let's initiate the GTK using <code>gtk_init()</code> function.
+      </p>
+
+      <pre>#include&lt;gtk/gtk.h&gt;
+
+int main(int argc, char *argv[]) {
+  <mark>gtk_init(&argc, &argv);</mark>
+
+
+  return 0;
+}</pre>
+
+      <p>
+        Before we forgot, let's add the main loop at the end but before the <code>return</code> statement.
+      </p>
+
+      <pre>#include&lt;gtk/gtk.h&gt;
+
+int main(int argc, char *argv[]) {
+  gtk_init(&argc, &argv);
+
+  <mark>gtk_main();</mark>
+
+  return 0;
+}</pre>
+
+      <p>
+        Finally, we can write our application code between init function and main loop.
+      </p>
+
+      <pre>#include&lt;gtk/gtk.h&gt;
+
+int main(int argc, char *argv[]) {
+  gtk_init(&argc, &argv);
+
+  <mark>/* application code should be written here. */</mark>
+
+  gtk_main();
+
+  return 0;
+}</pre>
+
+      <p>
+        Until we take different approach to build GTK applications in future chapters, you need to write this boilerplate code again and again until you frustrate with typing this too much! Because, that's how you understand, learn, and remember!
+      </p>
+
+      <p>
+        Note the name of both functions <code>gtk_init()</code> and <code>gtk_main()</code>. Every function in GTK starts with <code>gtk_</code>. You may try to write this boilerplate code couple of times until you remember. Once you done with it, let's meet in <a href="gtk2.html">next chapter</a> to write <code>hello, world</code> program using GTK.
       </p>
     </main>
     <footer>
-      <a href="w.html">&#8592; Back</a>.
+      <a href="index.html">&#8592; Back</a>.
     </footer>
   </body>
 </html>
