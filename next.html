@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Kiran Chauhan">
+
+    <title>Kiran Chauhan</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <style>
+      @import url("https://use.typekit.net/zli1tzj.css?v=2");
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background-color: #fff;
+        color: #2E2E2E;
+        font-family: "source-serif-pro", serif;
+        font-size: 1rem;
+        font-style: normal;
+        font-weight: normal;
+        line-height: 1.5;
+        width: 100%;
+        max-width: 39rem;
+        margin: 8rem auto;
+        padding: 1rem;
+        transition: background-color 0.5s ease-out;
+      }
+      h1, p { margin: 0 }
+      p { margin-bottom: 1rem; }
+      a {
+        color: #0052cc;
+        text-decoration: none;
+      }
+      a:hover { text-decoration: underline; }
+      code, kbd, pre, samp { font-family: "courier-prime", monospace, x; }
+      code { color: rgb(124, 58, 237); }
+      hr {
+        border: 0;
+        height: 1px;
+        background-image: linear-gradient(to right, rgba(33, 33, 33, 0), rgba(33, 33, 33, 0.50), rgba(33, 33, 33, 0));
+      }
+      mark {
+        background-color: rgb(252, 211, 77);
+        display: inline-block;
+        padding: 0 .3rem 0 .3rem;
+        border-radius: .1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Next.js</h1>
+    <p>
+      Next.js is a React based framework that ease the building of fast web applications. Let's create a new folder with name <code>hello-world</code>.
+    </p>
+
+    <pre>$ touch hello-world</pre>
+
+    <p>
+      Once the folder is created, go inside the created folder.
+    </p>
+
+    <pre>$ cd hello-world</pre>
+
+    <p>
+      Next, we're going to <code>init</code> the <code>npm</code> and create the <code>package.json</code> file.
+    </p>
+
+    <pre>$ npm init -y</pre>
+
+    <p>
+      I added <code>-y</code> flag to accept the default answers for the <code>npm</code> questions. As I mentioned earlier that the Next.js is a React based framework and due to this we need to install <code>next</code> as well as <code>react</code> and <code>react-dom</code> packages as follows.
+    </p>
+
+    <pre>$ npm i react react-dom next</pre>
+
+    <p>
+      You might need to wait for a couple of minutes to finish the installation process. Once the installation is done, open the <code>package.json</code> file and update the <code>script</code> tag with <code>"dev": "next"</code> as follows.
+    </p>
+
+    <pre>{
+  "name": "hello-world",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  <mark>"scripts": {</mark>
+    <mark>"dev": "next"</mark>
+  <mark>},</mark>
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "next": "^10.0.3",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  }
+}</pre>
+
+    <p>
+      We're are now ready with setup and configuration. 
+    </p>
+
+    <hr>
+
+    <p>
+      Let's run the <code>dev</code> command as follows.
+    </p>
+
+    <pre>$ npm run dev
+
+> hello-world@1.0.0 dev
+> next
+
+<mark>Error: > Couldn't find a `pages` directory. Please create one under the project root</mark></pre>
+    
+    <p>
+      Ah! We got the error. But, the error is self-explanatory. It mentioned that <code>pages</code> directory or folder is not found, please create under the project root. Let's do it then.
+    </p>
+
+    <pre>$ mkdir pages</pre>
+
+    <p>
+      Now, let's run the <code>dev</code> command again.
+    </p>
+
+    <pre>$ npm run dev
+
+> hello-world@1.0.0 dev
+> next
+
+ready - started server on <mark>http://localhost:3000</mark></pre>
+  
+    <p>
+      Great! Our application is running at <a href="http://localhost:3000">http://localhost:3000</a>. Let's open this URL in browser. Oh! We get the 404 error. That's ok because we haven't define a home page or root route within application. Next.js support file-system base routing. In other words, you'll have routing like PHP or HTML where the page route is directly associated with file within <code>pages</code> folder. Let's create an <code>index.js</code> within <code>pages</code> folder and write the following code inside this file.
+    </p>
+
+    <pre>const Home = () => {
+  return (
+    &lt;h1&gt;Home&lt;/h1&gt;
+  )
+}
+
+export default Home;</pre>
+
+    <p>
+      Here we created a React function component and exports it. You don't have to import <code>React</code> or <code>ReactDOM</code>. Just create a component and exports it. Don't worry about the component name. You can give any name you like. But, giving a meaningful name is good idea.
+    </p>
+
+    <p>
+      Now, if we reload the page, we'll see the <code>Home</code> as header text in browser. Because, <code>index.js</code> points to index route which is root route or <code>/</code>.
+    </p>
+
+    <p>
+      Within <code>pages</code> folder, let's create another page with name <code>about.js</code> file. In this file, let's write the following code.
+    </p>
+
+    <pre>const About = () => {
+  return (
+    &lt;h1&gt;About&lt;/h1&gt;
+  )
+}
+
+export default About;</pre>
+
+    <p>
+      Now, if you visit <code>/about</code> page, you'll see <code>About</code> as header text in browser. Based on name of the file, you'll auto get the routing within <code>pages</code> folder. Got it? Let's add a navigation within both <code>index.js</code> and <code>about.js</code> files. Here is the updated content of <code>index.js</code> file.
+    </p>
+
+    <pre>const Home = () => {
+  return (
+    <mark>&lt;&gt;</mark>
+      <mark>&lt;nav&gt;</mark>
+        <mark>&lt;a href="/about"&gt;About&lt;/a&gt;</mark>
+      <mark>&lt;/nav&gt;</mark>
+      &lt;h1&gt;Home&lt;/h1&gt;
+    <mark>&lt;/&gt;</mark>
+  )
+}
+
+export default Home;</pre>
+
+    <p>
+      And here is the <code>about.js</code> file with updated content.
+    </p>
+
+    <pre>const About = () => {
+  return (
+    <mark>&lt;&gt;</mark>
+      <mark>&lt;nav&gt;</mark>
+        <mark>&lt;a href="/"&gt;Home&lt;/a&gt;</mark>
+      <mark>&lt;/nav&gt;</mark>
+      &lt;h1&gt;About&lt;/h1&gt;
+    <mark>&lt;/&gt;</mark>
+  )
+}
+
+export default About;</pre>
+
+    <p>
+      Now, if you click on <code>About</code> link from home page, it'll open <code>About</code> page and if you click on <code>Home</code> link from <code>About</code> page, it'll open <code>Home</code> page. But, did you notice the complete browser reload? We can eliminate this complete reload via <code>Link</code> component. Let's import this <code>Link</code> component from <code>next/link</code> in <code>index.js</code> file as follows.
+    </p>
+
+    <pre><mark>import Link from 'next/link'</mark>
+
+const Home = () => {
+  return (
+    &lt;&gt;
+      &lt;nav&gt;
+        &lt;a href="/about"&gt;About&lt;/a&gt;
+      &lt;/nav&gt;
+      &lt;h1&gt;Home&lt;/h1&gt;
+    &lt;/&gt;
+  )
+}
+
+export default Home;</pre>
+    
+    <p>
+      Then wrap the <code>&lt;a&gt;</code> tag with <code>&lt;Link&gt;</code> tag as follows.
+    </p>
+
+    <pre>import Link from 'next/link'
+
+const Home = () =&gt; {
+  return (
+    &lt;&gt;
+      &lt;nav&gt;
+        <mark>&lt;Link&gt;</mark>
+          &lt;a href=&quot;/about&quot;&gt;About&lt;/a&gt;
+        <mark>&lt;/Link&gt;</mark>
+      &lt;/nav&gt;
+      &lt;h1&gt;Home&lt;/h1&gt;
+    &lt;/&gt;
+  )
+}
+
+export default Home;</pre>
+    <p>
+      Now, cut the <code>href</code> from <code>&lt;a&gt;</code> tag and place it with <code>&lt;Link&gt;</code> tag as a attribute as follows.
+    </p>
+
+    <pre>import Link from 'next/link'
+
+const Home = () =&gt; {
+  return (
+    &lt;&gt;
+      &lt;nav&gt;
+        <mark>&lt;Link href=&quot;/about&quot;&gt;</mark>
+          <mark>&lt;a&gt;About&lt;/a&gt;</mark>
+        &lt;/Link&gt;
+      &lt;/nav&gt;
+      &lt;h1&gt;Home&lt;/h1&gt;
+    &lt;/&gt;
+  )
+}
+
+export default Home;</pre>
+
+    <p>
+      That's it! Now, go to browser, visit <code>/</code> page, and click on <code>About</code> link. Did you notice that the content of <code>About</code> page is loaded without browser reload! But, if you click on <code>Home</code> link from <code>About</code> page, you'll see complete page refresh. Magic of <code>&lt;Link&gt;</code> tag! Let's update the same change in <code>about.js</code> file as well.
+    </p>
+
+    <pre>import Link from 'next/link'
+
+const About = () =&gt; {
+  return (
+    &lt;&gt;
+      &lt;nav&gt;
+        <mark>&lt;Link href=&quot;/&quot;&gt;</mark>
+          <mark>&lt;a&gt;Home&lt;/a&gt;</mark>
+        <mark>&lt;/Link&gt;</mark>
+      &lt;/nav&gt;
+      &lt;h1&gt;About&lt;/h1&gt;
+    &lt;/&gt;
+  )
+}
+
+export default About;</pre>
+
+      <p>
+        Now, if you go from <code>/</code> to <code>/about</code> or <code>/about</code> to <code>/</code>, you'll <em>not</em> see the complete page refresh.
+      </p>
+
+  </body>
+</html>
