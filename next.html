@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="Kiran Chauhan">
 
-    <title>Kiran Chauhan</title>
+    <title>Next.js &mdash; Kiran Chauhan</title>
     <link rel="shortcut icon" href="favicon.ico">
     <style>
       @import url("https://use.typekit.net/zli1tzj.css?v=2");
@@ -287,6 +287,64 @@ export default About;</pre>
       <p>
         Now, if you go from <code>/</code> to <code>/about</code> or <code>/about</code> to <code>/</code>, you'll <em>not</em> see the complete page refresh.
       </p>
+
+      <hr>
+
+      <p>
+        Our navigation is incomplete. Currently, it includes only one page link. Let's add both links in both pages. Let's add <code>Home</code> link in <code>index.js</code> file.
+      </p>
+
+      <pre>import Link from 'next/link'
+
+const Home = () =&gt; {
+  return (
+    &lt;&gt;
+      &lt;nav&gt;
+        &lt;Link href=&quot;/&quot;&gt;
+          &lt;a&gt;Home&lt;/a&gt;
+        &lt;/Link&gt;
+        <mark>&amp;nbsp;</mark>
+        <mark>&lt;Link href=&quot;/about&quot;&gt;</mark>
+          <mark>&lt;a&gt;About&lt;/a&gt;</mark>
+        <mark>&lt;/Link&gt;</mark>
+      &lt;/nav&gt;
+      &lt;h1&gt;Home&lt;/h1&gt;
+    &lt;/&gt;
+  )
+}
+
+export default Home;</pre>
+
+    <p>
+      Wrote an <code>&amp;nbsp;</code> hack to put one space between two links. Just confirm from your side that both links are clickable and working. Once done let's update <code>about.js</code> file by including <code>About</code> link within it.
+    </p>
+
+    <pre>import Link from 'next/link'
+
+const About = () =&gt; {
+  return (
+    &lt;&gt;
+      &lt;nav&gt;
+        <mark>&lt;Link href=&quot;/&quot;&gt;</mark>
+          <mark>&lt;a&gt;Home&lt;/a&gt;</mark>
+        <mark>&lt;/Link&gt;</mark>
+        <mark>&amp;nbsp;</mark>
+        &lt;Link href=&quot;/about&quot;&gt;
+          &lt;a&gt;About&lt;/a&gt;
+        &lt;/Link&gt;
+      &lt;/nav&gt;
+      &lt;h1&gt;About&lt;/h1&gt;
+    &lt;/&gt;
+  )
+}
+
+export default About;</pre>
+
+    <p>
+      Again confirm from your side that both links on both pages are working.
+    </p>
+
+    <hr>
 
   </body>
 </html>
