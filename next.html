@@ -346,5 +346,290 @@ export default About;</pre>
 
     <hr>
 
+    <p>
+      There are a couple of software engineering principles that you should or must follow and one of them is DRY or Don't Repeat Yourself. We're doing exactly opposite of it. We're duplicating the same <code>&lt;nav&gt;</code> tag in two different pages. Duplicating code has its own advantages in some special circumstances but not in our <code>hello-world</code> application. What will happen if our application will have more pages and then we need to add one link within navigation? You get the point, right!
+    </p>
+
+    <p>
+      So, let's eliminate the repetitive code from our application by the use of layout. What we'll do is create <code>Layout</code> component and inside this <code>Layout</code> component, we'll have <code>&lt;nav&gt;</code>. Below, this <code>&lt;nav&gt;</code> we're going to render the content from the pages where we use <code>Layout</code>. For example, this is how we're going to use <code>Layout</code> component.
+    </p>
+
+    <pre>&lt;Layout&gt;
+  // Content goes here.
+&lt;/Layout&gt;</pre>
+
+    <p>
+      But, we can't create this <code>Layout</code> within <code>pages</code> folder. Why? Because, if we do it, then it'll be available at <code>/layout</code>. In this case, we can create this <code>Layout</code> as component within <code>components</code> folder outside the <code>pages</code> folder and under the <code>project</code> root folder. Just like we create a normal React component.
+    </p>
+
+    <p>
+      First, in project root, let's create a <code>components</code> folder.
+    </p>
+
+    <pre>$ mkdir components</pre>
+
+    <p>
+      Then inside this created <code>components</code> folder, create a <code>Layout.js</code> file. Yeah, I intentionally gave the name <code>Layout.js</code> and not <code>layout.js</code>. Why? Because, it's a component and not the page.
+    </p>
+
+    <pre>const Layout = () =&gt; {
+  return (
+
+  )
+}
+
+export default Layout;</pre>
+
+    <p>
+      Let's copy the common code between <code>index.js</code> and <code>about.js</code> file i.g. <code>&lt;nav&gt;</code> code.
+    </p>
+
+    <pre>const Layout = () =&gt; {
+  return (
+    <mark>&lt;nav&gt;</mark>
+      <mark>&lt;Link href=&quot;/&quot;&gt;</mark>
+        <mark>&lt;a&gt;Home&lt;/a&gt;</mark>
+      <mark>&lt;/Link&gt;</mark>
+      <mark>&amp;nbsp;</mark>
+      <mark>&lt;Link href=&quot;/about&quot;&gt;</mark>
+        <mark>&lt;a&gt;About&lt;/a&gt;</mark>
+      <mark>&lt;/Link&gt;</mark>
+    <mark>&lt;/nav&gt;</mark>
+  )
+}
+
+export default Layout;</pre>
+
+    <p>
+      We need to import the <code>Link</code> tag here in this <code>Layout.js</code> file.
+    </p>
+
+    <pre><mark>import Link from 'next/link'</mark>
+
+const Layout = () =&gt; {
+  return (
+    &lt;nav&gt;
+      &lt;Link href=&quot;/&quot;&gt;
+        &lt;a&gt;Home&lt;/a&gt;
+      &lt;/Link&gt;
+      &amp;nbsp;
+      &lt;Link href=&quot;/about&quot;&gt;
+        &lt;a&gt;About&lt;/a&gt;
+      &lt;/Link&gt;
+    &lt;/nav&gt;
+  )
+}
+
+export default Layout;</pre>
+
+    <p>
+      Now, we're going to wrap this <code>&lt;nav&gt;</code> tag within React fragment as follows.
+    </p>
+
+    <pre>import Link from 'next/link'
+
+const Layout = () =&gt; {
+  return (
+    <mark>&lt;&gt;</mark>
+      &lt;nav&gt;
+        &lt;Link href=&quot;/&quot;&gt;
+          &lt;a&gt;Home&lt;/a&gt;
+        &lt;/Link&gt;
+        &amp;nbsp;
+        &lt;Link href=&quot;/about&quot;&gt;
+          &lt;a&gt;About&lt;/a&gt;
+        &lt;/Link&gt;
+      &lt;/nav&gt;
+    <mark>&lt;/&gt;</mark>
+  )
+}
+
+export default Layout;</pre>
+
+    <p>
+      Why? Because, after <code>&lt;nav&gt;</code> tag, we're going to render the actual content of <code>index.js</code> or <code>about.js</code> file. In this case, we need to use <code>props.children</code> in <code>Layout.js</code> file as follows.
+    </p>
+
+    <pre>import Link from 'next/link'
+
+const Layout = (<mark>props</mark>) =&gt; {
+  return (
+    &lt;&gt;
+      &lt;nav&gt;
+        &lt;Link href=&quot;/&quot;&gt;
+          &lt;a&gt;Home&lt;/a&gt;
+        &lt;/Link&gt;
+        &amp;nbsp;
+        &lt;Link href=&quot;/about&quot;&gt;
+          &lt;a&gt;About&lt;/a&gt;
+        &lt;/Link&gt;
+      &lt;/nav&gt;
+
+      <mark>{ props.children }</mark>
+    &lt;/&gt;
+  )
+}
+
+export default Layout;</pre>
+    
+    <p>
+      Let's use the concept of destructuring with <code>props</code> and accept <code>children</code> directly.
+    </p>
+
+    <pre>import Link from 'next/link'
+
+const Layout = (<mark>{ children }</mark>) =&gt; {
+  return (
+    &lt;&gt;
+      &lt;nav&gt;
+        &lt;Link href=&quot;/&quot;&gt;
+          &lt;a&gt;Home&lt;/a&gt;
+        &lt;/Link&gt;
+        &amp;nbsp;
+        &lt;Link href=&quot;/about&quot;&gt;
+          &lt;a&gt;About&lt;/a&gt;
+        &lt;/Link&gt;
+      &lt;/nav&gt;
+
+      <mark>{ children }</mark>
+    &lt;/&gt;
+  )
+}
+
+export default Layout;</pre>
+
+    <p>
+      We're now ready with out <code>Layout</code> component! Let's first use it in <code>index.js</code> file. Go to <code>index.js</code> file, open it in text-editor, and import the <code>Layout</code> component in this file as follows.
+    </p>
+
+    <pre>import Link from 'next/link'
+
+<mark>import Layout from '../components/Layout'</mark>
+
+const Home = () =&gt; {
+  return (
+    &lt;&gt;
+      &lt;nav&gt;
+        &lt;Link href=&quot;/&quot;&gt;
+          &lt;a&gt;Home&lt;/a&gt;
+        &lt;/Link&gt;
+        &amp;nbsp;
+        &lt;Link href=&quot;/about&quot;&gt;
+          &lt;a&gt;About&lt;/a&gt;
+        &lt;/Link&gt;
+      &lt;/nav&gt;
+      &lt;h1&gt;Home&lt;/h1&gt;
+    &lt;/&gt;
+  )
+}
+
+export default Home;</pre>
+
+    <p>
+      Next, let's remove the complete <code>&lt;nav&gt;</code> tag.
+    </p>
+
+    <pre>import Link from 'next/link'
+
+import Layout from '../components/Layout'
+
+const Home = () =&gt; {
+  return (
+    &lt;&gt;
+      &lt;h1&gt;Home&lt;/h1&gt;
+    &lt;/&gt;
+  )
+}
+
+export default Home;</pre>
+
+    <p>
+      We also don't need <code>Link</code> in this <code>index.js</code> file. So, let's remove the <code>Link</code> import statement.
+    </p>
+
+    <pre>import Layout from '../components/Layout'
+
+const Home = () =&gt; {
+  return (
+    &lt;&gt;
+      &lt;h1&gt;Home&lt;/h1&gt;
+    &lt;/&gt;
+  )
+}
+
+export default Home;</pre>
+    
+    <p>
+      Finally, let's use <code>Layout</code> component by wrapping the content of <code>index.js</code> file within it as follows.
+    </p>
+
+    <pre>import Layout from '../components/Layout'
+
+const Home = () =&gt; {
+  return (
+    &lt;&gt;
+      <mark>&lt;Layout&gt;</mark>
+        &lt;h1&gt;Home&lt;/h1&gt;
+      <mark>&lt;/Layout&gt;</mark>
+    &lt;/&gt;
+  )
+}
+
+export default Home;</pre>
+
+    <p>
+      Yay! We just eliminate the duplicate from <code>index.js</code> file. Let's update the <code>about.js</code> file as well. First, let's remove the <code>Link</code> import statement and <code>&lt;nav&gt;</code> tag.
+    </p>
+
+    <pre>const About = () =&gt; {
+  return (
+    &lt;&gt;
+      &lt;h1&gt;About&lt;/h1&gt;
+    &lt;/&gt;
+  )
+}
+
+export default About;</pre>
+
+    <p>
+      Then import the <code>Layout</code> component as follows.
+    </p>
+
+    <pre><mark>import Layout from '../components/Layout'</mark>
+
+const About = () =&gt; {
+  return (
+    &lt;&gt;
+      &lt;h1&gt;About&lt;/h1&gt;
+    &lt;/&gt;
+  )
+}
+
+export default About;</pre>
+
+    <p>
+      Finally, let's wrap the content with <code>&lt;Layout&gt;</code> tag as follow.
+    </p>
+
+    <pre>import Layout from '../components/Layout'
+
+const About = () =&gt; {
+  return (
+    &lt;&gt;
+      <mark>&lt;Layout&gt;</mark>
+        &lt;h1&gt;About&lt;/h1&gt;
+      <mark>&lt;/Layout&gt;</mark>
+    &lt;/&gt;
+  )
+}
+
+export default About;</pre>
+
+    <p>
+      We just achieved DRY! What we did in this section doesn't effect the output. But, it did greatly improve the development productivity for future changes. That's the important part of programming an application.
+    </p>
+
+    <hr>
+
   </body>
 </html>
