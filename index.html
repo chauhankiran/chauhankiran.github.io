@@ -33,17 +33,126 @@
         padding: 1rem;
         transition: background-color 0.5s ease-out;
       }
-      h1, p { margin: 0 }
-      p { font-style: italic; }
+      h1, h2 { margin: 0; }
+      p { margin-top: 0; }
+      header p { font-style: italic; }
       a {
         color: #0052cc;
         text-decoration: none;
       }
       a:hover { text-decoration: underline; }
+      hr {
+        border: 0;
+        height: 1px;
+        background-image: linear-gradient(to right, rgba(33, 33, 33, 0), rgba(33, 33, 33, 0.50), rgba(33, 33, 33, 0));
+      }
+      ul { padding-left: 0; margin-top: 0; }
+      code { font-family: "courier-prime",monospace; }
+
+      @media only screen and (max-width: 600px) {
+        body { font-size: 1.1rem; }
+        ul { padding-left: 1rem; }
+      }
     </style>
   </head>
   <body>
-    <h1>Hi! I'm Kiran.</h1>
-    <p>Team Lead at <a href="https://www.varianceinfotech.com/" target="_blank">Variance InfoTech Pvt. Ltd.</a></p>
+    <header>
+      <img src="https://avatars0.githubusercontent.com/u/20952580?s=460&v=4" height="150" width="150" alt="Ankit Solanki">
+      <h1>Hi! I'm Kiran.</h1>
+      <p>Team Lead at <a href="https://www.varianceinfotech.com/" target="_blank">Variance InfoTech Pvt. Ltd.</a></p>
+    </header>
+
+    <hr>
+
+    <section>
+      <h2>Current Employment</h2>
+      <p>
+        As of <span id="month">Dec</span> <span id="year">2020</span>, I work at <a href="https://www.varianceinfotech.com/">Variance</a>. (I'm working here since Aug 2014)
+      </p>
+
+      <h2>Education</h2>
+      <p>I received bachelor's degree in <em>Computer Engineering</em> from the <a href="http://ldce.ac.in/">L.D. College of Engineering, Ahmadabad</a> in 2013.</p>
+
+      <h2>Projects</h2>
+      <ul>
+        <li>
+          <a href="https://www.npmjs.com/package/kalapi">
+            Kalapi
+          </a>: Yet another simple express generator with ejs.
+        </li>
+        <li>
+          <a href="https://github.com/chauhankiran/gee">
+            Gee
+          </a>: A component-first small style framework with simplicity and easiness.
+        </li>
+      </ul>
+
+
+      <h2>Achievements</h2>
+      <ul>
+          <li>
+              Completed course on <a href="https://university.mongodb.com/course_completion/f20e6739-49e7-43af-8eb8-f5c757a1/printable">MongoDB for Node.js Developers</a> from MongoDB University, Jul 2018.
+          </li>
+      </ul>
+
+    </section>
+
+    <hr>
+
+    <footer>
+      &copy; 2020 Kiran Chauhan <code>&lt;<a href="mailto:kiranchauhan68@gmail.com">kiranchauhan68@gmail.com</a>&gt;</code>
+    </footer>
+
+    <script>
+      function getMonthName(m) {
+        switch (m) {
+          case 0:
+            month = "Jan";
+            break;
+          case 1:
+            month = "Feb";
+            break;
+          case 2:
+            month = "Mar";
+            break;
+          case 3:
+            month = "Apr";
+            break;
+          case 4:
+            month = "May";
+            break;
+          case 5:
+            month = "Jun";
+            break;
+          case 6:
+            month = "Jul";
+            break;
+          case 7:
+            month = "Aug";
+            break;
+          case 8:
+            month = "Sep";
+            break;
+          case 9:
+            month = "Oct";
+            break;
+          case 10:
+            month = "Nov";
+            break;
+          case  11:
+            month = "Dec";
+        }
+        return month;
+      }
+
+      (function() {
+        var d = new Date();
+        var n = d.getMonth();
+        var m = getMonthName(n)
+        var y = d.getFullYear();
+        document.getElementById("month").innerHTML = m;
+        document.getElementById("year").innerHTML = y;
+      })();
+    </script>
   </body>
 </html>
