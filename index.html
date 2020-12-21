@@ -19,9 +19,21 @@
         margin: 0;
         padding: 0;
       }
+      html {
+        height: 100%;
+        background: url('guadec-skyline.png'), rgb(74, 134, 207);
+        background-position: bottom;
+        background-repeat: no-repeat;
+        background-size: 100% 48%;
+      }
+      @media screen and (max-width: 768px) {
+        html {
+          background: unset;
+        }
+      }
       body {
-        background-color: #fff;
-        color: #212121;
+        background-color: rgb(74, 134, 207);
+        color: rgb(255, 255, 255, 1);
         font-family: "source-serif-pro", serif;
         font-size: 1rem;
         font-style: normal;
@@ -43,7 +55,7 @@
       hr {
         border: 0;
         height: 1px;
-        background-image: linear-gradient(to right, rgba(33, 33, 33, 0), rgba(33, 33, 33, 0.50), rgba(33, 33, 33, 0));
+        background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.50), rgba(255, 255, 255, 0));
       }
       code { font-family: "courier-prime",monospace; }
     </style>
