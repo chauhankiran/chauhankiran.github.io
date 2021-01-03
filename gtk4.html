@@ -148,13 +148,17 @@ int main(int argc, char *argv[]) {
 }</pre>
 
     <p>
-      Within <code>main()</code> function you need to first initiate the GTK using <code><a href="https://developer.gnome.org/gtk3/stable/gtk3-General.html#gtk-init">gtk_init()</a></code> method. This method will do all the needed configuration for you before your application render on the screen. This method also take passed arguments.
+      Within <code>main()</code> function you need to first initiate the GTK using <code><a href="https://developer.gnome.org/gtk4/unstable/gtk4-General.html#gtk-init">gtk_init()</a></code> method. This method will do all the needed configuration for you before your application render on the screen.
+    </p>
+
+    <p class="note">
+      Note: If you know <code>gtk_init()</code> from version <a href="https://developer.gnome.org/gtk2/stable/gtk2-General.html#gtk-init">2</a> and <a href="https://developer.gnome.org/gtk3/stable/gtk3-General.html#gtk-init">3</a> then, in version <a href="https://developer.gnome.org/gtk4/unstable/gtk4-General.html#gtk-init">4</a>, it <a href="https://developer.gnome.org/gtk4/unstable/ch41s02.html#id-1.7.4.4.47">no longer accepts any arguments</a>.
     </p>
 
     <pre>#include&lt;gtk/gtk.h&gt;
 
 int main(int argc, char *argv[]) {
-  <mark>gtk_init(&amp;argc, &amp;argv);</mark>
+  <mark>gtk_init();</mark>
 
   return 0;
 }</pre>
@@ -174,24 +178,105 @@ int main(int argc, char *argv[]) {
 }</pre>
 
     <p>
-      Once you complete with your application code, you need to write - at the end but before <code>return</code> statement - <code><a href="https://developer.gnome.org/gtk3/stable/gtk3-General.html#gtk-main">gtk_main()</a></code>. This method take the control of your application and continue run until you close the application. This called the GTK main loop that continue run.
+      Once you done with the application code, you'll run the application that will continue to interact with user, right? In other words, we need to run our application in infinite loop until user explicitly close or terminate the application. This can be done via running <code><a href="https://developer.gnome.org/glib/stable/glib-The-Main-Event-Loop.html#g-main-context-iteration">g_main_context_iteration()</code></a> method in infinite but terminative loop as follow.
+    </p>
+
+    <pre>gboolean done = FALSE;
+<mark>while (!done) {</mark>
+  g_main_context_iteration(NULL, TRUE);
+<mark>}</pre></mark>
+
+    <p>
+      With this code, <code>g_main_context_iteration()</code> method continue run until, in some way the <code>done</code> variable is set to <code>TRUE</code>. Explaining the meaning of method's argument value is little complicated at this stage. So, for now, just remember that we need to pass <code>NULL</code> as context and <code>TRUE</code> as may block value.
+    </p>
+
+    <p class="note">
+      Note: If you're thinking that we're writing too much low details than focusing on building GUI application then you're correct. We're writing unnecessary low details than focusing on what is important for us as application developers. But, this is for educational purpose and after becoming familiar with these fundamentals, we're going to use different path to hide this information.
     </p>
 
     <pre>#include&lt;gtk/gtk.h&gt;
 
 int main(int argc, char *argv[]) {
-  gtk_init(&amp;argc, &amp;argv);
+  gtk_init();
+  <mark>gboolean done = FALSE;</mark>
 
   /* application code should be written here. */
 
-  <mark>gtk_main();</mark>
+  <mark>while (!done) {</mark>
+    <mark>g_main_context_iteration(NULL, TRUE);</mark>
+  <mark>}</mark>
 
   return 0;
 }</pre>
 
     <p>
-      What I just written here is the skeleton of normal desktop application. Although, the above code is valid, but it does not make any sense. If you run the above program it will display nothing and continue run in terminal.
+      What I just written here is the skeleton of normal desktop application initial code. Although, the above code is valid, but it does not make any sense. If you run the above program it will display nothing and continue run in terminal.
     </p>
+
+    <hr>
+
+    <p>
+      To make it little useful and to demonstrate the GTK functionalities, we need to create GUI. In GTK, <a href="https://developer.gnome.org/gtk3/stable/ch02.html">everything</a> is <a href="https://developer.gnome.org/gtk3/stable/ch03.html">widget</a>. The <a href="https://developer.gnome.org/gtk4/unstable/GtkWindow.html">window</a> you are seeing is the widget, the <a href="https://developer.gnome.org/gtk4/unstable/GtkButton.html">button</a> you will click is the widget, the information your reading as <a href="https://developer.gnome.org/gtk4/unstable/GtkLabel.html">label</a> is the widget and many other things which your are not seeing on screen is the widget! These window, button, label - all are the categories of widget.
+    </p>
+
+    <p>
+      Let's say I want to create a window. To do so, first I need to define a variable <code>window</code> with type <code>GtkWidget</code>.
+    </p>
+
+    <pre>GtkWidget *window;</pre>
+
+    <p>
+      Just defining this variable does not make it a <em>window</em>. In order to create a window, I actually need to invoke the window creation method as -
+    </p>
+
+    <pre>window = gtk_window_new(GTK_WINDOW_TOPLEVEL);</pre>
+
+    <p>
+      <code><a href="https://developer.gnome.org/gtk4/unstable/GtkWindow.html#gtk-window-new">gtk_window_new</a></code> method creates a new toplevel window and reference to this created window is saved into <code>window</code> variable.
+    </p>
+
+    <p>
+      Finally, I need to draw this window on screen using <code><a href="https://developer.gnome.org/gtk4/unstable/GtkWidget.html#gtk-widget-show">gtk_widget_show()</a></code> method.
+    </p>
+
+    <pre>gtk_widget_show(window);</pre>
+
+    <p>
+      With these three lines, the program <code>hello.c</code> becomes
+    </p>
+
+    <pre>#include&lt;gtk/gtk.h&gt;
+
+int main(int argc, char *argv[]) {
+  gtk_init();
+  gboolean done = FALSE;
+
+  <mark>GtkWidget *window;</mark>
+  <mark>window = gtk_window_new(GTK_WINDOW_TOPLEVEL);</mark>
+  <mark>gtk_widget_show(window);</mark>
+
+  while (!done) {
+    g_main_context_iteration(NULL, TRUE);
+  }
+
+  return 0;
+}</pre>
+
+    <p>
+      This will create a blank window with size of default <a href="https://gitlab.gnome.org/GNOME/gtk/blob/master/gtk/gtkwindow.c#L163">200x200</a>.
+    </p>
+
+     <p>
+      We know how to run a C program using <code>gcc</code> command. But, it wouldn't work. Why? Because, <code>gcc</code> don't know about <code>gtk/gtk.h</code>. As I mentioned earlier, <code>pkg-config</code> will take care about installed library. So, we need to use <code>pkg-config</code> with <code>gcc</code> in following way.
+    </p>
+
+    <pre>$ gcc `pkg-config --cflags --libs gtk4` hello.c -o hello
+$ ./hello</pre>
+
+    <p>
+      Here, I'm compiling <code>hello.c</code> program using <code>gcc</code> and asking <code>pkg-config</code> to include <code>gtk4</code> library in compilation process. If everything works then we'll see a 200x200 blank window. We can minimize or maximize the window or re-position the window. But, if we click on <code>x</code> or close icon of window, it will close or terminate the window visually but not as process. You'll see in terminal that the process is still running. You need to press <kbd>ctrl+c</kbd> to explicitly terminate process.
+    </p>
+
     <hr>
 
     <footer>
