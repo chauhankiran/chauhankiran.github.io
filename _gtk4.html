@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, height=device-height, viewport-fit=cover, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>GTK Chapter 4.</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet">
+    <link href="k.css" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+      <h1>GTK Chapter 4.</h1>
+      <p>
+        Aug 2020
+      </p>
+    </header>
+    <main>
+      <div class="post">
+        <div class="post-content">
+          <p class="note">
+            This book is written while learning. It might contains errors. You're welcome to do the corrections! Enjoy!
+          </p>
+
+          <p>
+            We're now in Chapter 4 and still <code>hello, world</code> program is not complete! That's okay for me. Because it took a couple of weeks for me to just correctly write and understand the <code>hello, world</code> program written in the <a href="https://developer.gnome.org/gtk-tutorial/stable/c39.html">official documentation</a>. Anyway, we're going to fix the second problem in this chapter and complete the first version of <code>hello, world</code> program. Let me copy the <code>hello-gtk.c</code> code here from the previous chapter.
+          </p>
+
+          <pre>#include&lt;gtk/gtk.h&gt;
+
+int main(int argc, char *argv[]) {
+  gtk_init(&argc, &argv);
+
+  /**
+   * 1. Create a variable that will hold a window.
+   * 2. Create an actual window.
+   * 3. Display the created window.
+  **/
+  GtkWidget *window;
+  window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+  gtk_window_set_title(GTK_WINDOW(window), "hello, world");
+  gtk_widget_show(window);
+
+  gtk_main();
+  return 0;
+}</pre>
+
+        <p>
+          Now, what we want with this program is, it should terminate the process (running in terminal) when clicked on close or x icon. In order to do that, we need to catch 'click on the close icon' <em>signal</em> or <code>window</code>'s <code>destroy</code> signal.
+        </p>
+
+        <p>
+          First thing first, how I know that 'click on close icon' signal is the window's destroy signal? The answer is documentation and little experience with GTK. When you open the documentation for a specific widget for example <code>window</code>, you'll mostly see the section with title 'Signals' within the page and it lists the signals that particular widget emit. Don't assume that the mentioned signals are the only signals that the given widget emit. It also emits signals inherit from parent widget. For example, you might not see the <code>destroy</code> signal here but it is available from the <code>widget</code>.
+        </p>
+
+        <p>
+          Now you might have another question like, <em>signal</em>? What is it? GTK is an event-driven GUI toolkit where the flow of execution determines by events or can be modified by events. Do you know the event-driven programming? You might know if you're coming from JavaScript. If not, here is a simple description for you.
+        </p>
+
+        <p>
+          In event-driven programming, if you do something, an event will happen. If an event happens, it will emit the signal. You can catch this signal and write the code against it. For example, if you click on the button, a clicked event will happen and it emits the signal. Then you can catch this signal and write the code against it to do something interesting in terms of C functions. In this way, something will happen when you click on the button.
+        </p>
+
+        <p>
+          Back to our program, when we clicked on the close icon, a clicked event happens and it emits the <code>destroy</code> signal. We need to catch this signal and write the code (as a function) that run against this signal. To do so, <code><a href="https://developer.gnome.org/gobject/stable/gobject-Signals.html#g-signal-connect">g_signal_connect()</a></code> function is used. This function takes four parameters and following is the signature of it:
+        </p>
+
+        <pre>g_signal_connect(instance, detailed_signal, c_handler, data);</pre>
+
+        <p>
+          Before we go further and talk about the exact values that we're going to pass to this function, you might raise your voice on this function name because I previously told you that all functions name starts with <code>gtk_</code> whereas this starts with <code>g_</code>. Let me tell you that what I told you about the naming convention on GTK functions is correct and what I wrote here as a function is also correct. But, the thing is, <code>g_signal_connect()</code> function is not from GTK it is from <a href="https://developer.gnome.org/glib/2.64/">GLib</a>.
+        </p>
+
+        <p>
+          Now, what is GLib? It is one of the low-level C utilities library and GTK heavily depends on it. When you include <code>gtk/gtk.h</code> in your program, it automatically includes this GLib or <code>glib.h</code> library in your program via this <code>gtk.h</code> header file. So, you can directly use the functions from GLib (things do not end here, GLib has GObject which is also included here and from this <a href="https://developer.gnome.org/gobject/stable/index.html">GObject</a> this <code>g_signal_connect()</code> is coming. But, let's leave this complicated dependency discussion for future chapters when you have enough background).
+        </p>
+
+        <p>
+          In the future, I'll talk about GLib in detail. But for now, let's go with this - the signal mechanism is part of GLib and due to this we're going to use GLib's functions such as <code>g_singal_connect()</code>. Also, if the function is from GLib, it starts with <code>g_</code> and then the name of component or mechanism such as <code>signal</code> followed by verb or action that the function does such as <code>connect</code>.
+        </p>
+
+        <p>
+          Now, after this background information, let's talk about the exact values we need to pass to the <code>g_singal_connect()</code> function. First, it takes <em>instance</em> or widget, which emits the signal and in our case, it is a <code>window</code>.
+        </p>
+
+        <pre>g_signal_connect(<mark>window</mark>, detailed_signal, c_handler, data);</pre>
+
+        <p>
+          But, we need to cast this variable into the actual window and we know how to do it, right? Using <code>GTK_WINDOW</code> macro.
+        </p>
+
+        <pre>g_signal_connect(<mark>G_WINDOW(window)</mark>, "destroy", c_handler, data);</pre>
+
+        <p>
+          We're interested in catching the signal emitted by the window. But which signal? It is <code>destroy</code>. And don't worry GTK already written code for this specific scenario - if you click on the close icon, it'll emit <code<destroy</code> signal. Let's write this name of the signal as string e.g. "destroy".
+        </p>
+
+        <pre>g_signal_connect(G_WINDOW(window), <mark>"destroy"</mark>, c_handler, data);</pre>
+
+
+        <p>
+          Good! Now <code>c_handler</code> means a name of the function that will be called when window emits <code>destroy</code> signal. Again, you just have to write the name of the function, not a function call. In other words, if you have a function with name <code>app_quit()</code> then you have to write <code>app_quit</code> not <code>app_quit()</code> here (in other words, function name without parenthesis). Also, this <code>g_singal_connect()</code> accepts only <code><a href="https://developer.gnome.org/gobject/stable/gobject-Closures.html#GCallback">GCallback</a></code> types of function and due to this, you have to cast the function using <code><a href="https://developer.gnome.org/gobject/stable/gobject-Closures.html#G-CALLBACK:CAPS">G_CALLBACK</a></code> macro.
+        </p>
+
+        <p>
+          Don't forget that that function name we're going to pass here is the normal C function which we have to write and it'll run against the <code>window</code>'s <code>destroy</code> signal. Here when we click on a close icon, it should terminate or quit the application. Based on this requirement, I think the function with name <code>app_quit()</code> is suitable to understand its purpose. So, let's pass this name and cast it using the <code>G_CALLBACK</code> macro.
+        </p>
+
+        <pre>g_signal_connect(G_WINDOW(window), "destroy", <mark>G_CALLBACK(app_quit)</mark>, data);</pre>
+
+        <p>
+          Finally, you can pass some data to this <code>app_quit()</code> function when called. If you don't want to pass, you can just write <code>NULL</code> because, in GTK, parameters are not optional, you must have to pass something. In our case, let's go with <code>NULL</code> for now.
+        </p>
+
+        <pre>g_signal_connect(G_WINDOW(window), "destroy", G_CALLBACK(app_quit), <mark>NULL</mark>);</pre>
+
+        <p>
+          And this is how we're going to connect the specific widget's signal to our custom code via a callback function. This <em>callback</em> word is from event-driven programming, meaning a function that will be called when an event happens. Let's copy the about function call in our program and we should put this after the creation of window as follows:
+        </p>
+
+        <pre>#include&lt;gtk/gtk.h&gt;
+
+int main(int argc, char *argv[]) {
+  gtk_init(&argc, &argv);
+
+  /**
+   * 1. Create a variable that will hold a window.
+   * 2. Create an actual window.
+   * 3. Display the created window.
+  **/
+  GtkWidget *window;
+  window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+  gtk_window_set_title(GTK_WINDOW(window), "hello, world");
+  <mark>g_signal_connect(GTK_WINDOW(window), "destroy", G_CALLBACK(app_quit), NULL);</mark>
+
+  gtk_widget_show(window);
+
+  gtk_main();
+  return 0;
+}</pre>
+
+        <p>
+          Does our program is now ready to run? No! Because we haven't written the <code>app_quit()</code> function. We can write this function after or before the <code>main()</code> function. If we write the <code>app_quit()</code> function after <code>main()</code> (or more specifically after the call), we have to first declare the function using its signature at the top. But, if we write the function before <code>main()</code>, then we can write the function directly. This is related to C, not GTK and I assume that you already know. What I just did here is revised your C knowledge! I'm going to write the function before its call.
+        </p>
+
+        <pre>#include&lt;gtk/gtk.h&gt;
+
+<mark>app_quit() {</mark>
+
+<mark>}</mark>
+
+int main(int argc, char *argv[]) {
+  gtk_init(&argc, &argv);
+
+  /**
+   * 1. Create a variable that will hold a window.
+   * 2. Create an actual window.
+   * 3. Display the created window.
+  **/
+  GtkWidget *window;
+  window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+  gtk_window_set_title(GTK_WINDOW(window), "hello, world");
+  g_signal_connect(GTK_WINDOW(window), "destroy", G_CALLBACK(app_quit), NULL);
+
+  gtk_widget_show(window);
+
+  gtk_main();
+  return 0;
+}</pre>
+
+          <p>
+            I mentioned earlier that this function is not the normal function but a special type of function that will run when <code>destroy</code> signal caught and due to this, you need to define this function in the way <code>destroy</code> signal <a href="https://developer.gnome.org/gtk3/stable/GtkWidget.html#GtkWidget-destroy">points out</a> and this is how destroy signal wants its function!
+          </p>
+
+          <pre>void user_function(GtkWidget *object, gpointer user_data)</pre>
+
+          <p>
+            First thing first, let's update the function name with <code>app_quit</code>.
+          </p>
+
+          <pre>void <mark>app_quit</mark>(GtkWidget *object, gpointer user_data)</pre>
+
+          <p>
+            This function accept the <code>object</code> which emit the signal and we normally call it widget so I'll use <code>widget</code> name instead of <code>object</code>.
+          </p>
+
+          <pre>void app_quit(GtkWidget *<mark>widget</mark>, gpointer user_data)</pre>
+
+          <p>
+            This widget is a reference to the window and you can do all sorts of stuff with a window within a function (and we surely do in future chapters). Finally, this <code>gpointer</code> is a pointer to <code>data</code> we passed from <code>g_singal_connect()</code> function as the last argument. We can also call it just <code>data</code> if we want and I'll do.
+          </p>
+
+          <pre>void app_quit(GtkWidget *widget, gpointer <mark>data</mark>)</pre>
+
+          <p>
+            So, this is the signature I'll going to use for this and future programs for the <code>window</code>'s <code>destroy</code> signal. Also, remember that not all callback functions are written in this way, it is based on signal and I'll talk about this in future chapters. Let's update the function signature with the mentioned one.
+          </p>
+
+          <pre>#include&lt;gtk/gtk.h&gt;
+
+<mark>void app_quit(GtkWidget *widget, gpointer data)</mark> {
+
+}
+
+int main(int argc, char *argv[]) {
+  gtk_init(&argc, &argv);
+
+  /**
+   * 1. Create a variable that will hold a window.
+   * 2. Create an actual window.
+   * 3. Display the created window.
+  **/
+  GtkWidget *window;
+  window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+  gtk_window_set_title(GTK_WINDOW(window), "hello, world");
+  g_signal_connect(GTK_WINDOW(window), "destroy", G_CALLBACK(app_quit), NULL);
+
+  gtk_widget_show(window);
+
+  gtk_main();
+  return 0;
+}</pre>
+
+          <p>
+            Now, inside this function, we can write the code as whatever we want or the code that quit the application in our case. Actually, the problem is with the <code>gtk_main()</code> loop because it is running in the background and we need to terminate it when clicked on close icon. This will automatically close the process in a terminal and this can be done using <code>gtk_main_quit()</code> function from GTK. So, what we have to do is, just call this function from our <code>app_quit()</code> function as follow:
+          </p>
+
+          <pre>#include&lt;gtk/gtk.h&gt;
+
+void app_quit(GtkWidget *widget, gpointer data) {
+  <mark>gtk_main_quit();</mark>
+}
+
+int main(int argc, char *argv[]) {
+  gtk_init(&argc, &argv);
+
+  /**
+   * 1. Create a variable that will hold a window.
+   * 2. Create an actual window.
+   * 3. Display the created window.
+  **/
+  GtkWidget *window;
+  window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+  gtk_window_set_title(GTK_WINDOW(window), "hello, world");
+  g_signal_connect(GTK_WINDOW(window), "destroy", G_CALLBACK(app_quit), NULL);
+
+  gtk_widget_show(window);
+
+  gtk_main();
+  return 0;
+}</pre>
+
+          <p>
+            That's it, this function will take care of remaining things - close the application as well as the process. That's it! Let's run the program:
+          </p>
+
+          <pre>$ gcc `pkg-config --cflags --libs gtk+-3.0` hello-gtk.c -o hello-gtk
+$ ./hello-gtk</pre>
+
+          <p>
+            Now, click on close button from the window and it should terminate the process in terminal. For me its works, <em>how about you</em>?
+          </p>
+
+          <p>
+            In case if you want, you can also print the message in console before terminating the process like - "terminating the application..." using <code>g_print()</code> function as follows:
+          </p>
+
+          <pre>#include&lt;gtk/gtk.h&gt;
+
+void app_quit(GtkWidget *widget, gpointer data) {
+  <mark>g_print("terminating the application...");</mark>
+  gtk_main_quit();
+}
+
+int main(int argc, char *argv[]) {
+  gtk_init(&argc, &argv);
+
+  /**
+   * 1. Create a variable that will hold a window.
+   * 2. Create an actual window.
+   * 3. Display the created window.
+  **/
+  GtkWidget *window;
+  window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+  gtk_window_set_title(GTK_WINDOW(window), "hello, world");
+  g_signal_connect(GTK_WINDOW(window), "destroy", G_CALLBACK(app_quit), NULL);
+
+  gtk_widget_show(window);
+
+  gtk_main();
+  return 0;
+}</pre>
+
+          <p>
+            Now, if you run this program and then close it, you'll also see the message in terminal as follows:
+          </p>
+
+          <pre>$ gcc `pkg-config --cflags --libs gtk+-3.0` hello-gtk.c -o hello-gtk
+$ ./hello-gtk
+terminating the application...</pre>
+
+          <p>
+            This is helpful for debugging purpose. Let's meet in <a href="gtk5.html">next chapter</a> and write second version of <code>hello, world</code> program.
+          </p>
+
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <a href="w.html">&#8592; Back</a>. <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a>
+    </footer>
+  </body>
+</html>
