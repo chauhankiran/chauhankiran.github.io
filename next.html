@@ -61,7 +61,7 @@
       Next.js is a React based framework that ease the building of fast web applications. Let's create a new folder with name <code>hello-world</code>.
     </p>
 
-    <pre>$ touch hello-world</pre>
+    <pre>$ mkdir hello-world</pre>
 
     <p>
       Once the folder is created, go inside the created folder.
@@ -104,7 +104,7 @@
 }</pre>
 
     <p>
-      We're are now ready with setup and configuration. 
+      We're are now ready with setup and configuration.
     </p>
 
     <hr>
@@ -119,7 +119,7 @@
 > next
 
 <mark>Error: > Couldn't find a `pages` directory. Please create one under the project root</mark></pre>
-    
+
     <p>
       Ah! We got the error. But, the error is self-explanatory. It mentioned that <code>pages</code> directory or folder is not found, please create under the project root. Let's do it then.
     </p>
@@ -136,7 +136,7 @@
 > next
 
 ready - started server on <mark>http://localhost:3000</mark></pre>
-  
+
     <p>
       Great! Our application is running at <a href="http://localhost:3000">http://localhost:3000</a>. Let's open this URL in browser. Oh! We get the 404 error. That's ok because we haven't define a home page or root route within application. Next.js support file-system base routing. In other words, you'll have routing like PHP or HTML where the page route is directly associated with file within <code>pages</code> folder. Let's create an <code>index.js</code> within <code>pages</code> folder and write the following code inside this file.
     </p>
@@ -221,7 +221,7 @@ const Home = () => {
 }
 
 export default Home;</pre>
-    
+
     <p>
       Then wrap the <code>&lt;a&gt;</code> tag with <code>&lt;Link&gt;</code> tag as follows.
     </p>
@@ -471,7 +471,7 @@ const Layout = (<mark>props</mark>) =&gt; {
 }
 
 export default Layout;</pre>
-    
+
     <p>
       Let's use the concept of destructuring with <code>props</code> and accept <code>children</code> directly.
     </p>
@@ -558,7 +558,7 @@ const Home = () =&gt; {
 }
 
 export default Home;</pre>
-    
+
     <p>
       Finally, let's use <code>Layout</code> component by wrapping the content of <code>index.js</code> file within it as follows.
     </p>
