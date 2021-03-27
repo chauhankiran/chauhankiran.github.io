@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, viewport-fit=cover, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <title>An Introduction to C programming Language</title>
+
+    <style>
+      @import url("https://use.typekit.net/zli1tzj.css?v=2");
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background-color: #fff;
+        color: #2E2E2E;
+        font-family: "source-serif-pro", serif;
+        font-size: 1rem;
+        font-style: normal;
+        font-weight: normal;
+        line-height: 1.5;
+        width: 100%;
+        max-width: 39rem;
+        margin: 8rem auto;
+        padding: 1rem;
+        transition: background-color 0.5s ease-out;
+      }
+      h1, h2, h3 { margin: 0; }
+      h1 { font-size: 4rem; }
+      p { margin-top: 0; }
+      a {
+        color: #0052cc;
+        text-decoration: none;
+      }
+      a:hover { text-decoration: underline; }
+      hr {
+        border: 0;
+        height: 1px;
+        background-image: linear-gradient(to right, rgba(33, 33, 33, 0), rgba(33, 33, 33, 0.50), rgba(33, 33, 33, 0));
+      }
+      pre, code { font-family: "courier-prime",monospace; }
+      code { color: rgb(124, 58, 237); }
+      .note { color: #929292; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>An Introduction to C programming Language</h1>
+    </header>
+    
+    <main>
+      <p>
+        Welcome to <em>An Introduction to C Programming Language</em> course. This is a mini yet compulsory course for undergraduate computer science students. In this course, you are going to learn C programming language and do some low-level programming. There are numerous benefits of taking this course but one of them is - <em>this course is a prerequisite of almost all the advance courses you are going to take as undergraduate computer science student</em>.
+      </p>
+
+      <p>
+        This is a pass/fail course. You need to pass this course in order to get <em>hacker</em> badge on your student’s profile. If you don't get this badge on your profile then professor will know that you don’t know C programming and it might possible that you don't get enrollment in class where more students has applied than seats available and professor has to choose.
+      </p>
+
+      <p>
+        But, don't worry! This course is not challenging course. With more practice, hard work, and patience you can easily pass this course. This course has high passing ratio than any other courses within university!
+      </p>
+
+      <h3>Prerequisites</h3>
+
+      <p>
+        As you already have completed your first semester in computer science, you know some programming and that's the prerequisites of this course. You should know the basic concepts of programming such as variables, conditionals, loops, functions, standard libraries, how to write and execute the program and so on. These basic concepts are not going to explain in this course, they are assumed - you know these concepts.
+      </p>
+
+      <h3>Software</h3>
+
+      <p>
+        You need two software on your GNU/Linux system - text-editor and compiler. You are free to use any text-editor you like but for the compiler, you must have to use <a href="http://gcc.gnu.org/">GCC</a> or GNU Compiler Collection. Because, that is the compiler on which the course is depends on.
+      </p>
+      
+      <p>
+        You can communicate with your seniors for the installation of these software.
+      </p>
+
+      <h3>Grade</h3>
+
+      <p>Total grade for this course is <code>10(+2)</code>. You need at least <code>7</code> out of <code>10(+2)</code> to get badge. The grade is divided into three categories.</p>
+      
+      <ol>
+        <li>Projects ( 3 in-course projects with weightage of 2 for each ) - <code>6</code></li>
+        <li>Capstone ( capstone project, you are going to build at the end of this course ) - <code>2</code></li>
+        <li>Contribution ( the contribution you need to do in open source project, will get more information in future email, when needed ) - <code>2</code></li>
+        <li>Bonus ( a reserved task that we will release after second in-course project ) - <code>2</code></li>
+      </ol>
+
+      <p>
+        Finally, you will not get grade in terms of numbers. You will only get either pass or fail based on score. But, if you do an incredible job at projects, we have many things for you and that will help to build your career.
+      </p>
+
+      <h3>Ref. Books</h3>
+
+      <p>
+        This course does not depend on any book. The course notes are going to serve with each lecture. But, for the reference purpose you should purchase the <a href="https://en.wikipedia.org/wiki/The_C_Programming_Language">K&amp;R</a> book. You also need some reference to standards such as C11 and C18. That is available online at <a href="https://devdocs.io/">devdocs.io</a> and <a href="https://gcc.gnu.org/onlinedocs/">gcc reference manual</a>.
+      </p>
+
+      <h3>Contact</h3>
+
+      <p>
+        This is the little introduction of this course. You might have questions regarding - anything. Feel free to ask me in personal or via email at - <a href="mailto:kiranchauhan68@gmail.com">kiranchauhan68@gmail.com</a>. Please don’t ask or send email for installation.
+      </p>
+
+      <h3>Let’s Get Started</h3>
+
+      <p>
+        After covering this administriva stuff, we still have half an hour. In this half an hour, I’ll going to quickly cover what is C and why you should consider to use and after that we’ll write <em>hello, world</em> program in C.
+      </p>
+
+      <p>
+        C is the programming language that is twice older than you! and yet its been in top programming languages chart since last few decades. How? There are many reasons but some of them are:
+      </p>
+
+      <ol>
+        <li>blazingly fast,</li>
+        <li>provides no/little abstraction to hardware,</li>
+        <li>has huge code base and experts,</li>
+        <li>is small programming language and</li>
+        <li>continuously evolves with backward compatibility!</li>
+      </ol>
+
+      <p>
+        C is de facto language in terms of speed. Many other languages have claim to achieve the speed near to C but none of them able to replace it! The reason of such a speediness is, an absence of abstraction to the hardware. In C, you are directly talking to hardware! That has numerous benefits when you are doing low-level programming. And that’s the reason why more than 40 operating systems are written in C. Yet the language is so small that it completely explain within 272 pages. Finally, C continuously evolves in terms of standard and make it more modern while maintaining backward compatibility. The current standard is C18.
+      </p>
+
+      <p>
+        That’s enough for introduction we will talk a lot about C in future sessions with great open discussion sections and via guest panels. Let’s quickly jump into text-editor and write our very first <em>hello, world</em> program.
+      </p>
+
+      <h3>Hello, world Program</h3>
+
+      <p>
+        I’ve opened the text-editor with blank window. Let me quickly save this blank program with name <code>hello.c</code>. C language has <code>.c</code> extension and <code>hello</code> is the name of the program that satisfies the purpose of code, going to written inside of it. After saving this blank program, I have syntax highlighting. Good!
+      </p>
+
+      <p>
+        Next, we are going to print <em>hello, world</em> text in terminal. So, we need to write this text within <code>hello.c</code>. Let me do that.
+      </p>
+
+      <pre>hello, world</pre>
+
+      <p>
+        But, this <code>hello, world</code> is string, right? In program, you write string inside of double or single quotes. Agree? But in C, you must write string inside of double quotes. So, let me quickly wrap this text with double quotes and make it string.
+      </p>
+
+      <pre><mark>&quot;</mark>hello, world<mark>&quot;</mark></pre>
+
+      <p>
+        Great! This string is not going to print in terminal on its own. We need to invoke a function on it to print and the function is <code>printf()</code>. This is how we use <code>printf()</code> function.
+      </p>
+
+      <pre><mark>printf(&quot;</mark>hello, world<mark>&quot;)</mark></pre>
+
+      <p>
+        C is one of those languages the required semicolon to complete the statement. In C, semicolon is not optional but required. And that way I need to write,
+      </p>
+
+      <pre>printf(&quot;hello, world&quot;)<mark>;</mark></pre>
+
+      <p>
+        Semicolon at the end. Great. But you know, compiled languages like C is different than interpreted language in terms of execution. In interpreted languages, the execution start from top and execute each statement or expression that comes in flow. But, in compiled language you need to tell the starting point - a point from where the compilation process starts. This is where the <code>main()</code> function comes in picture. Your program must contain one <code>main()</code> function and this is the function from where your program will going to compile.
+      </p>
+
+      <p>
+        In order to run our <code>printf()</code> statement, we need to put it inside of <code>main()</code> function this way.
+      </p>
+
+      <pre><mark>main() {</mark>
+  printf(&quot;hello, world&quot;);
+<mark>}</mark></pre>
+
+      <p>
+        This indentation inside of function is not required. It is just for readability purpose. But, it is required for this course. If your program contain confused indentation, you will likely lose the grade even if your project perfectly works!
+      </p>
+
+      <p>
+        You are going to use curly braces to define block like I did to define <code>main()</code> function block. Whatever statements we write inside of this curly braces, are considered part of the <code>main()</code> function.
+      </p>
+
+      <p>
+        After compilation of this <code>main()</code> function, it returns something. It returns an integer with <code>0</code> or greater than <code>0</code>. Here, <code>0</code> means successful compilation and any other value than <code>0</code> mean something goes wrong with your program! Let’s add the type signature before the <code>main()</code> function to indicate, what this <code>main()</code> is going to be written and also write <code>return 0</code> explicitly.
+      </p>
+
+      <pre><mark>int</mark> main() {
+  printf(&quot;hello, world&quot;);
+
+  <mark>return 0;</mark>
+}</pre>
+
+      <p>
+        Yes, this <code>return</code> statement should be at the end of <code>main()</code> function.
+      </p>
+
+      <p>
+        In C, you don’t get a single function by default and <code>printf()</code> is not an exception. You need to include a library in which this function is written. The library or header file is <code>stdio.h</code> and its standard header file that comes with C. You can include this file in our program like -
+      </p>
+
+      <pre><mark>#include&lt;stdio.h&gt;</mark>
+
+int main() {
+  printf(&quot;hello, world&quot;);
+
+  return 0;
+}</pre>
+
+      <p>
+        You need to write the include statement at the top of your program and the blank line after this include statement is optional. But, again it is strongly recommended and required for this course.
+      </p>
+
+      <p>
+        That’s it! This is our <em>hello, world</em> program in C. It’s time to execute this program.
+      </p>
+
+      <h3>Execution</h3>
+
+      <p>
+        We need a compiler to execute any C program. For this purpose, we are going to use GCC. This is the compiler that comes with most of the GNU/Linux system. A quick <code>--version</code> command will let you know that C is installed on your system or not.
+      </p>
+
+      <pre>$ gcc --version
+gcc (GCC) 8.3.1 20190223 (Red Hat 8.3.1-2)
+Copyright (C) 2018 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</pre>
+
+      <p>
+        If you get similar output, then you have <code>gcc</code> on your system else you need to install. In my case, I’ve <code>gcc</code> so I can go further and execute this program. The execution of C program done in two steps —
+      </p>
+
+      <ol>
+        <li>Compiles the program,</li>
+        <li>Executes the compiled program.</li>
+      </ol>
+
+      <p>
+        To compile the program, this command is used.
+      </p>
+
+      <pre>$ gcc hello.c -o hello</pre>
+
+      <p>
+        This will compile your <code>hello.c</code> program and after successful completion it will generate output (<code>-o</code>) with name <code>hello</code>. You will get nothing if compilation happen successfully in terminal. In my case, I don’t get anything, so that means my program execute successfully and has build <code>hello</code>. A quick ls will show you the same.
+      </p>
+
+      <pre>$ ls
+hello.c hello</pre>
+
+      <p>
+        In order to execute this <code>hello</code> executable, I need to write
+      </p>
+
+      <pre>$ ./hello
+hello, world</pre>
+
+      <p>
+        And we get the output! But, this is a little clumsy. A <code>\n</code> after the <em>hello, world</em> string will help. Let’s add that.
+      </p>
+
+      <pre>#include&lt;stdio.h&gt;
+
+int main() {
+  printf(&quot;hello, world<mark>\n</mark>&quot;);
+
+  return 0;
+}</pre>
+
+      <p>
+        Let’s compile and run the program again.
+      </p>
+
+      <pre>$ gcc hello.c -o hello &amp;&amp; ./hello
+hello, world</pre>
+
+      <p>
+        Here, I’ve combines both commands into single one using <code>&amp;&amp;</code> terminal operator. You will going to use so many terminal commands in this course along with C. So, be ready!
+      </p>
+
+      <p>
+        Looks like we are running out of time for this lecture. I know you might have many questions on this program and execution process. But, let’s first try from your side at home and then in the next lecture you can ask questions.
+      </p>
+    </main>
+    <footer>
+      <a href="index.html">&#8592; Home</a>. &copy; Kiran Chauhan.
+    </footer>
+  </body>
+</html>
