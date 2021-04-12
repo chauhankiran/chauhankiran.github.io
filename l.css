@@ -41,5 +41,10 @@ footer {
   margin-bottom: 1rem;
   color: #6B7280;
 }
+code,
+pre {
+  font-family: Source Code Pro, SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+  font-size: 1rem;
+}
 
 .note { color: #6B7280; }

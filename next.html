@@ -3,90 +3,42 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="author" content="Kiran Chauhan">
-
     <title>Next.js &mdash; Kiran Chauhan</title>
-    <link rel="shortcut icon" href="favicon.ico">
-    <style>
-      @import url("https://use.typekit.net/zli1tzj.css?v=2");
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
-      }
-      html,
-      body {
-        margin: 0;
-        padding: 0;
-      }
-      body {
-        background-color: #fff;
-        color: #2E2E2E;
-        font-family: "source-serif-pro", serif;
-        font-size: 1rem;
-        font-style: normal;
-        font-weight: normal;
-        line-height: 1.5;
-        width: 100%;
-        max-width: 39rem;
-        margin: 8rem auto;
-        padding: 1rem;
-        transition: background-color 0.5s ease-out;
-      }
-      h1, p { margin: 0 }
-      p { margin-bottom: 1rem; }
-      a {
-        color: #0052cc;
-        text-decoration: none;
-      }
-      a:hover { text-decoration: underline; }
-      code, kbd, pre, samp { font-family: "courier-prime", monospace, x; }
-      code { color: rgb(124, 58, 237); }
-      hr {
-        border: 0;
-        height: 1px;
-        background-image: linear-gradient(to right, rgba(33, 33, 33, 0), rgba(33, 33, 33, 0.50), rgba(33, 33, 33, 0));
-      }
-      mark {
-        background-color: rgb(252, 211, 77);
-        display: inline-block;
-        padding: 0 .3rem 0 .3rem;
-        border-radius: .1rem;
-      }
-    </style>
+
+    <link rel="stylesheet" href="l.css">
   </head>
   <body>
     <h1>Next.js</h1>
     <p>
-      Next.js is a React based framework that ease the building of fast web applications. Let's create a new folder with name <code>hello-world</code>.
+      <a href="https://nextjs.org/">Next.js</a> is a <a href="https://reactjs.org/">React</a> based framework that ease the building of fast web applications. Let's create a new folder with name <code>company-website</code>.
     </p>
 
-    <pre>$ mkdir hello-world</pre>
+    <pre>$ mkdir company-website</pre>
 
     <p>
       Once the folder is created, go inside the created folder.
     </p>
 
-    <pre>$ cd hello-world</pre>
+    <pre>$ cd company-website</pre>
 
     <p>
-      Next, we're going to <code>init</code> the <code>npm</code> and create the <code>package.json</code> file.
+      We're going to <code>init</code> the <code>npm</code> and create the <code>package.json</code> file.
     </p>
 
     <pre>$ npm init -y</pre>
 
     <p>
-      I added <code>-y</code> flag to accept the default answers for the <code>npm</code> questions. As I mentioned earlier that the Next.js is a React based framework and due to this we need to install <code>next</code> as well as <code>react</code> and <code>react-dom</code> packages as follows.
+      I added <code>-y</code> flag to accept the default answers for the <code>npm</code> questions. As I mentioned earlier that the Next.js is a React based framework and due to this we need to install <code>next</code> as well as <code>react</code> and <code>react-dom</code> packages.
     </p>
 
     <pre>$ npm i react react-dom next</pre>
 
     <p>
-      You might need to wait for a couple of minutes to finish the installation process. Once the installation is done, open the <code>package.json</code> file and update the <code>script</code> tag with <code>"dev": "next"</code> as follows.
+      You might need to wait for a couple of minutes to finish the installation process. Once the installation is done, open the <code>package.json</code> file and update the <code>script</code> tag with <code>"dev": "next"</code>.
     </p>
 
     <pre>{
-  "name": "hello-world",
+  "name": "company-website",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -97,11 +49,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "next": "^10.0.3",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "next": "^10.1.3",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   }
-}</pre>
+}
+</pre>
 
     <p>
       We're are now ready with setup and configuration.
@@ -115,13 +68,14 @@
 
     <pre>$ npm run dev
 
-> hello-world@1.0.0 dev
+> company-website@1.0.0 dev
 > next
 
+ready - started server on 0.0.0.0:3000, url: http://localhost:3000
 <mark>Error: > Couldn't find a `pages` directory. Please create one under the project root</mark></pre>
 
     <p>
-      Ah! We got the error. But, the error is self-explanatory. It mentioned that <code>pages</code> directory or folder is not found, please create under the project root. Let's do it then.
+      Ah! We got the error. But, the error is self-explanatory. It mentioned that <em><code>pages</code> directory or folder is not found, please create under the project root</em>. Let's do it then.
     </p>
 
     <pre>$ mkdir pages</pre>
@@ -132,25 +86,23 @@
 
     <pre>$ npm run dev
 
-> hello-world@1.0.0 dev
+> company-website@1.0.0 dev
 > next
 
-ready - started server on <mark>http://localhost:3000</mark></pre>
+ready - <mark>started server on 0.0.0.0:3000, url: http://localhost:3000</mark></pre>
 
     <p>
       Great! Our application is running at <a href="http://localhost:3000">http://localhost:3000</a>. Let's open this URL in browser. Oh! We get the 404 error. That's ok because we haven't define a home page or root route within application. Next.js support file-system base routing. In other words, you'll have routing like PHP or HTML where the page route is directly associated with file within <code>pages</code> folder. Let's create an <code>index.js</code> within <code>pages</code> folder and write the following code inside this file.
     </p>
 
-    <pre>const Home = () => {
-  return (
-    &lt;h1&gt;Home&lt;/h1&gt;
-  )
-}
+    <pre>const Home = () =&gt; {
+  return &lt;h1&gt;Home&lt;/h1&gt;;
+};
 
 export default Home;</pre>
 
     <p>
-      Here we created a React function component and exports it. You don't have to import <code>React</code> or <code>ReactDOM</code>. Just create a component and exports it. Don't worry about the component name. You can give any name you like. But, giving a meaningful name is good idea.
+      Here we created a React functional component and exports it. You don't have to import <code>React</code> or <code>ReactDOM</code>. Just create a component and exports it. Don't worry about the component name. You can give any name you like (even ok to not give any name). But, giving a meaningful name is good idea.
     </p>
 
     <p>
@@ -161,11 +113,9 @@ export default Home;</pre>
       Within <code>pages</code> folder, let's create another page with name <code>about.js</code> file. In this file, let's write the following code.
     </p>
 
-    <pre>const About = () => {
-  return (
-    &lt;h1&gt;About&lt;/h1&gt;
-  )
-}
+    <pre>const About = () =&gt; {
+  return &lt;h1&gt;About&lt;/h1&gt;;
+};
 
 export default About;</pre>
 
@@ -173,16 +123,18 @@ export default About;</pre>
       Now, if you visit <code>/about</code> page, you'll see <code>About</code> as header text in browser. Based on name of the file, you'll auto get the routing within <code>pages</code> folder. Got it? Let's add a navigation within both <code>index.js</code> and <code>about.js</code> files. Here is the updated content of <code>index.js</code> file.
     </p>
 
-    <pre>const Home = () => {
+    <pre>const Home = () =&gt; {
   return (
     <mark>&lt;&gt;</mark>
       <mark>&lt;nav&gt;</mark>
-        <mark>&lt;a href="/about"&gt;About&lt;/a&gt;</mark>
+        <mark>&lt;a href=&quot;/&quot;&gt;Home&lt;/a&gt;</mark>
+        <mark>&amp;nbsp;</mark>
+        <mark>&lt;a href=&quot;/about&quot;&gt;About&lt;/a&gt;</mark>
       <mark>&lt;/nav&gt;</mark>
       &lt;h1&gt;Home&lt;/h1&gt;
     <mark>&lt;/&gt;</mark>
-  )
-}
+  );
+};
 
 export default Home;</pre>
 
@@ -190,84 +142,102 @@ export default Home;</pre>
       And here is the <code>about.js</code> file with updated content.
     </p>
 
-    <pre>const About = () => {
+    <pre>const About = () =&gt; {
   return (
     <mark>&lt;&gt;</mark>
       <mark>&lt;nav&gt;</mark>
-        <mark>&lt;a href="/"&gt;Home&lt;/a&gt;</mark>
+        <mark>&lt;a href=&quot;/&quot;&gt;Home&lt;/a&gt;</mark>
+        <mark>&amp;nbsp;</mark>
+        <mark>&lt;a href=&quot;/about&quot;&gt;About&lt;/a&gt;</mark>
       <mark>&lt;/nav&gt;</mark>
       &lt;h1&gt;About&lt;/h1&gt;
     <mark>&lt;/&gt;</mark>
-  )
-}
+  );
+};
 
 export default About;</pre>
 
     <p>
-      Now, if you click on <code>About</code> link from home page, it'll open <code>About</code> page and if you click on <code>Home</code> link from <code>About</code> page, it'll open <code>Home</code> page. But, did you notice the complete browser reload? We can eliminate this complete reload via <code>Link</code> component. Let's import this <code>Link</code> component from <code>next/link</code> in <code>index.js</code> file as follows.
+      If you click on <code>Home</code> link, it'll open <code>Home</code> page and if you click on <code>About</code> link it'll open <code>About</code> page.
     </p>
 
-    <pre><mark>import Link from 'next/link'</mark>
+    <p>
+      But, did you notice the complete browser reload? We can eliminate this complete reload via <code>Link</code> component. Let's import this <code>Link</code> component from <code>next/link</code> package in <code>index.js</code> file.
+    </p>
 
-const Home = () => {
+    <pre><mark>import Link from &quot;next/link&quot;;</mark>
+
+const Home = () =&gt; {
   return (
     &lt;&gt;
       &lt;nav&gt;
-        &lt;a href="/about"&gt;About&lt;/a&gt;
+        &lt;a href=&quot;/&quot;&gt;Home&lt;/a&gt;
+        &amp;nbsp;
+        &lt;a href=&quot;/about&quot;&gt;About&lt;/a&gt;
       &lt;/nav&gt;
       &lt;h1&gt;Home&lt;/h1&gt;
     &lt;/&gt;
-  )
-}
+  );
+};
 
 export default Home;</pre>
 
     <p>
-      Then wrap the <code>&lt;a&gt;</code> tag with <code>&lt;Link&gt;</code> tag as follows.
+      Let's wrap the <code>&lt;a&gt;</code> tags with <code>&lt;Link&gt;</code> tag as follows
     </p>
 
-    <pre>import Link from 'next/link'
+    <pre>import Link from &quot;next/link&quot;;
 
 const Home = () =&gt; {
   return (
     &lt;&gt;
       &lt;nav&gt;
         <mark>&lt;Link&gt;</mark>
+          &lt;a href=&quot;/&quot;&gt;Home&lt;/a&gt;
+        <mark>&lt;/Link&gt;</mark>
+        &amp;nbsp;
+        <mark>&lt;Link&gt;</mark>
           &lt;a href=&quot;/about&quot;&gt;About&lt;/a&gt;
         <mark>&lt;/Link&gt;</mark>
       &lt;/nav&gt;
       &lt;h1&gt;Home&lt;/h1&gt;
     &lt;/&gt;
-  )
-}
+  );
+};
 
 export default Home;</pre>
+
+
     <p>
-      Now, cut the <code>href</code> from <code>&lt;a&gt;</code> tag and place it with <code>&lt;Link&gt;</code> tag as a attribute as follows.
+      After this, cut the <code>href</code> from <code>&lt;a&gt;</code> tags and place it in <code>&lt;Link&gt;</code> tags as a attribute as follows.
     </p>
 
-    <pre>import Link from 'next/link'
+    <pre>import Link from &quot;next/link&quot;;
 
 const Home = () =&gt; {
   return (
     &lt;&gt;
       &lt;nav&gt;
+        <mark>&lt;Link href=&quot;/&quot;&gt;</mark>
+          <mark>&lt;a&gt;Home&lt;/a&gt;</mark>
+        <mark>&lt;/Link&gt;</mark>
+        &amp;nbsp;
         <mark>&lt;Link href=&quot;/about&quot;&gt;</mark>
           <mark>&lt;a&gt;About&lt;/a&gt;</mark>
-        &lt;/Link&gt;
+        <mark>&lt;/Link&gt;</mark>
       &lt;/nav&gt;
       &lt;h1&gt;Home&lt;/h1&gt;
     &lt;/&gt;
-  )
-}
+  );
+};
 
 export default Home;</pre>
 
     <p>
-      That's it! Now, go to browser, visit <code>/</code> page, and click on <code>About</code> link. Did you notice that the content of <code>About</code> page is loaded without browser reload! But, if you click on <code>Home</code> link from <code>About</code> page, you'll see complete page refresh. Magic of <code>&lt;Link&gt;</code> tag! Let's update the same change in <code>about.js</code> file as well.
+      Now, go to the browser on <code>/</code> route and click on <code>About</code> from navigation link. It'll take you to the <code>About</code> page but without page reload. Did you notice (do it again if not)? Let's apply the same changes now in <code>About.js</code> page - import <code>Link</code> from <code>next/link</code>, wraps all <code>&lt;a&gt;</code> tags with <code>Link</code>, and the place all <code>href</code>s with <code>Link</code> instead of <code>&lt;a&gt;</code>s. Magic of <code>&lt;Link&gt;</code> tag!
     </p>
 
-    <pre>import Link from 'next/link'
+    <pre><mark>import Link from &quot;next/link&quot;;</mark>
 
 const About = () =&gt; {
   return (
@@ -276,78 +246,26 @@ const About = () =&gt; {
         <mark>&lt;Link href=&quot;/&quot;&gt;</mark>
           <mark>&lt;a&gt;Home&lt;/a&gt;</mark>
         <mark>&lt;/Link&gt;</mark>
+        &amp;nbsp;
+        <mark>&lt;Link href=&quot;/about&quot;&gt;</mark>
+          <mark>&lt;a&gt;About&lt;/a&gt;</mark>
+        <mark>&lt;/Link&gt;</mark>
       &lt;/nav&gt;
       &lt;h1&gt;About&lt;/h1&gt;
     &lt;/&gt;
-  )
-}
+  );
+};
 
 export default About;</pre>
 
       <p>
-        Now, if you go from <code>/</code> to <code>/about</code> or <code>/about</code> to <code>/</code>, you'll <em>not</em> see the complete page refresh.
+        Now, if you go from <code>/</code> to <code>/about</code> or <code>/about</code> to <code>/</code>, you wouldn't <em>not</em> see the complete page refresh.
       </p>
 
       <hr>
 
-      <p>
-        Our navigation is incomplete. Currently, it includes only one page link. Let's add both links in both pages. Let's add <code>Home</code> link in <code>index.js</code> file.
-      </p>
-
-      <pre>import Link from 'next/link'
-
-const Home = () =&gt; {
-  return (
-    &lt;&gt;
-      &lt;nav&gt;
-        &lt;Link href=&quot;/&quot;&gt;
-          &lt;a&gt;Home&lt;/a&gt;
-        &lt;/Link&gt;
-        <mark>&amp;nbsp;</mark>
-        <mark>&lt;Link href=&quot;/about&quot;&gt;</mark>
-          <mark>&lt;a&gt;About&lt;/a&gt;</mark>
-        <mark>&lt;/Link&gt;</mark>
-      &lt;/nav&gt;
-      &lt;h1&gt;Home&lt;/h1&gt;
-    &lt;/&gt;
-  )
-}
-
-export default Home;</pre>
-
     <p>
-      Wrote an <code>&amp;nbsp;</code> hack to put one space between two links. Just confirm from your side that both links are clickable and working. Once done let's update <code>about.js</code> file by including <code>About</code> link within it.
-    </p>
-
-    <pre>import Link from 'next/link'
-
-const About = () =&gt; {
-  return (
-    &lt;&gt;
-      &lt;nav&gt;
-        <mark>&lt;Link href=&quot;/&quot;&gt;</mark>
-          <mark>&lt;a&gt;Home&lt;/a&gt;</mark>
-        <mark>&lt;/Link&gt;</mark>
-        <mark>&amp;nbsp;</mark>
-        &lt;Link href=&quot;/about&quot;&gt;
-          &lt;a&gt;About&lt;/a&gt;
-        &lt;/Link&gt;
-      &lt;/nav&gt;
-      &lt;h1&gt;About&lt;/h1&gt;
-    &lt;/&gt;
-  )
-}
-
-export default About;</pre>
-
-    <p>
-      Again confirm from your side that both links on both pages are working.
-    </p>
-
-    <hr>
-
-    <p>
-      There are a couple of software engineering principles that you should or must follow and one of them is DRY or Don't Repeat Yourself. We're doing exactly opposite of it. We're duplicating the same <code>&lt;nav&gt;</code> tag in two different pages. Duplicating code has its own advantages in some special circumstances but not in our <code>hello-world</code> application. What will happen if our application will have more pages and then we need to add one link within navigation? You get the point, right!
+      There are a <a href="https://rubyonrails.org/doctrine/">couple of software</a> engineering principles that we should or must follow and one of them is DRY or Don't Repeat Yourself. We're doing exactly opposite of it. We're duplicating the same <code>&lt;nav&gt;</code> tag in two different pages. Duplicating code has its own advantages in some special circumstances but not in our <code>company-website</code> application. What will happen if our application will have more pages and then we need to add one link within navigation? You get the point, right!
     </p>
 
     <p>
@@ -359,11 +277,11 @@ export default About;</pre>
 &lt;/Layout&gt;</pre>
 
     <p>
-      But, we can't create this <code>Layout</code> within <code>pages</code> folder. Why? Because, if we do it, then it'll be available at <code>/layout</code>. In this case, we can create this <code>Layout</code> as component within <code>components</code> folder outside the <code>pages</code> folder and under the <code>project</code> root folder. Just like we create a normal React component.
+      But, we can't create this <code>Layout</code> within <code>pages</code> folder. Why? Because, if we do it, then it'll be available at <code>/layout</code>. In this case, we can create this <code>Layout</code> as component within <code>components</code> folder outside the <code>pages</code> folder and under the <code>company-website</code> root folder. Just like we create a normal React component.
     </p>
 
     <p>
-      First, in project root, let's create a <code>components</code> folder.
+      First, in <code>company-website</code> project root, let's create a <code>components</code> folder.
     </p>
 
     <pre>$ mkdir components</pre>
@@ -375,13 +293,13 @@ export default About;</pre>
     <pre>const Layout = () =&gt; {
   return (
 
-  )
+  );
 }
 
 export default Layout;</pre>
 
     <p>
-      Let's copy the common code between <code>index.js</code> and <code>about.js</code> file i.g. <code>&lt;nav&gt;</code> code.
+      Let's copy the common code from <code>index.js</code> and <code>about.js</code> file i.g. <code>&lt;nav&gt;</code> code.
     </p>
 
     <pre>const Layout = () =&gt; {
@@ -395,16 +313,17 @@ export default Layout;</pre>
         <mark>&lt;a&gt;About&lt;/a&gt;</mark>
       <mark>&lt;/Link&gt;</mark>
     <mark>&lt;/nav&gt;</mark>
-  )
-}
+  );
+};
 
 export default Layout;</pre>
 
     <p>
-      We need to import the <code>Link</code> tag here in this <code>Layout.js</code> file.
+      Don't forget to import the <code>Link</code> package here as we're using it in our <code>Layout.js</code> file.
     </p>
 
-    <pre><mark>import Link from 'next/link'</mark>
+
+    <pre><mark>import Link from &quot;next/link&quot;;</mark>
 
 const Layout = () =&gt; {
   return (
@@ -417,18 +336,18 @@ const Layout = () =&gt; {
         &lt;a&gt;About&lt;/a&gt;
       &lt;/Link&gt;
     &lt;/nav&gt;
-  )
-}
+  );
+};
 
 export default Layout;</pre>
 
     <p>
-      Now, we're going to wrap this <code>&lt;nav&gt;</code> tag within React fragment as follows.
+      Now, we're going to write this <code>nav</code> tag within React fragment. Because, we're going to load/display the content from actual pages. The content in those pages are going to be wrapped within <code>Layout</code> content. So, the content of those page becomes <code>props.children</code>. Let's update the component definition by accepting <code>props</code>, wrapping the <code>nav</code> with React fragment, and finally loading the <code>props.children</code> component (I'm doing three modifications at a same time. Because, they're simple).
     </p>
 
-    <pre>import Link from 'next/link'
+    <pre>import Link from &quot;next/link&quot;;
 
-const Layout = () =&gt; {
+const Layout = (props) =&gt; {
   return (
     <mark>&lt;&gt;</mark>
       &lt;nav&gt;
@@ -440,35 +359,11 @@ const Layout = () =&gt; {
           &lt;a&gt;About&lt;/a&gt;
         &lt;/Link&gt;
       &lt;/nav&gt;
+
+      <mark>{props.children}</mark>
     <mark>&lt;/&gt;</mark>
-  )
-}
-
-export default Layout;</pre>
-
-    <p>
-      Why? Because, after <code>&lt;nav&gt;</code> tag, we're going to render the actual content of <code>index.js</code> or <code>about.js</code> file. In this case, we need to use <code>props.children</code> in <code>Layout.js</code> file as follows.
-    </p>
-
-    <pre>import Link from 'next/link'
-
-const Layout = (<mark>props</mark>) =&gt; {
-  return (
-    &lt;&gt;
-      &lt;nav&gt;
-        &lt;Link href=&quot;/&quot;&gt;
-          &lt;a&gt;Home&lt;/a&gt;
-        &lt;/Link&gt;
-        &amp;nbsp;
-        &lt;Link href=&quot;/about&quot;&gt;
-          &lt;a&gt;About&lt;/a&gt;
-        &lt;/Link&gt;
-      &lt;/nav&gt;
-
-      <mark>{ props.children }</mark>
-    &lt;/&gt;
-  )
-}
+  );
+};
 
 export default Layout;</pre>
 
@@ -476,7 +371,7 @@ export default Layout;</pre>
       Let's use the concept of destructuring with <code>props</code> and accept <code>children</code> directly.
     </p>
 
-    <pre>import Link from 'next/link'
+    <pre>import Link from &quot;next/link&quot;;
 
 const Layout = (<mark>{ children }</mark>) =&gt; {
   return (
@@ -491,20 +386,24 @@ const Layout = (<mark>{ children }</mark>) =&gt; {
         &lt;/Link&gt;
       &lt;/nav&gt;
 
-      <mark>{ children }</mark>
+      <mark>{children}</mark>
     &lt;/&gt;
-  )
-}
+  );
+};
 
 export default Layout;</pre>
 
     <p>
-      We're now ready with out <code>Layout</code> component! Let's first use it in <code>index.js</code> file. Go to <code>index.js</code> file, open it in text-editor, and import the <code>Layout</code> component in this file as follows.
+      We're not ready with our <code>Layout</code> component!
     </p>
 
-    <pre>import Link from 'next/link'
+    <p>
+      Let's first use it in <code>index.js</code> file. Let's import the component first.
+    </p>
 
-<mark>import Layout from '../components/Layout'</mark>
+    <pre>import Link from &quot;next/link&quot;;
+
+<mark>import Layout from &quot;../components/Layout&quot;;</mark>
 
 const Home = () =&gt; {
   return (
@@ -520,50 +419,32 @@ const Home = () =&gt; {
       &lt;/nav&gt;
       &lt;h1&gt;Home&lt;/h1&gt;
     &lt;/&gt;
-  )
-}
+  );
+};
 
 export default Home;</pre>
 
     <p>
-      Next, let's remove the complete <code>&lt;nav&gt;</code> tag.
+      Next, let's remove the complete <code>nav</code> tag as we already have this in <code>Layout</code>. Also, if we remove the <code>nav</code> content, we don't need <code>Link</code> any more. So, lets also delete the <code>Link</code> import statement.
     </p>
 
-    <pre>import Link from 'next/link'
-
-import Layout from '../components/Layout'
+    <pre>import Layout from &quot;../components/Layout&quot;;
 
 const Home = () =&gt; {
   return (
     &lt;&gt;
       &lt;h1&gt;Home&lt;/h1&gt;
     &lt;/&gt;
-  )
-}
+  );
+};
 
 export default Home;</pre>
 
     <p>
-      We also don't need <code>Link</code> in this <code>index.js</code> file. So, let's remove the <code>Link</code> import statement.
+      The final steps of using <code>Layout</code> is quite simple. We just need to wrap the content of <code>index.js</code> page with <code>Layout</code> component.
     </p>
 
-    <pre>import Layout from '../components/Layout'
-
-const Home = () =&gt; {
-  return (
-    &lt;&gt;
-      &lt;h1&gt;Home&lt;/h1&gt;
-    &lt;/&gt;
-  )
-}
-
-export default Home;</pre>
-
-    <p>
-      Finally, let's use <code>Layout</code> component by wrapping the content of <code>index.js</code> file within it as follows.
-    </p>
-
-    <pre>import Layout from '../components/Layout'
+    <pre>import Layout from &quot;../components/Layout&quot;;
 
 const Home = () =&gt; {
   return (
@@ -572,46 +453,16 @@ const Home = () =&gt; {
         &lt;h1&gt;Home&lt;/h1&gt;
       <mark>&lt;/Layout&gt;</mark>
     &lt;/&gt;
-  )
-}
+  );
+};
 
 export default Home;</pre>
 
     <p>
-      Yay! We just eliminate the duplicate from <code>index.js</code> file. Let's update the <code>about.js</code> file as well. First, let's remove the <code>Link</code> import statement and <code>&lt;nav&gt;</code> tag.
+      Let's check in browser for the <code>/</code> route and confirm that the page is displaying as it is without any error. No issue in browser. Perfect! Let's apply the same change in <code>About.js</code> page. We're going to import <code>Layout</code>, removed the not-need <code>Link</code> import, remove the <code>nav</code> tag, and finally wrap the content within <code>Layout</code> component.
     </p>
 
-    <pre>const About = () =&gt; {
-  return (
-    &lt;&gt;
-      &lt;h1&gt;About&lt;/h1&gt;
-    &lt;/&gt;
-  )
-}
-
-export default About;</pre>
-
-    <p>
-      Then import the <code>Layout</code> component as follows.
-    </p>
-
-    <pre><mark>import Layout from '../components/Layout'</mark>
-
-const About = () =&gt; {
-  return (
-    &lt;&gt;
-      &lt;h1&gt;About&lt;/h1&gt;
-    &lt;/&gt;
-  )
-}
-
-export default About;</pre>
-
-    <p>
-      Finally, let's wrap the content with <code>&lt;Layout&gt;</code> tag as follow.
-    </p>
-
-    <pre>import Layout from '../components/Layout'
+    <pre><mark>import Layout from &quot;../components/Layout&quot;;</mark>
 
 const About = () =&gt; {
   return (
@@ -620,13 +471,218 @@ const About = () =&gt; {
         &lt;h1&gt;About&lt;/h1&gt;
       <mark>&lt;/Layout&gt;</mark>
     &lt;/&gt;
-  )
-}
+  );
+};
 
 export default About;</pre>
 
     <p>
       We just achieved DRY! What we did in this section doesn't effect the output. But, it did greatly improve the development productivity for future changes. That's the important part of programming an application.
+    </p>
+
+    <hr>
+
+    <p>
+      Let's add a title on both page using <code>Head</code> from <code>next/head</code> package. Let's do it first in <code>index.js</code> file and if it works there, we'll copy the changes into <code>About.js</code> file.
+    </p>
+
+    <pre><mark>import Head from &quot;next/head&quot;;</mark>
+
+import Layout from &quot;../components/Layout&quot;;
+
+const Home = () =&gt; {
+  return (
+    &lt;&gt;
+      &lt;Layout&gt;
+        &lt;h1&gt;Home&lt;/h1&gt;
+      &lt;/Layout&gt;
+    &lt;/&gt;
+  );
+};
+
+export default Home;</pre>
+
+    <p>
+      Now, we can define <code>title</code> within <code>Home</code> component. But, in order to do that, we need to place <code>title</code> tag within <code>Head</code>.
+    </p>
+
+    <pre>import Head from &quot;next/head&quot;;
+
+import Layout from &quot;../components/Layout&quot;;
+
+const Home = () =&gt; {
+  return (
+    &lt;&gt;
+      <mark>&lt;Head&gt;</mark>
+        <mark>&lt;title&gt;Home&lt;/title&gt;</mark>
+      <mark>&lt;/Head&gt;</mark>
+      &lt;Layout&gt;
+        &lt;h1&gt;Home&lt;/h1&gt;
+      &lt;/Layout&gt;
+    &lt;/&gt;
+  );
+};
+
+export default Home;</pre>
+
+      <p>
+        It is always good idea to write <code>Head</code> tag first within you component. Because, that's where normally you write the title tag or other meta tag in normal webpage!
+      </p>
+
+      <p>
+        Let's add same to <code>About.js</code> file. But, wait! Aren't we duplicating the code? I mean, for now it just a simple <code>title</code> tag so it wouldn't hurt us to write in another page. But, what if we need to include other repetitive meta tag such as <code>viewport</code> or <code>charSet</code> like this?
+      </p>
+
+      <pre>import Head from &quot;next/head&quot;;
+
+import Layout from &quot;../components/Layout&quot;;
+
+const Home = () =&gt; {
+  return (
+    &lt;&gt;
+      &lt;Head&gt;
+        &lt;title&gt;Home&lt;/title&gt;
+        <mark>&lt;meta charSet=&quot;utf-8&quot; /&gt;</mark>
+        <mark>&lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1.0, width=device-width&quot; /&gt;</mark>
+      &lt;/Head&gt;
+      &lt;Layout&gt;
+        &lt;h1&gt;Home&lt;/h1&gt;
+      &lt;/Layout&gt;
+    &lt;/&gt;
+  );
+};
+
+export default Home;</pre>
+
+    <p>
+      Now, we're going to duplicate these two lines again and again as we create new pages. We can eliminate this duplication again by placing this code within layout page. So, let's first import <code>Head</code> in <code>Layout.js</code> file as follow.
+    </p>
+
+    <pre><mark>import Head from &quot;next/head&quot;;</mark>
+import Link from &quot;next/link&quot;;
+
+const Layout = ({ children }) =&gt; {
+  return (
+    &lt;&gt;
+      &lt;nav&gt;
+        &lt;Link href=&quot;/&quot;&gt;
+          &lt;a&gt;Home&lt;/a&gt;
+        &lt;/Link&gt;
+        &amp;nbsp;
+        &lt;Link href=&quot;/about&quot;&gt;
+          &lt;a&gt;About&lt;/a&gt;
+        &lt;/Link&gt;
+      &lt;/nav&gt;
+
+      {children}
+    &lt;/&gt;
+  );
+};
+
+export default Layout;</pre>
+
+    <p>
+      Then we're going to copy the <code>Head</code> tag from <code>index.js</code> and place it here within Layout.js file and before <code>nav</code> tag.
+    </p>
+
+    <pre>import Head from &quot;next/head&quot;;
+import Link from &quot;next/link&quot;;
+
+const Layout = ({ children }) =&gt; {
+  return (
+    &lt;&gt;
+      <mark>&lt;Head&gt;</mark>
+        <mark>&lt;title&gt;Home&lt;/title&gt;</mark>
+        <mark>&lt;meta charSet=&quot;utf-8&quot; /&gt;</mark>
+        <mark>&lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1.0, width=device-width&quot; /&gt;</mark>
+      <mark>&lt;/Head&gt;</mark>
+      &lt;nav&gt;
+        &lt;Link href=&quot;/&quot;&gt;
+          &lt;a&gt;Home&lt;/a&gt;
+        &lt;/Link&gt;
+        &amp;nbsp;
+        &lt;Link href=&quot;/about&quot;&gt;
+          &lt;a&gt;About&lt;/a&gt;
+        &lt;/Link&gt;
+      &lt;/nav&gt;
+
+      {children}
+    &lt;/&gt;
+  );
+};
+
+export default Layout;</pre>
+
+    <p>
+      But, this <code>title</code> is dynamic and change from page to page. Then about making it <code>props</code> for Layout? So, let's accept <code>title</code> with <code>children</code> also. Also, let's not forget to update the `title` Home with `title` variable.
+    </p>
+
+    <pre>import Head from &quot;next/head&quot;;
+import Link from &quot;next/link&quot;;
+
+const Layout = ({ <mark>title,</mark> children }) =&gt; {
+  return (
+    &lt;&gt;
+      &lt;Head&gt;
+        &lt;title&gt;<mark>{title}</mark>&lt;/title&gt;
+        &lt;meta charSet=&quot;utf-8&quot; /&gt;
+        &lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1.0, width=device-width&quot; /&gt;
+      &lt;/Head&gt;
+      &lt;nav&gt;
+        &lt;Link href=&quot;/&quot;&gt;
+          &lt;a&gt;Home&lt;/a&gt;
+        &lt;/Link&gt;
+        &amp;nbsp;
+        &lt;Link href=&quot;/about&quot;&gt;
+          &lt;a&gt;About&lt;/a&gt;
+        &lt;/Link&gt;
+      &lt;/nav&gt;
+
+      {children}
+    &lt;/&gt;
+  );
+};
+
+export default Layout;</pre>
+
+    <p>
+      Perfect! Let's remove the <code>Head</code> import, <code>Head</code> tag, and pass the <code>title</code> as props to <code>Layout</code>.
+    </p>
+
+    <pre>import Layout from &quot;../components/Layout&quot;;
+
+const Home = () =&gt; {
+  return (
+    &lt;&gt;
+      &lt;Layout <mark>title=&quot;Home&quot;</mark>&gt;
+        &lt;h1&gt;Home&lt;/h1&gt;
+      &lt;/Layout&gt;
+    &lt;/&gt;
+  );
+};
+
+export default Home;</pre>
+
+    <p>
+      Let's apply the same change to <code>About.js</code> page by just including the <code>title</code> props to <code>Layout</code>.
+    </p>
+
+    <pre>import Layout from &quot;../components/Layout&quot;;
+
+const About = () =&gt; {
+  return (
+    &lt;&gt;
+      &lt;Layout <mark>title=&quot;About&quot;</mark>&gt;
+        &lt;h1&gt;About&lt;/h1&gt;
+      &lt;/Layout&gt;
+    &lt;/&gt;
+  );
+};
+
+export default About;</pre>
+
+    <p>
+      Let's do one more change before I forget about it. What if someone forgot to include the <code>title</code> props? In this case we should displaying something default like <code>Company Website</code>. Thanks to ES6, this is now easy with default value parameters. Let's apply the default value to <code>title</code> in <code>Layout.js</code> file.
     </p>
 
     <hr>
