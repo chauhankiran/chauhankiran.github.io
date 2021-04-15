@@ -685,7 +685,86 @@ export default About;</pre>
       Let's do one more change before I forget about it. What if someone forgot to include the <code>title</code> props? In this case we should displaying something default like <code>Company Website</code>. Thanks to ES6, this is now easy with default value parameters. Let's apply the default value to <code>title</code> in <code>Layout.js</code> file.
     </p>
 
+    <pre>import Head from &quot;next/head&quot;;
+import Link from &quot;next/link&quot;;
+
+const Layout = ({ <mark>title = &quot;Company Website&quot;</mark>, children }) =&gt; {
+  return (
+    &lt;&gt;
+      &lt;Head&gt;
+        &lt;title&gt;{title}&lt;/title&gt;
+        &lt;meta charSet=&quot;utf-8&quot; /&gt;
+        &lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1.0, width=device-width&quot; /&gt;
+      &lt;/Head&gt;
+      &lt;nav&gt;
+        &lt;Link href=&quot;/&quot;&gt;
+          &lt;a&gt;Home&lt;/a&gt;
+        &lt;/Link&gt;
+        &amp;nbsp;
+        &lt;Link href=&quot;/about&quot;&gt;
+          &lt;a&gt;About&lt;/a&gt;
+        &lt;/Link&gt;
+      &lt;/nav&gt;
+
+      {children}
+    &lt;/&gt;
+  );
+};
+
+export default Layout;</pre>
+
     <hr>
+
+    <p>
+      We're building website for company and I wouldn't think that any company will accept our work on their website without beautiful websites. So, let's add styles to our pages.
+    </p>
+
+    <p>
+      I'm going to use Tailwind CSS. So, that in that way, we know how to integrate the stylesheet via npm package. The good thing about Tailwind CSS is that, they have already written nice  <a href="https://tailwindcss.com/docs/guides/nextjs">documentation</a> on how to setup the Tailwind CSS with Next.js project. Let's go ahead and follow the steps. We already create a Next project in our way, so we directly need to just in step 02. Look over the <code>package.json</code> and you'll see that we're using <code>next</code> version <code>10</code>. So, we need to run following command to install the Tailwind CSS.
+    </p>
+
+    <pre>npm install -D tailwindcss@latest postcss@latest autoprefixer@latest</pre>
+
+    Next, they asked us to create <code>config</code> file for both Tailwind and PostCSS using following command.
+
+    <pre>npx tailwindcss init -p
+
+   tailwindcss 2.1.1
+
+   ✅ Created Tailwind config file: tailwind.config.js
+   ✅ Created PostCSS config file: postcss.config.js</pre>
+
+   <p>
+     As per console message, it created two config files.
+   </p>
+
+   <p>
+     If you don't know then let me tell you that Tailwind CSS is really big and they even don't recommended you to include the complete CSS in your production application. What they ask us to purge the unwanted style when you're doing production development. Let's do it by updating the purge option in <code>tailwind.config.js</code> file.
+   </p>
+
+   <pre>module.exports = {
+  <mark>purge: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],</mark>
+  darkMode: false, // or 'media' or 'class'
+  theme: {
+    extend: {},
+  },
+  variants: {
+    extend: {},
+  },
+  plugins: [],
+};
+</pre>
+
+  <p>
+    Now, they want us to include the Tailwind in <code>_app.js</code> file. Wait! I don't think we have this file. From where they get this file? Does this file is require? From where this fill will going to call? What we have to write within this file? Let's answer these questions in next question.
+    </p>
+
+    <hr>
+
+    <p>
+      <code>_app.js</code> is one of the special file that you can have within pages folder. This file has quite few usages and you can read the usages here on this <a href="https://nextjs.org/docs/advanced-features/custom-app">documentation</a>. But, the one which is important for us is, "Add global CSS".
+    </p>
+
 
   </body>
 </html>
