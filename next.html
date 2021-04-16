@@ -1332,5 +1332,237 @@ export default Blog;</pre>
 
     <hr>
 
+    <p>
+      First, let's make the links clickable. How about adding slugs in link by prefixing the blog e.g. <code>blog/hello-world</code> and <code>blog/company-mission</code>.
+    </p>
+
+    <pre>import Layout from &quot;../components/Layout&quot;;
+
+const Blog = () =&gt; {
+  return (
+    &lt;&gt;
+      &lt;Layout title=&quot;Blog&quot;&gt;
+        &lt;h1 className=&quot;text-4xl mt-4 ml-8&quot;&gt;Blog&lt;/h1&gt;
+
+        &lt;ul className=&quot;list-none mt-4 ml-8&quot;&gt;
+          &lt;li className=&quot;mb-2&quot;&gt;
+            &lt;a
+              <mark>href=&quot;blog/company-mission&quot;</mark>
+              className=&quot;text-blue-500 hover:text-blue-700&quot;
+            &gt;
+              Company's Mission
+            &lt;/a&gt;
+          &lt;/li&gt;
+          &lt;li className=&quot;mb-2&quot;&gt;
+            &lt;a
+              <mark>href=&quot;blog/hello-world&quot;</mark>
+              className=&quot;text-blue-500 hover:text-blue-700&quot;
+            &gt;
+              Hello, World
+            &lt;/a&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/Layout&gt;
+    &lt;/&gt;
+  );
+};
+
+export default Blog;</pre>
+
+    <p>
+      Now, the real world scenario will be like this. If I click on blog post, based on slug, it'll look in markdown file or many be in database and based on it, it'll going to display the blog post. So, the important part here is slug in URL. The page will remain same except the content will going to be changed. This is called dynamic routing and we can achieve this by creating a dynamic routing supported file and folder. In our case we need to create a folder with name <code>blog</code> within <code>pages</code> and then <code>[slug.js]</code> within <code>blog</code> folder. Here, <code>[]</code> in file name suggest that it is for dynamic route. Let's create <code>blog</code> folder and then <code>[slug.js]</code> file within it. Now, open this <code>[slug.js]</code> file and copy the generic code in this file.
+    </p>
+
+    <pre>import Layout from &quot;../components/Layout&quot;;
+
+const BlogPost = () =&gt; {
+  return (
+    &lt;&gt;
+      &lt;Layout title=&quot;BlogPost&quot;&gt;
+        &lt;h1 className=&quot;text-4xl&quot;&gt;BlogPost&lt;/h1&gt;
+      &lt;/Layout&gt;
+    &lt;/&gt;
+  );
+};
+
+export default BlogPost;</pre>
+
+    <p>
+      In browser, let's visit <code>/blog/2</code> or may be <code>/blog/hello-world</code>. You'll see this page is loading. This is how you can do the dynamic routing. Now, we need to fetch the slug from the URL. To do that, we need to use <code>useRouter</code> from <code>next/router</code> package. Then we'll going to create a constant <code>router</code> using <code>useRouter()</code> method.
+    </p>
+
+    <pre><mark>import { useRouter } from &quot;next/router&quot;;</mark>
+
+import Layout from &quot;../../components/Layout&quot;;
+
+const BlogPost = () =&gt; {
+  <mark>const router = useRouter();</mark>
+
+  return (
+    &lt;&gt;
+      &lt;Layout title=&quot;BlogPost&quot;&gt;
+        &lt;h1 className=&quot;text-4xl&quot;&gt;BlogPost&lt;/h1&gt;
+      &lt;/Layout&gt;
+    &lt;/&gt;
+  );
+};
+
+export default BlogPost;</pre>
+
+    <p>
+      Now, we can fetch the slug from <code>router.query</code> by desctructuring it. Also, to do testing, let's print it as well.
+    </p>
+
+    <pre>import { useRouter } from &quot;next/router&quot;;
+
+import Layout from &quot;../../components/Layout&quot;;
+
+const BlogPost = () =&gt; {
+  const router = useRouter();
+  <mark>const { slug } = router.query;</mark>
+
+  return (
+    &lt;&gt;
+      &lt;Layout title=&quot;BlogPost&quot;&gt;
+        &lt;h1 className=&quot;text-4xl&quot;&gt;BlogPost&lt;/h1&gt;
+        <mark>{slug}</mark>
+      &lt;/Layout&gt;
+    &lt;/&gt;
+  );
+};
+
+export default BlogPost;</pre>
+
+    <p>
+      Based on the URL you opened, you might get <code>2</code> or <code>hello-world</code> printed. This is how, you can fetch the params from URL.
+    </p>
+
+    <p>
+      Now, lets assume that we have list of posts as array of an object and from this based on slug, we'll going to display the blog post. (this is just for example purpose. We'll going to change in future and will fetch from the database or CRM).
+    </p>
+
+    <p>
+      I'm going to add a <code>posts</code> array as follow.
+    </p>
+
+    <pre>import { useRouter } from &quot;next/router&quot;;
+
+import Layout from &quot;../../components/Layout&quot;;
+
+const BlogPost = () =&gt; {
+  const router = useRouter();
+  const { slug } = router.query;
+
+  <mark>const posts = [</mark>
+    <mark>{</mark>
+      <mark>id: 1,</mark>
+      <mark>slug: &quot;hello-world&quot;,</mark>
+      <mark>title: &quot;Hello, Word&quot;,</mark>
+      <mark>body:</mark>
+        <mark>&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</mark>
+        <mark>eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad</mark>
+        <mark>minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip</mark>
+        <mark>ex ea commodo consequat. Duis aute irure dolor in reprehenderit in</mark>
+        <mark>voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur</mark>
+        <mark>sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt</mark>
+        <mark>mollit anim id est laborum.&quot;,</mark>
+    <mark>},</mark>
+    <mark>{</mark>
+      <mark>id: 2,</mark>
+      <mark>slug: &quot;company-mission&quot;,</mark>
+      <mark>title: &quot;Company's Mission&quot;,</mark>
+      <mark>body:</mark>
+        <mark>&quot;Sed ut perspiciatis unde omnis iste natus error sit voluptatem</mark>
+        <mark>accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae</mark>
+        <mark>ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt</mark>
+        <mark>explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut</mark>
+        <mark>odit aut fugit, sed quia consequuntur magni dolores eos qui ratione</mark>
+        <mark>voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum</mark>
+        <mark>quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam</mark>
+        <mark>eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat</mark>
+        <mark>voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem</mark>
+        <mark>ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi</mark>
+        <mark>consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate</mark>
+        <mark>velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum</mark>
+        <mark>fugiat quo voluptas nulla pariatur?&quot;,</mark>
+    <mark>},</mark>
+  <mark>];</mark>
+
+  return (
+    &lt;&gt;
+      &lt;Layout title=&quot;BlogPost&quot;&gt;
+        &lt;h1 className=&quot;text-4xl&quot;&gt;BlogPost&lt;/h1&gt;
+        {slug}
+      &lt;/Layout&gt;
+    &lt;/&gt;
+  );
+};
+
+export default BlogPost;</pre>
+
+    <p>
+      Now, the logic is simple, we just need to search the fetched <code>slug</code> in given array and if it match throw the details of that matched array e.g. blog post. But, before we go further, I would like to print the value of slug in console after we fetch it from <code>router.query</code>. Why? Let's do it and then we can talk about.
+    </p>
+
+    <pre>import { useRouter } from &quot;next/router&quot;;
+
+import Layout from &quot;../../components/Layout&quot;;
+
+const BlogPost = () =&gt; {
+  const router = useRouter();
+  const { slug } = router.query;
+  <mark>console.log(slug);</mark>
+
+  const posts = [
+    {
+      id: 1,
+      slug: &quot;hello-world&quot;,
+      title: &quot;Hello, Word&quot;,
+      body:
+        &quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+        minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+        ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+        sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.&quot;,</mark>
+    },
+    {
+      id: 2,
+      slug: &quot;company-mission&quot;,
+      title: &quot;Company's Mission&quot;,
+      body:
+        &quot;Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+        accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae
+        ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
+        explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+        odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
+        voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum
+        quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam
+        eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
+        voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem
+        ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi
+        consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate
+        velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum
+        fugiat quo voluptas nulla pariatur?&quot;,
+    },
+  ];
+
+  return (
+    &lt;&gt;
+      &lt;Layout title=&quot;BlogPost&quot;&gt;
+        &lt;h1 className=&quot;text-4xl&quot;&gt;BlogPost&lt;/h1&gt;
+        {slug}
+      &lt;/Layout&gt;
+    &lt;/&gt;
+  );
+};
+
+export default BlogPost;</pre>
+
+    <p>
+      Did you notice? It is displaying first <code>undefined</code> and then <code>2</code> or the value of slug. This is because, <code>useRouter</code> is async and you don't get the result immediately. For now, I going to save the time on nor writing the logic for doing find in this <code>post</code> array because it'll not going to work. The solution is little bit interesting and that we're going to do in next couple of sections.
+    </p>
+
   </body>
 </html>
