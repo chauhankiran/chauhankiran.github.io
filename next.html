@@ -765,6 +765,572 @@ export default Layout;</pre>
       <code>_app.js</code> is one of the special file that you can have within pages folder. This file has quite few usages and you can read the usages here on this <a href="https://nextjs.org/docs/advanced-features/custom-app">documentation</a>. But, the one which is important for us is, "Add global CSS".
     </p>
 
+    <p>
+      Tailwind needs to be included as global CSS and due to this, I think, <code>_app.js</code> is the good place to write. So, let's go ahead and do it. First, we're going to create <code>_app.js</code> file within <code>pages</code> folder. And inside this file, we're going to write the following code. I copy this code from the website example with little modification on syntax.
+    </p>
+
+    <pre>const App = ({ Component, pagePros }) =&gt; {
+  return &lt;Component {...pagePros} /&gt;;
+};
+
+export default App;</pre>
+
+    <p>
+      As per documentation, you need to restart the server, in order to get the changes we just done. Because, <code>_app.js</code> requires server restart (one time only). Just for the sake of confirmation, visit <code>/</code> and <code>/about</code> in browser. It should work without any problem. Basically, Next.js load the <code>App</code> component by default, then on visit, it is loading the page "Component" with its "pagePros". So, everything working as expected but now we explicitly write the <code>App</code> component. Because, we need to include the global styles.
+    </p>
+
+    <p>
+      Next, back to our Tailwind documentation, I think we're now read to include the <code>tailwind.css</code> within <code>_app.js</code> file as mentioned in documentation.
+    </p>
+
+    <pre><mark>import &quot;tailwindcss/tailwind.css&quot;;</mark>
+
+const App = ({ Component, pagePros }) =&gt; {
+  return &lt;Component {...pagePros} /&gt;;
+};
+
+export default App;</pre>
+
+    <p>
+      Now, visit the <code>/</code> and <code>/about</code> again. You'll see the instance styles update in your page. Perfect! We just included Tailwind in our whole application. The next section will be boring in terms of Next.js as we're going to do some styling to make our website little interesting.
+    </p>
+
+    <hr>
+
+    <p>
+      In our current pages, we can differentiate the link, header, and navigation. Let's increase the font-size of header. So, that we know that this is header. To increase the font-size, <code>text-</code> followed by <a href="https://tailwindcss.com/docs/font-size">size classes</a> is used. For example, <code>text-4xl</code> increase the font-size to really big font size. So, lets apply it in both <code>index.js</code> and <code>about.js</code>.
+    </p>
+
+    <p>
+      Here is the <code>index.js</code> with applied class. Don't forget to use <code>className</code> instead of <code>class</code>.
+    </p>
+
+    <pre>import Layout from &quot;../components/Layout&quot;;
+
+const Home = () =&gt; {
+  return (
+    &lt;&gt;
+      &lt;Layout title=&quot;Home&quot;&gt;
+        &lt;h1 <mark>className=&quot;text-4xl&quot;</mark>&gt;Home&lt;/h1&gt;
+      &lt;/Layout&gt;
+    &lt;/&gt;
+  );
+};
+
+export default Home;</pre>
+    <p>
+      And here is the class update in <code>about.js</code> file.
+    </p>
+
+    <pre>import Layout from &quot;../components/Layout&quot;;
+
+const About = () =&gt; {
+  return (
+    &lt;&gt;
+      &lt;Layout title=&quot;About&quot;&gt;
+        &lt;h1 <mark>className=&quot;text-4xl&quot;</mark>&gt;About&lt;/h1&gt;
+      &lt;/Layout&gt;
+    &lt;/&gt;
+  );
+};
+
+export default About;</pre>
+
+    <p>
+      Both pages header looks good in browser. Let's target the navigation now. Frankly speaking, we'll going to build the design quite simple. But, you're welcome to add your personal design touch. In order to build the navigation, first I'm going to visit the older version of <a href="https://tailwindcss-v0.netlify.app/">Tailwind website</a>. Because, it has <a href="https://tailwindcss-v0.netlify.app/docs/examples/navigation/#app">example</a> code for the navigation. We're going to use this for our application.
+    </p>
+
+    <p>
+      Don't worry if you don't get it. I'll walk you through the creation of simple navigation. Examples are using <code>ul</code> where as we're using actual <code>nav</code>. So, there'll be little classes usages. For example, we're not going to use <code>list-reset</code> class as we don't needed it.
+    </p>
+
+    <p>
+      First, let's add <code>flex</code> class to our <code>nav</code>. Don't forget, we're going to do this change in <code>Layout.js</code> file.
+    </p>
+
+    <pre>import Head from &quot;next/head&quot;;
+import Link from &quot;next/link&quot;;
+
+const Layout = ({ title = &quot;Company Website&quot;, children }) =&gt; {
+  return (
+    &lt;&gt;
+      &lt;Head&gt;
+        &lt;title&gt;{title}&lt;/title&gt;
+        &lt;meta charSet=&quot;utf-8&quot; /&gt;
+        &lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1.0, width=device-width&quot; /&gt;
+      &lt;/Head&gt;
+      &lt;nav <mark>className=&quot;flex&quot;</mark>&gt;
+        &lt;Link href=&quot;/&quot;&gt;
+          &lt;a&gt;Home&lt;/a&gt;
+        &lt;/Link&gt;
+        &amp;nbsp;
+        &lt;Link href=&quot;/about&quot;&gt;
+          &lt;a&gt;About&lt;/a&gt;
+        &lt;/Link&gt;
+      &lt;/nav&gt;
+
+      {children}
+    &lt;/&gt;
+  );
+};
+
+export default Layout;</pre>
+
+    <p>
+      Let's add some spaces between these two links. As mentioned in example, they're using <code>mr-6</code> or margin right 6. Let's use this class on both code <code>a</code> tags.
+    </p>
+
+    <pre>import Head from &quot;next/head&quot;;
+import Link from &quot;next/link&quot;;
+
+const Layout = ({ title = &quot;Company Website&quot;, children }) =&gt; {
+  return (
+    &lt;&gt;
+      &lt;Head&gt;
+        &lt;title&gt;{title}&lt;/title&gt;
+        &lt;meta charSet=&quot;utf-8&quot; /&gt;
+        &lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1.0, width=device-width&quot; /&gt;
+      &lt;/Head&gt;
+      &lt;nav className=&quot;flex&quot;&gt;
+        &lt;Link href=&quot;/&quot;&gt;
+          &lt;a <mark>className=&quot;mr-6&quot;</mark>&gt;Home&lt;/a&gt;
+        &lt;/Link&gt;
+        &amp;nbsp;
+        &lt;Link href=&quot;/about&quot;&gt;
+          &lt;a <mark>className=&quot;mr-6&quot;</mark>&gt;About&lt;/a&gt;
+        &lt;/Link&gt;
+      &lt;/nav&gt;
+
+      {children}
+    &lt;/&gt;
+  );
+};
+
+export default Layout;</pre>
+
+    <p>
+      Good space between the two nav links. But, I think we should need these sort of space all around, why you think? So, let's add <code>p-4</code> or padding 4 on <code>nav</code> tag.
+    </p>
+
+    <pre>import Head from &quot;next/head&quot;;
+import Link from &quot;next/link&quot;;
+
+const Layout = ({ title = &quot;Company Website&quot;, children }) =&gt; {
+  return (
+    &lt;&gt;
+      &lt;Head&gt;
+        &lt;title&gt;{title}&lt;/title&gt;
+        &lt;meta charSet=&quot;utf-8&quot; /&gt;
+        &lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1.0, width=device-width&quot; /&gt;
+      &lt;/Head&gt;
+      &lt;nav className=&quot;flex <mark>p-4</mark>&quot;&gt;
+        &lt;Link href=&quot;/&quot;&gt;
+          &lt;a className=&quot;mr-6&quot;&gt;Home&lt;/a&gt;
+        &lt;/Link&gt;
+        &amp;nbsp;
+        &lt;Link href=&quot;/about&quot;&gt;
+          &lt;a className=&quot;mr-6&quot;&gt;About&lt;/a&gt;
+        &lt;/Link&gt;
+      &lt;/nav&gt;
+
+      {children}
+    &lt;/&gt;
+  );
+};
+
+export default Layout;</pre>
+
+    <p>
+      Now, you might notice the good space around. But, we can't differentiate the nav from content. Let's add a bottom border. So, that we know that this is nav and this is from where content starts. At nav, we're going to use <code>border-b</code> class that will add bottom border and then a class <code>border-grey-400</code>, this will set color to <code>grey-400</code>.
+    </p>
+
+    <pre>import Head from &quot;next/head&quot;;
+import Link from &quot;next/link&quot;;
+
+const Layout = ({ title = &quot;Company Website&quot;, children }) =&gt; {
+  return (
+    &lt;&gt;
+      &lt;Head&gt;
+        &lt;title&gt;{title}&lt;/title&gt;
+        &lt;meta charSet=&quot;utf-8&quot; /&gt;
+        &lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1.0, width=device-width&quot; /&gt;
+      &lt;/Head&gt;
+      &lt;nav className=&quot;flex p-4 <mark>border-b border-grey-400</mark>&quot;&gt;
+        &lt;Link href=&quot;/&quot;&gt;
+          &lt;a className=&quot;mr-6&quot;&gt;Home&lt;/a&gt;
+        &lt;/Link&gt;
+        &amp;nbsp;
+        &lt;Link href=&quot;/about&quot;&gt;
+          &lt;a className=&quot;mr-6&quot;&gt;About&lt;/a&gt;
+        &lt;/Link&gt;
+      &lt;/nav&gt;
+
+      {children}
+    &lt;/&gt;
+  );
+};
+
+export default Layout;</pre>
+
+    <p>
+      You may not be agree with me, but I think the navigation looks good. Why you think? Let's add sort of blue color to our link tag in navigation. Let's add <code>text-blue-500</code>. This will make the link blue. Also, while we're doing this, let's add hover support also. When we hover on link, it should change the blue color to something darker blue for example <code>text-blue-700</code>. To make the hover working, we need to prefix the class with <code>hover:</code> e.g. <code>hover:text-blue-700</code>.
+    </p>
+
+    <pre>import Head from &quot;next/head&quot;;
+import Link from &quot;next/link&quot;;
+
+const Layout = ({ title = &quot;Company Website&quot;, children }) =&gt; {
+  return (
+    &lt;&gt;
+      &lt;Head&gt;
+        &lt;title&gt;{title}&lt;/title&gt;
+        &lt;meta charSet=&quot;utf-8&quot; /&gt;
+        &lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1.0, width=device-width&quot; /&gt;
+      &lt;/Head&gt;
+      &lt;nav className=&quot;flex p-4 border-b border-grey-400&quot;&gt;
+        &lt;Link href=&quot;/&quot;&gt;
+          &lt;a className=&quot;mr-6 <mark>text-blue-500 hover:text-blue-700</mark>&quot;&gt;Home&lt;/a&gt;
+        &lt;/Link&gt;
+        &amp;nbsp;
+        &lt;Link href=&quot;/about&quot;&gt;
+          &lt;a className=&quot;mr-6 <mark>text-blue-500 hover:text-blue-700</mark>&quot;&gt;About&lt;/a&gt;
+        &lt;/Link&gt;
+      &lt;/nav&gt;
+
+      {children}
+    &lt;/&gt;
+  );
+};
+
+export default Layout;</pre>
+
+    <p>
+      Now, our navigation looks little batter than previous. That's it for the styling part, in next section, we're going to add more functionalities within system.
+    </p>
+
+    <hr>
+
+    <p>
+      So, I communicated with our client for whom, we're creating this company website and he pointed out that until his designer create the design for the website, he want us to have some functionalities which might need within normal website. For example, adding a blog post. Many be on home page or many on other page, we'll have list of blogs, that'll going to be displayed. How about adding a new link in navigation from where we can display the list of blog post. Let's add then a link in <code>Layout.js</code> file.
+    </p>
+
+    <pre>import Head from &quot;next/head&quot;;
+import Link from &quot;next/link&quot;;
+
+const Layout = ({ title = &quot;Company Website&quot;, children }) =&gt; {
+  return (
+    &lt;&gt;
+      &lt;Head&gt;
+        &lt;title&gt;{title}&lt;/title&gt;
+        &lt;meta charSet=&quot;utf-8&quot; /&gt;
+        &lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1.0, width=device-width&quot; /&gt;
+      &lt;/Head&gt;
+      &lt;nav className=&quot;flex p-4 border-b border-grey-400&quot;&gt;
+        &lt;Link href=&quot;/&quot;&gt;
+          &lt;a className=&quot;mr-6 text-blue-500 hover:text-blue-700&quot;&gt;Home&lt;/a&gt;
+        &lt;/Link&gt;
+        &lt;Link href=&quot;/about&quot;&gt;
+          &lt;a className=&quot;mr-6 text-blue-500 hover:text-blue-700&quot;&gt;About&lt;/a&gt;
+        &lt;/Link&gt;
+        <mark>&lt;Link href=&quot;/blog&quot;&gt;</mark>
+          <mark>&lt;a className=&quot;mr-6 text-blue-500 hover:text-blue-700&quot;&gt;Blog&lt;/a&gt;</mark>
+        <mark>&lt;/Link&gt;</mark>
+      &lt;/nav&gt;
+
+      {children}
+    &lt;/&gt;
+  );
+};
+
+export default Layout;</pre>
+
+      <p>
+        With this code, I also remove that <code>&nbsp;</code> between <code>Home</code> and <code>About</code>. We don't needed it anymore.
+      </p>
+
+      <p>
+        If I click on this, it'll generate an error. Because we haven't defined the blog yet. So, we need to create <code>blog.js</code> page within <code>pages</code> folder and this error will gone. But, before I go further with this, I would like to do one thin. First, what will happen if user click or open the link which is not there. That is what happen in this scenario right? We should have error handling mechanism for short of things.
+      </p>
+
+      <p>
+        Now, stay on the <code>/blog</code> page in browser and go to the Network tab in Developer Tools. You'll see that we're getting 404 error. So, we need to display something when 404 error occurs. Next.js already know this issue. So, they provided an easy solution for it. Within <code>pages</code> folder, just create a file with name <code>404.js</code> and you're good to go. This page will be rendered when route not find. So, let's go ahead and create the <code>404.js</code> folder and write the following code.
+      </p>
+
+      <pre>const Error404 = () =&gt; {
+  return &lt;h1&gt;404 | The page you're looking for doesn't exist!&lt;/h1&gt;;
+};
+
+export default Error404;</pre>
+
+      <p>
+        Now, in browser, go ahead and reload it. You'll see the the content is displaying from this <code>404.js</code> page. Perfect! Let's add some style to it. Make it big and centered align within page.
+      </p>
+
+      <pre>const Error404 = () =&gt; {
+  return (
+    &lt;h1 <mark>className=&quot;flex justify-center items-center&quot;</mark>&gt;
+      404 | The page you're looking for doesn't exist!
+    &lt;/h1&gt;
+  );
+};
+
+export default Error404;</pre>
+
+    <p>
+      With the flex, what I tried to do is, align the item vertical and horizontally centered. But, it is not working vertically. The reason is, vertical height is up to the height of header. This is set from body. So, we need to make height of body to 100% in order to centered align the items. There're couple of ways, you can do it, but I'll going to show you by inline the style within this page. As Next.js has default support via <a href="https://github.com/vercel/styled-jsx">Styled JSX</a>. First, wrap out content with react fragment and then add <code>style</code> tag with <code>jsx</code> as attribute below the <code>h1</code> as follow.
+    </p>
+
+    <pre>const Error404 = () =&gt; {
+  return (
+    <mark>&lt;&gt;</mark>
+      &lt;h1 className=&quot;flex justify-center items-center&quot;&gt;
+        404 | The page you're looking for doesn't exist!
+      &lt;/h1&gt;
+      <mark>&lt;style jsx&gt;&lt;/style&gt;</mark>
+    <mark>&lt;/&gt;</mark>
+  );
+};
+
+export default Error404;</pre>
+
+    <p>
+      Type <code>{``}</code> within this <code>style</code> tag. And then you can write the css you want e.g. literal string in JavaScript as script. In our case, we wan to increase the hight of html and body, so we'll write like this. Also, we need to increase the height of <code>h1</code> also. That can be done using <code>h-full</code> class on <code>h1</code> tag.
+    </p>
+
+    <pre>import Head from &quot;next/head&quot;;
+
+const Error404 = () =&gt; {
+  return (
+    &lt;&gt;
+      &lt;h1 className=&quot;flex justify-center items-center <mark>h-full</mark>&quot;&gt;
+        404 | The page you're looking for doesn't exist!
+      &lt;/h1&gt;
+      &lt;style jsx&gt;<mark>{`</mark>
+        <mark>html,</mark>
+        <mark>body {</mark>
+          <mark>height: 100%;</mark>
+        <mark>}</mark>
+      <mark>`}</mark>&lt;/style&gt;
+    &lt;/&gt;
+  );
+};
+
+export default Error404;</pre>
+
+    <p>
+      Let's reload the page in browser and see the style in action. Ah! It is not working. Why? Because, you can update the style out of your components tag. I mean we're trying to update the style of <code>html</code> and <code>body</code> tag. But, those are not written within our <code>Error404</code> component. But, yeah! We can update the style of <code>h1</code> component. Do you want try? Let's add increase the font-size of this <code>h1</code> to 2rem.
+    </p>
+
+    <pre>import Head from &quot;next/head&quot;;
+
+const Error404 = () =&gt; {
+  return (
+    &lt;&gt;
+      &lt;h1 className=&quot;flex justify-center items-center h-full&quot;&gt;
+        404 | The page you're looking for doesn't exist!
+      &lt;/h1&gt;
+      &lt;style jsx&gt;{`
+        html,
+        body {
+          height: 100%;
+        }
+        <mark>h1 {</mark>
+          <mark>font-size: 2rem;</mark>
+        <mark>}</mark>
+      `}&lt;/style&gt;
+    &lt;/&gt;
+  );
+};
+
+export default Error404;</pre>
+
+    <p>
+      See the font size is updated. In order to update the style of <code>body</code>,  <code>html</code> and all other tags which are outside of this component but on this page, we need to add <code>global</code> attribute to styled JSX tag as follow.
+    </p>
+
+    <pre>import Head from &quot;next/head&quot;;
+
+const Error404 = () =&gt; {
+  return (
+    &lt;&gt;
+      &lt;h1 className=&quot;flex justify-center items-center h-full&quot;&gt;
+        404 | The page you're looking for doesn't exist!
+      &lt;/h1&gt;
+      &lt;style <mark>global</mark> jsx&gt;{`
+        html,
+        body {
+          height: 100%;
+        }
+        h1 {
+          font-size: 2rem;
+        }
+      `}&lt;/style&gt;
+    &lt;/&gt;
+  );
+};
+
+export default Error404;</pre>
+
+    <p>
+      Now, reload the page manually in browser and do an inspect element for <code>html</code> element. You'll see the height is now increased. But, still the header is not displaying in middle and that is because of <code>div#__next</code> This one is added by Next.js and it wrap all the content within <code>body</code>. We need to increase the height of this tag also to have it <code>100%</code> all way down.
+    </p>
+
+    <pre>import Head from &quot;next/head&quot;;
+
+const Error404 = () =&gt; {
+  return (
+    &lt;&gt;
+      &lt;h1 className=&quot;flex justify-center items-center h-full&quot;&gt;
+        404 | The page you're looking for doesn't exist!
+      &lt;/h1&gt;
+      &lt;style global jsx&gt;{`
+        html,
+        body,
+        <mark>#__next</mark> {
+          height: 100%;
+        }
+        h1 {
+          font-size: 2rem;
+        }
+      `}&lt;/style&gt;
+    &lt;/&gt;
+  );
+};
+
+export default Error404;</pre>
+
+    <p>
+      And now in the browser, see the magic (in case not, reload the page). You'll see that that the message is centered align.
+    </p>
+
+    <p>
+      To write an inline style, you can use Styled JSX using <code>style</code> tag and <code>jsx</code> attribute. Then you can write the literal style within <code>{``}</code>. Also, if you want to update the global style for this page such as update on <code>html</code>, <code>body</code> or <code>__next</code>, you can add one more attribute <code>global</code> to <code>style</code> tag as we just did.
+    </p>
+
+    <p>
+      Before we go further, let's remove the `h2` style and apply the class <code>text-2xl</code> to <code>h1</code> for the better size and <code>font-light</code> for the lighter weight.
+    </p>
+
+    <pre>import Head from &quot;next/head&quot;;
+
+const Error404 = () =&gt; {
+  return (
+    &lt;&gt;
+      &lt;h1 className=&quot;flex justify-center items-center h-full <mark>text-2xl font-light</mark>&quot;&gt;
+        404 | The page you're looking for doesn't exist!
+      &lt;/h1&gt;
+      &lt;style global jsx&gt;{`
+        html,
+        body,
+        #__next {
+          height: 100%;
+        }
+      `}&lt;/style&gt;
+    &lt;/&gt;
+  );
+};
+
+export default Error404;</pre>
+
+    <p>
+      Looks good! Doesn't it. In next section, we're create a blog page and display the list of blog post (hardcoded) for now.
+    </p>
+
+    <hr>
+
+    <p>
+      Let's create a <code>blog.js</code> page within <code>pages</code> folder and here is the basic content we're going to write.
+    </p>
+
+    <pre>import Layout from &quot;../components/Layout&quot;;
+
+const Blog = () =&gt; {
+  return (
+    &lt;&gt;
+      &lt;Layout title=&quot;Blog&quot;&gt;
+        &lt;h1 className=&quot;text-4xl&quot;&gt;Blog&lt;/h1&gt;
+      &lt;/Layout&gt;
+    &lt;/&gt;
+  );
+};
+
+export default Blog;</pre>
+
+    <p>
+      I have copy the same content from the other page for 'About'.
+    </p>
+
+    <p>
+      Now, if we visit the <code>/blog</code>, we'll see this created blog page instead of 404 page.
+    </p>
+
+    <p>
+      Now, let's assume that, we wrote the two blog posts. The first blog post is hello, world and second blog post is about the company's mission. So, we need to create a list with two items inside as links. And if we click on this link, it'll supposedly open the that clicked blog post.
+    </p>
+
+    <p>
+      For now, I'm going to add hardcoded list within <code>blog.js</code> page as follow.
+    </p>
+
+    <pre>import Layout from &quot;../components/Layout&quot;;
+
+const Blog = () =&gt; {
+  return (
+    &lt;&gt;
+      &lt;Layout title=&quot;Blog&quot;&gt;
+        &lt;h1 className=&quot;text-4xl&quot;&gt;Blog&lt;/h1&gt;
+
+        <mark>&lt;ul&gt;</mark>
+          <mark>&lt;li&gt;</mark>
+            <mark>&lt;a href=&quot;#&quot;&gt;Company's Mission&lt;/a&gt;</mark>
+          <mark>&lt;/li&gt;</mark>
+          <mark>&lt;li&gt;</mark>
+            <mark>&lt;a href=&quot;#&quot;&gt;Hello, World&lt;/a&gt;</mark>
+          <mark>&lt;/li&gt;</mark>
+        <mark>&lt;/ul&gt;</mark>
+      &lt;/Layout&gt;
+    &lt;/&gt;
+  );
+};
+
+export default Blog;</pre>
+
+    <p>
+      It looks too basic. So, I'm going update the design to make it centered, some space around it, and links in blue color.
+    </p>
+
+    <pre>import Layout from &quot;../components/Layout&quot;;
+
+const Blog = () =&gt; {
+  return (
+    &lt;&gt;
+      &lt;Layout title=&quot;Blog&quot;&gt;
+        &lt;h1 className=&quot;text-4xl <mark>mt-4 ml-8</mark>&quot;&gt;Blog&lt;/h1&gt;
+
+        &lt;ul className=&quot;list-none <mark>mt-4 ml-8</mark>&quot;&gt;
+          &lt;li <mark>className=&quot;mb-2&quot;</mark>&gt;
+            &lt;a href=&quot;#&quot; <mark>className=&quot;text-blue-500 hover:text-blue-700&quot;</mark>&gt;
+              Company's Mission
+            &lt;/a&gt;
+          &lt;/li&gt;
+          &lt;li <mark>className=&quot;mb-2&quot;</mark>&gt;
+            &lt;a href=&quot;#&quot; <mark>className=&quot;text-blue-500 hover:text-blue-700&quot;</mark>&gt;
+              Hello, World
+            &lt;/a&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/Layout&gt;
+    &lt;/&gt;
+  );
+};
+
+export default Blog;</pre>
+
+    <p>
+      I'm not saying that these styles looks good, but I think ok for now. Perfect! Our blog page is now up. Next, we need to open the particular blog post when click on link from the list. Let's do it in next section.
+    </p>
+
+    <hr>
 
   </body>
 </html>
