@@ -7,8 +7,9 @@
 
     <title>Resources</title>
     <link rel="shortcut icon" href="favicon.ico">
-    <style>
-      @import url("https://use.typekit.net/zli1tzj.css?v=2");
+        <style>
+      @import url('https://rsms.me/inter/inter.css');
+
       *,
       *::before,
       *::after {
@@ -21,20 +22,28 @@
       }
       body {
         background-color: #fff;
-        color: #212121;
-        font-family: "source-serif-pro", serif;
-        font-size: 1rem;
+        color: #2E2E2E;
+        font-family: 'Inter', sans-serif;
+        font-feature-settings: "ss03","zero","cv08","cv11" 1;
+        font-size: 1.2rem;
         font-style: normal;
         font-weight: normal;
         line-height: 1.5;
         width: 100%;
-        max-width: 39rem;
+        max-width: 45rem;
         margin: 8rem auto;
         padding: 1rem;
         transition: background-color 0.5s ease-out;
       }
       h1, h2, h3 { margin: 0; }
-      h1 { font-size: 4rem; }
+      h1 { margin: 0;
+        font-weight: 900;
+        font-size: 4rem;
+        letter-spacing: 0;
+        background: linear-gradient(to left, #ff5c87 30%, #4762ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent; }
+      h2 { margin-top: 2rem; }
       p { margin-top: 0; }
       a {
         color: #0052cc;
@@ -46,7 +55,9 @@
         height: 1px;
         background-image: linear-gradient(to right, rgba(33, 33, 33, 0), rgba(33, 33, 33, 0.50), rgba(33, 33, 33, 0));
       }
-      code { font-family: "courier-prime",monospace; }
+      pre, code { font-family: "Source Code Pro", monospace; }
+      code { color: rgb(124, 58, 237); }
+      .note { color: #929292; }
     </style>
   </head>
   <body>
@@ -113,12 +124,17 @@
       <p>
         <a href="https://planet.gnu.org/">Planet GNU</a><br>
         <a href="https://planet.gnome.org/">Planet GNOME</a><br>
-        <a href="https://planet.debian.org/">Planet Debian</a><br>
+        <a href="https://planet.debian.org/">Planet Debian</a><br><br>
+
         <a href="http://fedoraplanet.org/">Planet Fedora</a><br>
-        <a href="https://planet.centos.org/">Planet CentOS</a><br>
-        <a href="https://planet.ubuntu.com/">Planet Ubuntu</a><br>
-        <a href="https://planet.kernel.org/">Kernel Planet</a><br>
-        <a href="https://www.archlinux.org/planet/">Arch Planet</a><br>
+        <a href="https://planet.centos.org/">Planet CentOS</a><br><br>
+
+        <a href="https://planet.ubuntu.com/">Planet Ubuntu</a><br><br>
+
+        <a href="https://planet.kernel.org/">Kernel Planet</a><br><br>
+
+        <a href="https://www.archlinux.org/planet/">Arch Planet</a><br><br>
+
         <a href="https://planet.gentoo.org/">Planet Gentoo</a><br>
         <a href="https://planet.xbsd.net/">Planet FreeBSD</a>
       </p>
