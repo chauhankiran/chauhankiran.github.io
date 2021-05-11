@@ -1,12 +1,16 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, height=device-height, viewport-fit=cover, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, height=device-height, viewport-fit=cover, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"
+    />
     <title>A Normal Git Process</title>
 
+    <link href="prism.css" rel="stylesheet" />
     <style>
-      @import url('https://rsms.me/inter/inter.css');
+      @import url("https://rsms.me/inter/inter.css");
 
       *,
       *::before,
@@ -20,9 +24,9 @@
       }
       body {
         background-color: #fff;
-        color: #2E2E2E;
-        font-family: 'Inter', sans-serif;
-        font-feature-settings: "ss03","zero","cv08","cv11" 1;
+        color: #2e2e2e;
+        font-family: "Inter", sans-serif;
+        font-feature-settings: "ss03", "zero", "cv08", "cv11" 1;
         font-size: 1.2rem;
         font-style: normal;
         font-weight: normal;
@@ -33,29 +37,53 @@
         padding: 1rem;
         transition: background-color 0.5s ease-out;
       }
-      h1, h2, h3 { margin: 0; }
-      h1 { margin: 0;
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+      }
+      h1 {
+        margin: 0;
         font-weight: 900;
         font-size: 4rem;
         letter-spacing: 0;
         background: linear-gradient(to left, #ff5c87 30%, #4762ff);
         -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent; }
-      h2 { margin-top: 2rem; }
-      p { margin-top: 0; }
+        -webkit-text-fill-color: transparent;
+      }
+      h2 {
+        margin-top: 2rem;
+      }
+      p {
+        margin-top: 0;
+      }
       a {
         color: #0052cc;
         text-decoration: none;
       }
-      a:hover { text-decoration: underline; }
+      a:hover {
+        text-decoration: underline;
+      }
       hr {
         border: 0;
         height: 1px;
-        background-image: linear-gradient(to right, rgba(33, 33, 33, 0), rgba(33, 33, 33, 0.50), rgba(33, 33, 33, 0));
+        background-image: linear-gradient(
+          to right,
+          rgba(33, 33, 33, 0),
+          rgba(33, 33, 33, 0.5),
+          rgba(33, 33, 33, 0)
+        );
       }
-      pre, code { font-family: "Source Code Pro", monospace; }
-      code { color: rgb(124, 58, 237); }
-      .note { color: #929292; }
+      pre,
+      code {
+        font-family: "Source Code Pro", monospace;
+      }
+      code {
+        color: rgb(124, 58, 237);
+      }
+      .note {
+        color: #929292;
+      }
     </style>
   </head>
   <body>
@@ -63,187 +91,277 @@
       <h1>A Normal Git Process</h1>
     </header>
     <main>
-        <p class="note">
-          Note: This page contains the details of Git process used at organization as of now (Oct 2020). The guide is specifically written for targeted audience. Please contact <a href="mailto:kiran.chauhan@tuta.io">me</a>, if you find anything confusing here!
-        </p>
-
-        <p>
-          Chances are high that the <a href="https://git-scm.com/">Git</a> is already installed and configured on your computer (or the computer given to you). First two sections in this post confirm the installation and configuration. These two sections also walk you through installation and configuration if you have new computer.
-        </p>
-
-        <h2>Installation</h2>
-
-        <p>
-          You can confirm the Git installation by running following command in Terminal or Git Bash.
-        </p>
-
-        <pre>$ git --version</pre>
-
-        <p class="note">
-          Note: Every command, here and in the future, starting with the character $ is typed into a Terminal or Git Bash. The character $ is not to be typed out because it represents the prompt.
-        </p>
-
-        <p>
-          If you get some version number as output, then that means Git is installed on your computer. If not then you need to install Git from its <a href="https://git-scm.com/downloads">official download</a> page. If you're Ubuntu user, run the following command in Terminal.
-        </p>
-
-        <pre>$ sudo apt-get install git</pre>
-
-        <p>
-          This will install Git on your computer and then you can again type the version command to confirm the installation.
-        </p>
-
-        <h2>Configuration</h2>
-
-        <p>
-          Once Git is installed on your computer, you need do some configuration in order to properly use Git. This includes <u>setup the identity</u> and <u>add SSH key</u>.
-        </p>
-
-        <p>
-          The identity is required. In this way, your name should display next to commit/changes you do in project. Again, chances are high that identity is already configured on your computer. You can check it by running following command in Terminal or Git Bash.
-        </p>
-
-        <pre>$ git config --global user.name
-Kiran Chauhan</pre>
-
-        <p>
-          If identity is set on your computer, you'll see the name (such as "Kiran Chauhan" in my case) as output. If not then you can set the identity with your name using following command.
-        </p>
-
-        <pre>$ git config --global user.name "Kiran Chauhan"</pre>
-
-        <p>
-          This will set the name identity. You can confirm this setup by running following command.
-        </p>
-
-        <pre>$ git config --global user.name
-Kiran Chauhan</pre>
-
-        <p>The name identity is now set.</p>
-
-        <p>
-          You also need to set email. First let's confirm if the email is set or not by running following command.
-        </p>
-
-          <pre>$ git config --global user.email
-kiran.chauh@tuta.io</pre>
-
-          <p>
-            In case, if you don't get the email as output, you can set it using following command.
-          </p>
-
-          <pre>$ git config --global user.email "kiran.chauh@tuta.io"</pre>
-
-          <p>
-            This will set the email for you. You can confirm this setup by running following command.
-          </p>
-
-          <pre>$ git config --global user.email
-kiran.chauh@tuta.io</pre>
-
-          <h2>SSH Key Configuration</h2>
-
-          <p>
-            You need SSH key to work with local instance of the project (and this is recommended way, if you ask us). Again, chances are high that SSH key is already generated on your computer (in this case, you can skip the generation step). You can confirm it by going to one of the following path.
-          </p>
-
-          <ol>
-            <li>
-              Windows user - <code>C:/Users/YourUser/.ssh</code> folder - If this <code>.ssh</code> folder exists, then key is already generated.
-            </li>
-            <li>Ubuntu user - Look for hidden <code>.ssh</code> folder in you <code>$HOME</code> folder. If this <code>.ssh</code> folder exists, then key is already generated.</li>
-          </ol>
-
-          <p>
-            If this folder is not exist at the mentioned location, that means you need to generate SSH key. Please follow these steps to generate SSH key.
-          </p>
-
-          <ol>
-            <li>Open Git Bash or Terminal.</li>
-            <li>Paste this command by replacing with your email.
-              <pre>$ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"</pre>
-            </li>
-            <li>This command will create new SSH key (You need to press 'Enter' couple of times) at the one of the above mentioned location.</li>
-          </ol>
-
-          <p>
-            Once SSH key is generated, you need to add this key to Git instance. Following are the steps you need to follow.
-          </p>
-
-          <ol>
-            <li>Login with your account.</li>
-            <li>Click on Profile.</li>
-            <li>Choose SSH Keys.</li>
-            <li>Click on Add New.</li>
-            <li>Paste the key from <code>.ssh/id_rsa.pub</code> (be sure about this)</li>
-            <li>Save with some name.</li>
-          </ol>
+      <p class="note">
+        Note: This page contains the details of Git process used at organization
+        as of now (Oct 2020). The guide is specifically written for targeted
+        audience. Please contact <a href="mailto:kiran.chauhan@tuta.io">me</a>,
+        if you find anything confusing here!
+      </p>
 
       <p>
-        You are now ready to work with SSH Git URL. You can now clone the Git project with SSH URL.
+        Chances are high that the <a href="https://git-scm.com/">Git</a> is
+        already installed and configured on your computer (or the computer given
+        to you). First two sections in this post confirm the installation and
+        configuration. These two sections also walk you through installation and
+        configuration if you have new computer.
+      </p>
+
+      <h2>Installation</h2>
+
+      <p>
+        You can confirm the Git installation by running following command in
+        Terminal or Git Bash.
+      </p>
+
+      <pre><code class="language-bash">$ git --version</code></pre>
+
+      <p class="note">
+        Note: Every command, here and in the future, starting with the character
+        $ is typed into a Terminal or Git Bash. The character $ is not to be
+        typed out because it represents the prompt.
+      </p>
+
+      <p>
+        If you get some version number as output, then that means Git is
+        installed on your computer. If not then you need to install Git from its
+        <a href="https://git-scm.com/downloads">official download</a> page. If
+        you're Ubuntu user, run the following command in Terminal.
+      </p>
+
+      <pre><code class="language-bash">$ sudo apt-get install git</code></pre>
+
+      <p>
+        This will install Git on your computer and then you can again type the
+        version command to confirm the installation.
+      </p>
+
+      <h2>Configuration</h2>
+
+      <p>
+        Once Git is installed on your computer, you need do some configuration
+        in order to properly use Git. This includes
+        <u>setup the identity</u> and <u>add SSH key</u>.
+      </p>
+
+      <p>
+        The identity is required. In this way, your name should display next to
+        commit/changes you do in project. Again, chances are high that identity
+        is already configured on your computer. You can check it by running
+        following command in Terminal or Git Bash.
+      </p>
+
+      <pre><code class="language-bash">$ git config --global user.name
+Kiran Chauhan</code></pre>
+
+      <p>
+        If identity is set on your computer, you'll see the name (such as "Kiran
+        Chauhan" in my case) as output. If not then you can set the identity
+        with your name using following command.
+      </p>
+
+      <pre><code class="language-bash">$ git config --global user.name "Kiran Chauhan"</code></pre>
+
+      <p>
+        This will set the name identity. You can confirm this setup by running
+        following command.
+      </p>
+
+      <pre><code class="language-bash">$ git config --global user.name
+Kiran Chauhan</pre></code>
+
+      <p>The name identity is now set.</p>
+
+      <p>
+        You also need to set email. First let's confirm if the email is set or
+        not by running following command.
+      </p>
+
+      <pre><code class="language-bash">$ git config --global user.email
+kiran@example.io</code></pre>
+
+      <p>
+        In case, if you don't get the email as output, you can set it using
+        following command.
+      </p>
+
+      <pre><code class="language-bash">$ git config --global user.email "kiran@example.io"</code></pre>
+
+      <p>
+        This will set the email for you. You can confirm this setup by running
+        following command.
+      </p>
+
+      <pre><code class="language-bash">$ git config --global user.email
+kiran@example.io</pre></code>
+
+      <h2>SSH Key Configuration</h2>
+
+      <p>
+        You need SSH key to work with local instance of the project (and this is
+        recommended way, if you ask us). Again, chances are high that SSH key is
+        already generated on your computer (in this case, you can skip the
+        generation step). You can confirm it by going to one of the following
+        path.
+      </p>
+
+      <ol>
+        <li>
+          Windows user - <code>C:/Users/YourUser/.ssh</code> folder - If this
+          <code>.ssh</code> folder exists, then key is already generated.
+        </li>
+        <li>
+          Ubuntu user - Look for hidden <code>.ssh</code> folder in you
+          <code>$HOME</code> folder. If this <code>.ssh</code> folder exists,
+          then key is already generated.
+        </li>
+      </ol>
+
+      <p>
+        If this folder is not exist at the mentioned location, that means you
+        need to generate SSH key. Please follow these steps to generate SSH key.
+      </p>
+
+      <ol>
+        <li>Open Git Bash or Terminal.</li>
+        <li>
+          Paste this command by replacing with your email.
+          <pre><code class="language-bash">$ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"</code></pre>
+        </li>
+        <li>
+          This command will create new SSH key (You need to press 'Enter' couple
+          of times) at the one of the above mentioned location.
+        </li>
+      </ol>
+
+      <p>
+        Once SSH key is generated, you need to add this key to Git instance.
+        Following are the steps you need to follow.
+      </p>
+
+      <ol>
+        <li>Login with your account.</li>
+        <li>Click on Profile.</li>
+        <li>Choose SSH Keys.</li>
+        <li>Click on Add New.</li>
+        <li>
+          Paste the key from <code>.ssh/id_rsa.pub</code> (be sure about this)
+        </li>
+        <li>Save with some name.</li>
+      </ol>
+
+      <p>
+        You are now ready to work with SSH Git URL. You can now clone the Git
+        project with SSH URL.
       </p>
 
       <h2>Workflow</h2>
 
       <p>
-        You'll always have the project in Git before you start your task (if project is not there, don't work). with some default configuration and few branches. These branches are <code>development</code>, <code>RC</code>, and <code>master</code>. If you're not seeing one of these branches, ask admin to create first.
+        You'll always have the project in Git before you start your task (if
+        project is not there, don't work). with some default configuration and
+        few branches. These branches are <code>development</code>,
+        <code>RC</code>, and <code>master</code>. If you're not seeing one of
+        these branches, ask admin to create first.
       </p>
 
       <p>
-        You'll have tasks in system (if not create one) with unique project task number. The task mainly divided into two parts - enhancements(<u>feature</u>) or <u>bugfix</u> (there are others but those are specific ones and you'll to confirm with your team for different category).
+        You'll have tasks in system (if not create one) with unique project task
+        number. The task mainly divided into two parts -
+        enhancements(<u>feature</u>) or <u>bugfix</u> (there are others but
+        those are specific ones and you'll to confirm with your team for
+        different category).
       </p>
 
-      <p>Following are the steps, you need to always follow while working with project task and until task completes and moved to production.</p>
+      <p>
+        Following are the steps, you need to always follow while working with
+        project task and until task completes and moved to production.
+      </p>
 
       <ol>
-        <li>Check if the assigned ticket is bug or enhancement. If assigned ticket is enhancement, mark it as <u>feature</u> and if assigned ticket is bug then mark it as <u>bugfix</u>.</li>
         <li>
-          Check out the <code>RC</code> branch and create a new branch with name in following pattern.
+          Check if the assigned ticket is bug or enhancement. If assigned ticket
+          is enhancement, mark it as <u>feature</u> and if assigned ticket is
+          bug then mark it as <u>bugfix</u>.
+        </li>
+        <li>
+          Check out the <code>RC</code> branch and create a new branch with name
+          in following pattern.
           <ol>
-            <li>If <u>feature</u> then - feature + / + project task # + at max three words description separated by dash. e.g. <code>feature/5603-speed-problem</code>.</li>
-            <li>If <u>bugfix</u> then - bugfix + / + project task # + at max three words description separated by dash e.g. <code>bugfix/5707-send-mail-log</code>.</li>
-            <li>All characters used in branch name must be in <u>lowercase</u>.</li>
+            <li>
+              If <u>feature</u> then - feature + / + project task # + at max
+              three words description separated by dash. e.g.
+              <code>feature/5603-speed-problem</code>.
+            </li>
+            <li>
+              If <u>bugfix</u> then - bugfix + / + project task # + at max three
+              words description separated by dash e.g.
+              <code>bugfix/5707-send-mail-log</code>.
+            </li>
+            <li>
+              All characters used in branch name must be in <u>lowercase</u>.
+            </li>
           </ol>
         </li>
         <li>
-          By following step #3, you just created a local branch. This branch is local and you'll not see at Git instance, if you search for it online.
+          By following step #3, you just created a local branch. This branch is
+          local and you'll not see at Git instance, if you search for it online.
         </li>
         <li>
-          You need to register(push) the branch online via <code>push -> origin</code>.
+          You need to register(push) the branch online via
+          <code>push -> origin</code>.
         </li>
         <li>
-          You can now check out (or already checked in) the created branch and start working on it.
+          You can now check out (or already checked in) the created branch and
+          start working on it.
         </li>
         <li>
-          Once your changes are done, you need to commit your changes by following these steps -
+          Once your changes are done, you need to commit your changes by
+          following these steps -
           <ol>
             <li>Stage your changed files.</li>
-            <li>Commit the changes by writing an appropriate commit message. Commit messages such as <u>issues fixed</u> or <u>done</u> are not acceptable.</li>
+            <li>
+              Commit the changes by writing an appropriate commit message.
+              Commit messages such as <u>issues fixed</u> or <u>done</u> are not
+              acceptable.
+            </li>
             <li>Push the changes to your branch.</li>
           </ol>
         </li>
         <li>
-          Now, your changes are up and residing inside your branch (both locally and online). You need to add or merge your branch in <code>development</code> so that you can test your changes in <code>development</code> server.
+          Now, your changes are up and residing inside your branch (both locally
+          and online). You need to add or merge your branch in
+          <code>development</code> so that you can test your changes in
+          <code>development</code> server.
         </li>
         <li>
-          To merge your changes into <code>development</code>, you need to check out the <code>development</code> branch.
+          To merge your changes into <code>development</code>, you need to check
+          out the <code>development</code> branch.
         </li>
         <li>
-          After checkout the <code>development</code> branch, you can merge your branch into <code>development</code>. This will move your changes into <code>development</code> branch/server.
+          After checkout the <code>development</code> branch, you can merge your
+          branch into <code>development</code>. This will move your changes into
+          <code>development</code> branch/server.
         </li>
         <li>
-          In order to move the changes into <code>RC</code> branch, you need to create a pull request. This require a code review. So, the code review can be also done.
+          In order to move the changes into <code>RC</code> branch, you need to
+          create a pull request. This require a code review. So, the code review
+          can be also done.
         </li>
         <li>
-          After code review confirmed, you can merge your changes into <code>RC</code> from Git instance.
+          After code review confirmed, you can merge your changes into
+          <code>RC</code> from Git instance.
         </li>
         <li>
-          Finally, your team leader or senior developer will move changes from <code>RC</code> to <code>master</code> based on your project deployment cycle.
+          Finally, your team leader or senior developer will move changes from
+          <code>RC</code> to <code>master</code> based on your project
+          deployment cycle.
         </li>
       </ol>
 
       <p>
-        The process is straight forward but might looks difficult for couple of days because you might not used to be with it. Once you get familiar with it, you'll be happy Git user.
+        The process is straight forward but might looks difficult for couple of
+        days because you might not used to be with it. Once you get familiar
+        with it, you'll be happy Git user.
       </p>
     </main>
 
@@ -251,15 +369,23 @@ kiran.chauh@tuta.io</pre>
 
     <ol>
       <li>
-        <a href="https://www.sourcetreeapp.com/">Sourcetree</a> (for Windows and Mac)
+        <a href="https://www.sourcetreeapp.com/">Sourcetree</a> (for Windows and
+        Mac)
       </li>
       <li>
-        <a href="https://desktop.github.com/">GitHub Desktop</a> (for Windows and Mac). For Linux try <a href="https://github.com/shiftkey/desktop">this</a>.
+        <a href="https://desktop.github.com/">GitHub Desktop</a> (for Windows
+        and Mac). For Linux try
+        <a href="https://github.com/shiftkey/desktop">this</a>.
       </li>
     </ol>
 
     <footer>
-      <a href="index.html">&#8592; Home</a>. <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a>
+      <a href="index.html">&#8592; Home</a>.
+      <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"
+        >CC BY-NC-ND 4.0</a
+      >
     </footer>
+
+    <script src="prism.js"></script>
   </body>
 </html>
