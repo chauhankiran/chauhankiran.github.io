@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Python for Programmers</title>
+
+  <link href="prism.css" rel="stylesheet" />
+  <style>
+    @import url("https://rsms.me/inter/inter.css");
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: #fff;
+      color: #2e2e2e;
+      font-family: "Inter", sans-serif;
+      font-feature-settings: "ss03", "zero", "cv08", "cv11" 1;
+      font-size: 1.1rem;
+      font-style: normal;
+      font-weight: normal;
+      line-height: 1.5;
+      width: 100%;
+      max-width: 45rem;
+      margin: 8rem auto;
+      padding: 1rem;
+      transition: background-color 0.5s ease-out;
+    }
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+    }
+    h1 {
+      margin: 0;
+      font-weight: 900;
+      font-size: 3rem;
+      letter-spacing: 0;
+      background: linear-gradient(to left, #ff5c87 30%, #4762ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    h2 {
+      margin-top: 2rem;
+    }
+    p {
+      margin-top: 0;
+    }
+    a {
+      color: #0052cc;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    hr {
+      border: 0;
+      height: 1px;
+      background-image: linear-gradient(
+        to right,
+        rgba(33, 33, 33, 0),
+        rgba(33, 33, 33, 0.5),
+        rgba(33, 33, 33, 0)
+      );
+    }
+    pre,
+    code {
+      font-family: "Source Code Pro", monospace;
+    }
+    code {
+      color: rgb(124, 58, 237);
+    }
+    .note {
+      color: #929292;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Python for Programmers
+  </header>
+
+  <main>
+    <p class="note">
+      As the name suggests, this article is for the programmers who know the other programming language(s) and want to try or work with Python.
+    </p>
+
+    <p>
+      You need Python on your computer. Go ahead and open the <a href="https://www.python.org/">official website</a>. You need to install the latest version of Python (at this moment it's <code>v3.9.x</code>). Python has <code>.py</code> extension.
+    </p>
+
+    <pre><code class="language-python">print("hello, world")</code></pre>
+
+    <p>
+      We just wrote the <code>hello, world</code> program in python. The <code><a href="https://docs.python.org/3/library/functions.html#print">print()</a></code> function is used to print the text/string on the terminal. It also adds <code>\n</code> at the end.
+    </p>
+
+    <p>To run the Python program, this command is used <span class="note">(assuming that the name of the file is <code>hello.py</code>)</span>.</p>
+
+    <pre><code class="language-python">$ python hello.py</code></pre>
+
+    <p>
+      Python does not require a semicolon to complete the statement. It is helpful when you want to write multiple statements in single lines and want to separate them.
+    </p>
+
+    <pre><code class="language-python">print("hello, world"); print("hello, world")</code></pre>
+
+    <p>
+      Instead of double quotes for the string, you can also use single quotes. So, the following code is identical to the above code.
+    </p>
+
+    <pre><code class="language-python">print('hello, world')</code></pre>
+
+    <p>
+      I would suggest you to use double quotes unless the string has double quotes. Even in that scenario, you can use escape sequence characters such as <code>\n</code>.
+    </p>
+
+    <pre><code class="language-python">print("hello \" world")</code></pre>
+
+    <p>
+      This returns the following output.
+    </p>
+
+    <pre><code class="language-bash">$ python program.py
+hello " world</code></pre>
+
+    <p>
+      To write a comment, <code>#</code> is used.
+    </p>
+
+    <pre><code class="language-python"># hello, world program
+print("hello, world")</code></pre>
+
+    <p>
+      String concatenation is done via <code>+</code> operator.
+    </p>
+
+    <pre><code class="language-python">print("hello, " + "world")</code></pre>
+
+    <p>
+      Python will throw an error when you try to concatenate string with number.
+    </p>
+
+    <pre><code class="language-python">print("hello, " + 4)</code></pre>
+
+    <p>
+      Running the above program will throws the following error.
+    </p>
+
+    <pre><code class="language-bash">$ python program.py
+Traceback (most recent call last):
+  File "E:\Python\program.py", line 1, in <module>
+    print("hello, " + 4)
+TypeError: can only concatenate str (not "int") to str</code></pre>
+
+    <p>
+      In this case, we need to convert the number into string using <code>str()</code> function to run the string concatenation operation.
+    </p>
+
+    <pre><code class="language-python">print("hello, " + str(4))</code></pre>
+
+    <p>
+      In similar way, you need to use <code>int()</code> function to convert the string into number.
+    </p>
+
+    <pre><code class="language-python">print(int("3") + 23)</code></pre>
+
+    <p>
+      Python is dynamic programming language. You don't have to worry about the types while defining a variable. Just define a variable with its initial value and you're good to go. For example, here I have defined a string and integer variable.
+    </p>
+
+    <pre><code class="language-python">name = "Bruce"
+age = 28</code></pre>
+
+    <p>
+      To print the values of these variables using <code>print()</code> function, we need to cast <code>age</code> variable into string as its number and will throw the above error if we try to concatenate it with string.
+    </p>
+
+    <pre><code class="language-python">name = "Bruce"
+age = 28
+
+print("Hello " + name + "! You're " + str(age) + " years old.")</code></pre>
+
+    <p>
+      As expected, it'll print the following output.
+    </p>
+
+    <pre><code class="language-bash">$ python program.py
+Hello Bruce! You're 28 years old.</code></pre>
+
+    <p>
+      The string concatenation is cumbersome. You can use <code>.format()</code> method to simplify the print operation with variables.
+    </p>
+
+    <pre><code class="language-python">name = "Bruce"
+age = 28
+
+print("Hello {}! You're {} years old.".format(name, age))</code></pre>
+
+    <p>
+      This will print the same identical output as above. The <code>.format()</code> method replace the <code>{}</code> with variable mentioned in same sequence i.e. first <code>{}</code> with <code>name</code> and second <code>{}</code> with <code>age</code>.
+    </p>
+
+    <p>
+      Or you can even use f-strings as follow.
+    </p>
+
+    <pre><code class="language-python">name = "Bruce"
+age = 28
+
+print(f"Hello {name}! You're {age} years old.")</code></pre>
+
+    <p>
+      Again, this will print the same identical output as above two. But, this is lot cleaner. You just need to prefix the string with <code>f</code>.
+    </p>
+
+    <p>
+      To get something from the user <code>input()</code> function is used.
+    </p>
+
+    <pre><code class="language-python">name = input("Enter the name: ")
+
+print(f"Hello, {name}")</code></pre>
+
+    <p>
+      <code>input()</code> function will wait for the user to type something and accept the characters until <code>Enter</code> button is pressed.
+    </p>
+
+    <pre><code class="language-python">$ python program.py
+Enter the name: Bruce
+Hello, Bruce</code></pre>
+
+    <p>
+      <code>input()</code> function return the string. So, if you're planning to do some mathematical calculation on the entered input, you first need to convert the string into number using <code>int()</code> function.
+    </p>
+
+    <pre><code class="language-python">price = int(input("Enter the price of product: "))
+
+payable = price - 4.5
+
+print(f"You need to pay {payable} after discount.")</code></pre>
+
+    <p>
+      If we don't wrap the <code>input()</code> function with <code>int()</code>, the addition operation will throw the error.
+    </p>
+
+    <pre><code class="language-python">python program.py
+Enter the price of product: 12
+Traceback (most recent call last):
+  File "E:\Python\program.py", line 3, in <module>
+    payable = price - 4.5
+TypeError: unsupported operand type(s) for -: 'str' and 'float'</code></pre>
+
+    <p>
+      Python supports the arithmetic operators such as - <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code>. They're usual and you'll find these in almost all programming languages. Python also has <code>**</code> or power operator and <code>//</code> or integer division operator that truncates the value after decimal point.
+    </p>
+
+    <pre><code class="language-python">print(3 + 12.4)     # 15.4
+print(45 - 29)      # 16
+print(34 * 17)      # 578
+print(36 / 17)      # 2.1176470588235294
+print(3 ** 4)       # 81
+print(36 // 17)     # 2</code></pre>
+
+    <p>
+      Interesting enough, <code>*</code> also works with string and do the string multiplication with given number.
+    </p>
+
+    <pre><code class="language-python">print("hello " * 6)</code></pre>
+
+    <p>This program runs without an error and returns the following output.</p>
+
+    <pre><code class="language-python">python program.py
+hello hello hello hello hello hello</code></pre>
+
+    <p>
+      Python play nicely with relational operators such as - <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>, <code>==</code>, and <code>!=</code>. When used, they'll return the Boolean output in terms of <code>True</code> or <code>False</code>.
+    </p>
+
+    <pre><code class="language-python">print(3 > 4)   # False
+print(3 < 4)   # True
+print(2 >= 1)  # True
+print(6 <= 3)  # False
+print(3 == 3)  # True
+print(3 != 3)  # False</code></pre>
+
+    <p>
+      These <code>False</code> and <code>True</code> are keywords used to present the truth values..
+    </p>
+
+    <p>
+      Talking about Boolean, Python has support for Boolean operators such as <code>and</code>, <code>or</code>, and <code>not</code>.
+    </p>
+
+    <pre><code class="language-python">print(True and False)  # False
+print(True or False)   # True
+print(not False)       # True
+</code></pre>
+
+    <p>
+      As like other programming languages, the order of operators matters and whenever in confusion, always use parenthesis.
+    </p>
+
+    <p>
+      Python is one of the rare language in which indentation has meaning. For example, following program throws an error just because second line is indented.
+    </p>
+
+    <pre><code class="language-python">print("hello, world")
+  print("hello, world")</code></pre>
+
+    <p>
+      Python throws an error because, indentation is used to create a block unlike curly braces in other programming languages.
+    </p>
+
+    <p>For example, to write the <code>if</code> condition, following syntax is used.</p>
+
+    <pre><code class="language-python">num = 4
+
+if num == 4:
+  print("The magic number")</code></pre>
+
+    <p>
+      Here the indentation creates the body of <code>if</code> condition. Also, <code>:</code> is used after the condition to mark the end of condition expression.
+    </p>
+
+    <p>
+      In similar way <code>else</code> body must be written.
+    </p>
+
+    <pre><code class="language-python">num = 4
+
+if num == 5:
+  print("The magic number")
+else:
+  print("Not an ordinary number")</code></pre>
+
+    <p>
+      Write a statement without indent and you're in normal execution flow than this <code>if-else</code> condition.
+    </p>
+
+    <pre><code class="language-python">num = 4
+
+if num == 5:
+  print("The magic number")
+else:
+  print("Not an ordinary number")
+
+print("And this print always")</code></pre>
+
+    <p>
+      To write else if condition <code>elif</code> keyword is used with condition.
+    </p>
+
+    <pre><code class="language-python">num = -3
+
+if num > 0:
+  print("The number is positive.")
+elif num < 0:
+  print("The number is negative.")
+else:
+  print("The number is zero")</code></pre>
+
+    <p>
+      Nested condition can be written in Python <span class="note">(that make program less readable)</span>.
+    </p>
+
+    <p>
+      <code>while</code> is used to write the looping functionality in Python. Again, indentation is used to create the body of <code>while</code> condition.
+    </p>
+
+    <pre><code class="language-python">i = 0
+
+while(i < 6):
+  print(i)
+  i = i + 1</code></pre>
+
+    <p>
+      The <code>while</code> loop prints number from <code>0...5</code> and end as condition becomes false.
+    </p>
+
+    <p>
+      <code>for...in</code> loop can be written using <code>range()</code> function.
+    </p>
+
+    <pre><code class="language-python">for i in range(6):
+  print(i)</code></pre>
+
+    <p>
+      This will print the number from <code>0...5</code>, excluding the number mentioned in <code>range()</code> function.
+    </p>
+
+    <p>
+      We can even mention from where to start and end in <code>range()</code> function as follows.
+    </p>
+
+    <pre><code class="language-python">for i in range(1, 6):
+  print(i)</code></pre>
+
+    <p>
+      This loop will print the number from <code>1...5</code>. Finally, you can mentioned the step through within <code>range()</code> function.
+    </p>
+
+    <pre><code class="language-python">for i in range(1, 10, 2):
+  print(i)</code></pre>
+
+    <p>
+      This loop will print the number from <code>1, 3, 5, ...9</code>.
+    </p>
+
+    <p>
+      <code>range()</code> function is useful when you want to loop through the string characters.
+    </p>
+
+    <pre><code class="language-python">for char in "hello, world":
+  print(char)</code></pre>
+
+    <p>
+      This will print each characters from the mentioned string.
+    </p>
+
+    <p>
+      I personally find <code>for...in</code> useful while working with List (e.g. Array in other programming language(s)).
+    </p>
+
+    <p>
+      Let's talk about the List first and then we'll review the <code>for...in</code> loop with List.
+    </p>
+
+    <p>
+      Box bracket is used to define the List. Following define the lists <code>l1</code> and <code>l2</code>.
+    </p>
+
+    <pre><code class="language-python">l1 = []
+l2 = ["apple", "banana", "orange"]</code></pre>
+
+    <p>
+      <code>.append()</code> method add an element to list at the end.
+    </p>
+
+    <pre><code class="language-python">l1.append("one")</code></pre>
+
+    <p>
+      After this operation, value of <code>li</code> becomes <code>['one']</code>. To add an element at the given location, <code>.insert()</code> method is used.
+    </p>
+
+    <pre><code class="language-python">l2.insert(2, "grapes")</code></pre>
+
+    <p>
+      <code>grapes</code> will be added at the location <code>2</code> after <code>banana</code> as location starts from <code>0</code>.
+    </p>
+
+    <p>
+      Also, there is an extend method that will extend the one list with another.
+    </p>
+
+    <pre><code class="language-python">l1 = ["one"]
+l2 = ["apple", "banana", "orange"]
+
+l1.extend(l2)
+
+print(l1)</code></pre>
+
+    <p>
+      The list <code>l1</code> is now extended and return following output.
+    </p>
+
+    <pre><code class="language-bash">$ python program.py
+['one', 'apple', 'banana', 'orange']</code></pre>
+
+    <p>
+      To remove an element from the List, <code>.pop()</code> method is used. It'll remove the last element from the list.
+    </p>
+
+    <pre><code class="language-python">l = ["apple", "banana", "orange"]
+
+print(l.pop())</code></pre>
+
+    <p>
+      This will remove the <code>"orange"</code> from the list. If <code>.pop()</code> is mentioned with index, then it'll remove the element from the particular index.
+    </p>
+
+    <pre><code class="language-python">l = ["apple", "banana", "orange"]
+
+print(l.pop(0))</code></pre>
+
+    <p>
+      This will remove the <code>apple</code>.
+    </p>
+
+    <p>
+      You can even remove the element by specifying the text to <code>.remove()</code> method.
+    </p>
+
+    <pre><code class="language-python">l = ["apple", "banana", "orange"]
+
+l.remove("banana")</code></pre>
+
+    <p>
+      This removes the <code>banana</code> from the list.
+    </p>
+
+    You can use <code>del</code> keyword to delete the element from the specifies index.
+
+    <pre><code class="language-python">l = ["apple", "banana", "orange"]
+
+del l[0]</code></pre>
+
+    <p>
+      This remove the <code>apple</code> from the list. Finally, with <code>del</code> keyword, you can even delete the complete list.
+    </p>
+
+    <pre><code class="language-python">l = ["apple", "banana", "orange"]
+
+del l</code></pre>
+
+    <p>
+      To loop through elements from list, <code>for...in</code> is used.
+    </p>
+
+    <pre><code class="language-python">fruits = ["apple", "banana", "orange"]
+
+for fruit in fruits:
+  print(fruit)</code></pre>
+
+    <p>
+      <code>def</code> keyword is used to define a function Python.
+    </p>
+
+    <pre><code class="language-python">def hi():
+  print("hello, world")
+
+hi()</code></pre>
+
+    <p>
+      Last line call the <code>hi()</code> function and prints the text.
+    </p>
+
+    <pre><code class="language-python">def add(a, b):
+  return a + b
+
+print(add(3, 4))</code></pre>
+
+    <p>
+      This <code>add()</code> function accept two parameters and <code>return</code> the sum of those.
+    </p>
+
+    <p>
+      Function has support for default parameters value.
+    </p>
+
+    <pre><code class="language-python">def add(a=4, b=4):
+  return a + b
+
+print(add(3, 4))
+print(add())</code></pre>
+
+    <p>
+      In above program, the last line is used to call the function without arguments and in this case it run the function with default parameters.
+    </p>
+
+    <p>
+      While calling the function, you can use the name of parameters to call the function. In this way, you don't have to worry about the sequence of argument.
+    </p>
+
+    <pre><code class="language-python">def add(a, b):
+  return a + b
+
+print(add(b=4, a=3))</code></pre>
+
+    <p>
+      Here I reverse the order of argument and it still work because we have passed the name.
+    </p>
+
+    <p>
+      Python function supports the variable arguments.
+    </p>
+
+    <pre><code class="language-python">def marksheet(name, *marks):
+    total = 0
+    for mark in marks:
+        total = total + mark
+
+    print(f"Hi, {name}. Your total marks is {total}.")
+
+marksheet("Bruce", 43, 42, 47, 39)
+marksheet("Bruce", 47, 43, 44)</code></pre>
+
+    <p>
+      The first argument is points to <code>name</code> and then remaining arguments points to <code>marks</code>. Variable arguments parameter should be define with <code>*</code> e.g. <code>*marks</code>. Running this program will print the following output.
+    </p>
+
+    <pre><code class="language-python">$ python program.py
+Hi, Bruce. Your total marks is 171.
+Hi, Bruce. Your total marks is 134.</code></pre>
+
+    <p>
+      Functions are great ways to modularize the application into manageable and re-usable code. You can go further and modularise the application in modules also. Before we go further and create our own modules, let's become familiar with existing/standard module.
+    </p>
+
+    <p>
+      To use standard module, <code>import</code> statement is used in following way.
+    </p>
+
+    <pre><code class="language-python">import sys</code></pre>
+
+    <p>
+      This import the <code>sys</code> module and all the functions or constants from the <code>sys</code> modules can be used by prefixing <code>sys.</code> as follow.
+    </p>
+
+    <pre><code class="language-python">sys.copyright</code></pre>
+
+    This return the copyright statement.
+
+    <p>
+      You can remove this prefix <code>sys.</code> by importing the module using <code>from...import</code> statement.
+    </p>
+
+    <pre><code class="language-python">from sys import *
+
+print(copyright)</code></pre>
+
+    <p>
+      Here <code>*</code> means everything. Everything from <code>sys</code> module is imported. We can even import the specific item from the module by mentioned the name of it.
+    </p>
+
+    <pre><code class="language-python">from sys import copyright
+
+print(copyright)</code></pre>
+
+    <p>
+      This program now just import the <code>copyright</code> constant.
+    </p>
+
+    <p>
+      We can even import specific items from the given module by using <code>from...import</code> statement.
+    </p>
+
+    <p>
+      We can create our own module just by creating a file new file and include it. Create a file with name <code>module.py</code> and write the following code.
+    </p>
+
+    <pre><code class="language-python">def hi():
+  print("hello, world")</code></pre>
+
+    <p>
+      Now, in our program <code>hello.py</code>, to import this module, write -
+    </p>
+
+    <pre class="language-python">import module
+
+module.hi();</pre>
+
+    <p>
+      Or we can use the <code>from...import</code> statement as
+    </p>
+
+    <pre><code class="language-python">from module import hi
+
+hi()</code></pre>
+
+    When you import something for the first time, Python execute the module completely. For example, if <code>module.py</code> programs has
+
+    <pre><code class="language-python">def hi():
+  print("hello, world")
+
+print("This should not be printed.")</code></pre>
+
+    <p>
+      In our program, even though we're just calling <code>hi()</code> function from the <code>module.py</code>, it'll print the last line.
+    </p>
+
+    <pre><code class="language-bash">$ python program.py
+This should not be printed.
+hello, world</code></pre>
+
+    <p>
+      If we don't want to print that last line, it should be places within condition as follow.
+    </p>
+
+    <pre><code class="language-python">def hi():
+  print("hello, world")
+
+if __name__ == "__main__":
+  print("This should not be printed.")
+</code></pre>
+
+    <p>
+        This <code>__name__ == "__main__"</code> is only executed when the <code>module.py</code> program is executing standalone not as import. Hence, the <code>print()</code> will not run.
+    </p>
+
+    <p>
+      Apart from List, you have support for Tuple. Tuple is similar to List except it is immutable. You can change in any possible way. Normal parenthesis are used to define the tuple although parenthesis are optional. For example,
+    </p>
+
+    <pre><code class="language-python">fruits = ("apple", "cherry", "banana")</code></pre>
+
+    <p>
+      You can confirm the type of tuple using <code>type</code> function as,
+    </p>
+
+    <pre><code class="language-python">fruits = ("apple", "cherry", "banana")
+
+print(type(fruits))</code></pre>
+
+    <p>
+      This will return the <code>&lt;class 'tuple'&gt;</code>.
+    </p>
+
+    <p>
+      As mentioned, parenthesis are optional. Hence, if you define a tuple within single element as,
+    </p>
+
+    <pre><code class="language-python">fruits = ("apple")</code></pre>
+
+    <p>
+      Printing the type of should be <code>str</code>. To define an actual tuple, we need to write <code>,</code> at the end as -
+    </p>
+
+    <pre><code class="language-python">fruits = ("apple", )</code></pre>
+
+    <p>
+      Now, this is defined as tuple. While we can't modifies the tuple, the only thing we can do is, access the particular element using index and get the length of tuple using len() method.
+    </p>
+
+    <pre><code class="language-python">fruits = ("apple", "banana", "cherry")
+
+print(fruits[1])
+print(len(fruits))</code></pre>
+
+    <p>
+      Here <code>for...in</code> can be used to loop through.
+    </p>
+
+    <pre><code class="language-python">fruits = ("apple", "banana", "cherry")
+
+for fruit in fruits:
+    print(fruit)</code></pre>
+
+    <p>
+      Python has support for Dictionary (Object in other programming language e.g. key/value pair). Curly brackets are used to define the dictionary.
+    </p>
+
+    <pre><code class="language-python">person = {
+    "name": "Bruce",
+    "age": 28
+}
+
+extraInfo = {}</code></pre>
+
+    <p>
+      To access the element from the dictionary, <code>[]</code> is used.
+    </p>
+
+    <pre><code class="language-python">person = {
+    "name": "Bruce",
+    "age": 28
+}
+
+extraInfo = {}
+
+print(person["name"])</code></pre>
+
+    <p>
+      To remove item from the dictionary, <code>.pop()</code>, <code>.popitem()</code>, and <code>del</code> keyword can be used.
+    </p>
+
+    <pre><code class="language-python">person = {
+    "name": "Bruce",
+    "age": 28
+}
+
+person.pop("age")
+print(person)</code></pre>
+
+    <p>
+      The above code remove the <code>age</code> from the <code>person</code> dictionary.
+    </p>
+
+    <pre><code class="language-python">person = {
+    "name": "Bruce",
+    "age": 28
+}
+
+person.popitem()
+print(person)</code></pre>
+
+    <p>
+      <code>.popitem()</code> remove the last item from the dictionary. Alternatively, you can write -
+    </p>
+
+    <pre><code class="language-python">person = {
+    "name": "Bruce",
+    "age": 28
+}
+
+del person["age"]
+print(person)</code></pre>
+
+    <p>
+      To add something, just define the key with box notation and assign the value.
+    </p>
+
+    <pre><code class="language-python">person = {
+    "name": "Bruce",
+    "age": 28
+}
+
+person["city"] = "Gotham"
+
+print(person)</code></pre>
+
+    <p>
+      <code>for...in</code> used to loop through the dictionary items.
+    </p>
+
+    <pre><code class="language-python">person = {
+    "name": "Bruce",
+    "age": 28
+}
+
+for detail in person:
+    print(detail)</code></pre>
+
+    <p>
+      This prints the key e.g. <code>name</code> and <code>age</code>. To print the value, we need to use box notation.
+    </p>
+
+    <pre><code class="language-python">person = {
+    "name": "Bruce",
+    "age": 28
+}
+
+for detail in person:
+    print(person[detail])</code></pre>
+
+    <p>
+      Or we can use <code>.values()</code> method.
+    </p>
+
+    <pre><code class="language-python">person = {
+    "name": "Bruce",
+    "age": 28
+}
+
+for detail in person.values():
+    print(detail)</code></pre>
+
+    <p>
+      <code>len()</code> function is used to get the length of dictionary.
+    </p>
+
+    <pre><code class="language-python">person = {
+    "name": "Bruce",
+    "age": 28
+}
+
+print(len(person))</code></pre>
+
+  </main>
+
+  <footer>
+    <a href="index.html">&#8592; Home</a>.
+    <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a>
+  </footer>
+
+  <script src="prism.js"></script>
+</body>
+</html>
