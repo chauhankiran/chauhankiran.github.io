@@ -278,7 +278,7 @@ print(36 // 17)     # 2</code></pre>
 
     <p>This program runs without an error and returns the following output.</p>
 
-    <pre><code class="language-python">python program.py
+    <pre><code class="language-python">$ python program.py
 hello hello hello hello hello hello</code></pre>
 
     <p>
@@ -584,11 +584,11 @@ print(add(b=4, a=3))</code></pre>
     </p>
 
     <pre><code class="language-python">def marksheet(name, *marks):
-    total = 0
-    for mark in marks:
-        total = total + mark
+  total = 0
+  for mark in marks:
+    total = total + mark
 
-    print(f"Hi, {name}. Your total marks is {total}.")
+  print(f"Hi, {name}. Your total marks is {total}.")
 
 marksheet("Bruce", 43, 42, 47, 39)
 marksheet("Bruce", 47, 43, 44)</code></pre>
@@ -742,15 +742,15 @@ print(len(fruits))</code></pre>
     <pre><code class="language-python">fruits = ("apple", "banana", "cherry")
 
 for fruit in fruits:
-    print(fruit)</code></pre>
+  print(fruit)</code></pre>
 
     <p>
       Python has support for Dictionary (Object in other programming language e.g. key/value pair). Curly brackets are used to define the dictionary.
     </p>
 
     <pre><code class="language-python">person = {
-    "name": "Bruce",
-    "age": 28
+  "name": "Bruce",
+  "age": 28
 }
 
 extraInfo = {}</code></pre>
@@ -760,8 +760,8 @@ extraInfo = {}</code></pre>
     </p>
 
     <pre><code class="language-python">person = {
-    "name": "Bruce",
-    "age": 28
+  "name": "Bruce",
+  "age": 28
 }
 
 extraInfo = {}
@@ -773,8 +773,8 @@ print(person["name"])</code></pre>
     </p>
 
     <pre><code class="language-python">person = {
-    "name": "Bruce",
-    "age": 28
+  "name": "Bruce",
+  "age": 28
 }
 
 person.pop("age")
@@ -785,8 +785,8 @@ print(person)</code></pre>
     </p>
 
     <pre><code class="language-python">person = {
-    "name": "Bruce",
-    "age": 28
+  "name": "Bruce",
+  "age": 28
 }
 
 person.popitem()
@@ -797,8 +797,8 @@ print(person)</code></pre>
     </p>
 
     <pre><code class="language-python">person = {
-    "name": "Bruce",
-    "age": 28
+  "name": "Bruce",
+  "age": 28
 }
 
 del person["age"]
@@ -809,8 +809,8 @@ print(person)</code></pre>
     </p>
 
     <pre><code class="language-python">person = {
-    "name": "Bruce",
-    "age": 28
+  "name": "Bruce",
+  "age": 28
 }
 
 person["city"] = "Gotham"
@@ -822,47 +822,241 @@ print(person)</code></pre>
     </p>
 
     <pre><code class="language-python">person = {
-    "name": "Bruce",
-    "age": 28
+  "name": "Bruce",
+  "age": 28
 }
 
 for detail in person:
-    print(detail)</code></pre>
+  print(detail)</code></pre>
 
     <p>
       This prints the key e.g. <code>name</code> and <code>age</code>. To print the value, we need to use box notation.
     </p>
 
     <pre><code class="language-python">person = {
-    "name": "Bruce",
-    "age": 28
+  "name": "Bruce",
+  "age": 28
 }
 
 for detail in person:
-    print(person[detail])</code></pre>
+  print(person[detail])</code></pre>
 
     <p>
       Or we can use <code>.values()</code> method.
     </p>
 
     <pre><code class="language-python">person = {
-    "name": "Bruce",
-    "age": 28
+  "name": "Bruce",
+  "age": 28
 }
 
 for detail in person.values():
-    print(detail)</code></pre>
+  print(detail)</code></pre>
 
     <p>
       <code>len()</code> function is used to get the length of dictionary.
     </p>
 
     <pre><code class="language-python">person = {
-    "name": "Bruce",
-    "age": 28
+  "name": "Bruce",
+  "age": 28
 }
 
 print(len(person))</code></pre>
+
+<!-- 1. Point - function return None - https://stackoverflow.com/a/7053664 -->
+
+    <p>
+      Python has great support for object-oriented paradigm. To define a class, <code>class</code> keyword is used. Here, I define an empty class <code>Example</code>.
+    </p>
+
+    <pre><code class="language-python">class Example:
+  pass</code></pre>
+
+    <p>
+      To create an instance of a class just call the class and you've it.
+    </p>
+
+    <pre><code class="language-python">class Example:
+  pass
+
+e = Example()
+print(e)</code></pre>
+
+    <p>
+      As usual, you can define a method within class and call it.
+    </p>
+
+    <pre><code class="language-python">class Example:
+  def hi():
+    print("hello, world")
+
+e = Example()
+e.hi()</code></pre>
+
+    <!-- // https://stackoverflow.com/a/18884811/3776551
+        // https://shorturl.at/tFT34 -->
+
+    <p>
+      But, this throws an error. Methods within class should at least have one parameter <code>self</code>.
+    </p>
+
+    <pre><code class="language-bash">Traceback (most recent call last):
+  File "E:\Python\program.py", line 6, in <module>
+    e.hi()
+TypeError: hi() takes 0 positional arguments but 1 was given</code></pre>
+
+    <p>
+      And passing the <code>self</code> parameter to function within the class resolves the error.
+    </p>
+
+    <pre><code class="language-python">class Example:
+  def hi(self):
+    print("hello, world")
+
+e = Example()
+e.hi()</code></pre>
+
+    <p>
+      Alternatively, you can define the method as <code>@staticmethod</code>. Static methods in class don't require <code>self</code> parameter.
+    </p>
+
+    <pre><code class="language-python">class Example:
+  @staticmethod
+  def hi():
+    print("hello!")
+
+e = Example()
+e.hi()</code></pre>
+
+    <p>
+      We should go with the <code>self</code> parameter, unless a static method is needed.
+    </p>
+
+    <p>
+      The class should have data members.
+    </p>
+
+<pre><code class="language-python">class Example:
+  name = "Bruce"
+
+  def hi(self):
+    print(f"Hello, {name}")
+
+e = Example()
+e.hi()</code></pre>
+
+    <p>
+      Again, this throws the error as you can't access the class variables via just name.
+    </p>
+
+    <pre><code class="language-bash">Traceback (most recent call last):
+  File "E:\Python\program.py", line 8, in &lt;module&gt;
+    e.hi()
+  File "E:\Python\program.py", line 5, in hi
+    print(f"Hello, {name}")
+NameError: name 'name' is not defined</code></pre>
+
+    <p>
+      You should have to prefix it <code>self.`</code>
+    </p>
+
+    <pre><code class="language-python">class Example:
+  name = "Bruce"
+
+  def hi(self):
+    print(f"Hello, {self.name}")
+
+e = Example()
+e.hi()</code></pre>
+
+    <p>
+      In Python, <code>__init__()</code> is the constructor method. Like other methods in class, it also takes <code>self</code> as the first parameter and then other goes.
+    </p>
+
+    <pre><code class="language-python">class Point:
+  def __init__(self, x, y):
+    self.x = x
+    self.y = y
+
+p = Point(2, 4)</code></pre>
+
+    <p>
+      You can then have a method that works around the initial values used to create an object.
+    </p>
+
+    <pre><code class="language-python">class Point:
+  def __init__(self, x, y):
+    self.x = x
+    self.y = y
+
+  def info(self):
+    print(f"The location of point is ({self.x}, {self.y})")
+
+p = Point(2, 4)
+p.info()</code></pre>
+
+    <p>
+      Running above program prints
+    </p>
+
+    <pre><code class="language-bash">$ python program.py
+The location of point is (2, 4)</code></pre>
+
+    <p>
+      Finally the inheritance can be done via passing the name of the class as a parameter to another class's name.
+    </p>
+
+    <p>
+      Consider the example where I have one <code>Animal</code> class.
+    </p>
+
+    <pre><code class="language-python">class Animal:
+  def __init__(self, type):
+    self.type = type
+
+  def info(self):
+    print("The animal class")</code></pre>
+
+    <p>
+      Within the same file, create another class with the name <code>Cat</code>.
+    </p>
+
+    <pre><code class="language-python">class Animal:
+  def __init__(self, type):
+    self.type = type
+
+  def info(self):
+    print("The animal class")
+
+class Cat(Animal):
+  def __init__(self, name):
+    self.name = name
+
+  def getName(self):
+    print(f"The name is {self.name}")</code></pre>
+
+    <p>
+      Now, by creating an instance of <code>Cat</code>, I can access methods from both <code>Cat</code> as well as <code>Animal</code>.
+    </p>
+
+    <pre><code class="language-python">class Animal:
+  def __init__(self, type):
+    self.type = type
+
+  def info(self):
+    print("The animal class")
+
+class Cat(Animal):
+  def __init__(self, name):
+    self.name = name
+
+  def getName(self):
+    print(f"The name is {self.name}")
+
+c = Cat("Charlie")
+c.getName()
+c.info()</code></pre>
 
   </main>
 
@@ -872,8 +1066,6 @@ print(len(person))</code></pre>
     <a href="index.html">&#8592; Home</a>.
     <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a>
   </footer>
-
-
 
   <script src="prism.js"></script>
 </body>
