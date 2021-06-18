@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flask: An Introduction</title>
+
+    <link href="prism.css" rel="stylesheet" />
+    <style>
+      @import url("https://rsms.me/inter/inter.css");
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background-color: #fff;
+        color: #2e2e2e;
+        font-family: "Inter", sans-serif;
+        font-feature-settings: "ss03", "zero", "cv08", "cv11" 1;
+        font-size: 1.1rem;
+        font-style: normal;
+        font-weight: normal;
+        line-height: 1.5;
+        width: 100%;
+        max-width: 45rem;
+        margin: 8rem auto;
+        padding: 1rem;
+        transition: background-color 0.5s ease-out;
+      }
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+      }
+      h1 {
+        margin: 0;
+        font-weight: 900;
+        font-size: 3rem;
+        letter-spacing: 0;
+        background: linear-gradient(to left, #ff5c87 30%, #4762ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      h2 {
+        margin-top: 2rem;
+      }
+      p {
+        margin-top: 0;
+      }
+      a {
+        color: #0052cc;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      hr {
+        border: 0;
+        height: 1px;
+        background-image: linear-gradient(
+          to right,
+          rgba(33, 33, 33, 0),
+          rgba(33, 33, 33, 0.5),
+          rgba(33, 33, 33, 0)
+        );
+      }
+      pre,
+      code {
+        font-family: "Source Code Pro", monospace;
+      }
+      code {
+        color: rgb(124, 58, 237);
+      }
+      .note {
+        color: #929292;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Flask: An Introduction</h1>
+    </header>
+
+    <main>
+      <p>
+        We're going to learn
+        <a href="https://flask.palletsprojects.com/en/2.0.x/">Flask</a>, a
+        framework for building web applications using Python. Bookmark the
+        <a href="https://flask.palletsprojects.com/en/2.0.x/"
+          >official website</a
+        >
+        as we're going to visit a lot.
+      </p>
+
+      <p>
+        Getting up and running with Flask is simple as running few commands in
+        the terminal. The instructions written in this article are
+        Windows-specific. If you're using other systems like macOS or Linux, you
+        should have to read the
+        <a href="https://flask.palletsprojects.com/en/2.0.x/installation/"
+          >Installation</a
+        >
+        page for the commands you need to run.
+      </p>
+
+      <p>
+        Let's create a folder with the name <code>hello-world</code>, and then
+        go inside of it.
+      </p>
+
+      <pre><code class="language-bash">$ mkdir hello-world
+$ cd hello-world</code></pre>
+
+      <p>
+        Create a virtual environment for this project to isolate the project's
+        dependencies and versions. .
+      </p>
+
+      <pre><code class="language-bash">$ py -3 -m venv venv</code></pre>
+
+      <p>
+        Once created, enable or activate the virtual environment using the
+        following command.
+      </p>
+
+      <pre><code class="language-bash">$ .\venv\Scripts\activate</code></pre>
+
+      <p>
+        After running this command, you'll see <code>(venv)</code> somewhere in
+        your command prompt. In this way, you can confirm that the virtual
+        environment is activated.
+      </p>
+
+      <p class="note">
+        Note: If you're using PowerShell and if running the above command throws
+        the SecurityError. Try to run
+        <code>Set-ExecutionPolicy RemoteSigned -Scope CurrentUser</code> first
+        and then run the above command. It should work.
+      </p>
+
+      <p>
+        Now, we can install the flask in our folder/application using the
+        following command.
+      </p>
+
+      <pre><code class="language-bash">$ pip install Flask</code></pre>
+
+      <p>
+        Let's wait for a few seconds to install the Flask and its dependencies.
+        After the installation process is done, go ahead and open the
+        <code>hello-world</code> folder in text editor.
+      </p>
+
+      <pre><code class="language-bash">$ code .</code></pre>
+
+      <p>Create a file with the name <code>app.py</code>.</p>
+
+      <pre><code class="language-bash">$ touch app.py</code></pre>
+
+      <p>
+        Open the file in text-editor and import <code>Flask</code> from
+        <code>flask</code>.
+      </p>
+
+      <pre><code class="language-py">from flask import Flask</code></pre>
+
+      <p>
+        Create an <code>app</code> instance using
+        <code
+          ><a
+            href="https://flask.palletsprojects.com/en/2.0.x/api/#application-object"
+            >Flask()</a
+          ></code
+        >.
+      </p>
+
+      <pre data-line="3"><code class="language-py">from flask import Flask
+
+app = Flask(__name__)</code></pre>
+
+      <p>
+        We're now ready to create the
+        <a
+          href="https://flask.palletsprojects.com/en/2.0.x/api/#flask.Flask.route"
+          >route</a
+        >
+        in our web application.
+      </p>
+
+      <p>
+        Let's create <code>/</code> route and it should return the text
+        <code>hello, world</code> when visited in the browser.
+      </p>
+
+      <pre data-line="5-7"><code class="language-py">from flask import Flask
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+  return &quot;hello, world&quot;</code></pre>
+
+      <p>
+        When route <code>/</code> is visited in the browser, it'll run the
+        associated <code>index()</code> method and return the text
+        <code>hello, world</code>.
+      </p>
+
+      <p>
+        To run the application, we need to set one variable FLASK_APP in
+        terminal using following command.
+      </p>
+
+      <pre><code class="language-bash">$ set FLASK_APP=app.py</code></pre>
+
+      <p>
+        Now, running following command will auto run the <code>app.py</code>.
+      </p>
+
+      <pre data-line="6"><code class="language-bash">$ flask run
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+ * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)</code></pre>
+
+      <p>
+        As mentioned in the terminal output, the application is running at
+        localhost and on port <code>5000</code>. ctrl+click the URL from the
+        terminal and it opens the mentioned URL in the browser. In the browser,
+        you should see the <code>hello, world</code> text. If that is the case,
+        you're Flask application and up and running! If not, then send me the
+        error you're getting, I'll help you to resolve it.
+      </p>
+
+      <p>
+        We can return the HTML. Let's update the <code>return</code> statement
+        with <code>&lt;h1&gt;</code> as follow.
+      </p>
+
+      <pre data-line="7"><code class="language-py">from flask import Flask
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+  return &quot;&lt;h1&gt;hello, world&lt;/h1&gt;&quot;</code></pre>
+
+      <p>Now, reload the page in the browser.</p>
+
+      <p>
+        Ah! The <code>hello, world</code> text is displaying as it is. It should
+        display in header form. The reason is, we have to restart the server as
+        we did the modification in the <code>app.py</code>. By pressing
+        <code>ctrl+c</code>, we can quit the running server and then run the
+        <code>flask run</code> command to run the server again.
+      </p>
+
+      <p>
+        To auto restart the server, just change the Environment to development.
+        To do this, press <code>ctrl+c</code> first and then write the following
+        command.
+      </p>
+
+      <pre><code class="language-bash">$ set FLASK_ENV=development</code></pre>
+
+      <p>
+        This update the Flask environment to development. Now run the
+        application again using <code>flask run</code> command.
+      </p>
+
+      <pre data-line="2"><code class="language-bash">$ flask run
+ * Environment: development
+ * Debug mode: on
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 125-688-527
+ * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)</code></pre>
+
+      <p>
+        Notice the Environment in above terminal output? It is now changed to
+        <code>development</code>.
+      </p>
+
+      <p class="note">
+        Note: If you're using PS, you need to run
+        <code>$env:FLASK_ENV=&quot;development&quot;</code> command instead of
+        mentioned above.
+      </p>
+
+      <p>
+        With this change in the application, we don't have to worried about
+        restarting the server again.
+      </p>
+
+      <p>
+        We can return the JSON response using
+        <code
+          ><a
+            href="https://flask.palletsprojects.com/en/2.0.x/api/#flask.json.jsonify"
+            >.jsonify()</a
+          ></code
+        >
+        method from Flask. Let's first import this method with
+        <code>Flask</code> in <code>import</code> statement.
+      </p>
+
+      <pre
+        data-line="1"
+      ><code class="language-py">from flask import Flask, jsonify
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+  return &quot;&lt;h1&gt;hello, world&lt;/h1&gt;&quot;</code></pre>
+
+      <p>Now, using this method, we can return the JSON object.</p>
+
+      <pre
+        data-line="7"
+      ><code class="language-py">from flask import Flask, jsonify
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+  return jsonify({ &quot;message&quot;: &quot;hello, world &quot;})</code></pre>
+
+      <p>
+        As mentioned previously, we don't have to restart the server to get the
+        latest update in output. Visiting the mentioned localhost URL should
+        return now the above JSON response.
+      </p>
+
+      <p>
+        Flask nicely supports the dynamic route by mentioned it as a placeholder
+        within angle brackets (<code>&lt;&gt;</code>).
+      </p>
+
+      <pre
+        data-line="5"
+      ><code class="language-py">from flask import Flask, jsonify
+
+app = Flask(__name__)
+
+@app.route('/&lt;id&gt;')
+def index():
+  return jsonify({ &quot;message&quot;: &quot;hello, world &quot;})</code></pre>
+
+      <p>
+        The mentioned placeholder of the dynamic route needs to be pass as a
+        parameter of associated function and in our case, it's
+        <code>index()</code> method with the same name e.g. <code>id</code>.
+      </p>
+
+      <pre
+        data-line="6"
+      ><code class="language-py">from flask import Flask, jsonify
+
+app = Flask(__name__)
+
+@app.route('/&lt;id&gt;')
+def index(id):
+  return jsonify({ &quot;message&quot;: &quot;hello, world &quot;})</code></pre>
+
+      <p>
+        This <code>id</code> parameter has the value of the dynamic route. So,
+        we can use it in function if we want.
+      </p>
+
+      <pre
+        data-line="7"
+      ><code class="language-py">from flask import Flask, jsonify
+
+app = Flask(__name__)
+
+@app.route('/&lt;id&gt;')
+def index(id):
+  return f&quot;The id is {id}&quot;
+</code></pre>
+
+      <p>
+        Here, I'm just printing whatever value we have for the
+        <code>id</code>.
+      </p>
+
+      <p>
+        Visiting <code>/</code> throws a 404 Not Found error because we haven't
+        the associated route for the same. The error message is the default from
+        Flask and we can update it using,
+        <code
+          ><a
+            href="https://flask.palletsprojects.com/en/2.0.x/api/#flask.Flask.errorhandler"
+            >@app.errorhandler(404)</a
+          ></code
+        >.
+      </p>
+
+      <pre
+        data-line="9-11"
+      ><code class="language-py">from flask import Flask, jsonify
+
+app = Flask(__name__)
+
+@app.route('/&lt;id&gt;')
+def index(id):
+  return f&quot;The id is {id}&quot;
+
+@app.errorhandler(404)
+def file_not_found(error):
+  return &quot;4-0-4&quot;</code></pre>
+
+      <p>
+        The associated function accept one arguments - <code>error</code> and it
+        contains further information of the error such as code, name, and
+        description.
+      </p>
+
+      <p class="note">
+        Note: You can return this info to the user using
+        <code>error.code</code>, <code>error.name</code>, and
+        <code>error.description</code>. In case of <code>error.code</code>, you
+        need to convert into a string using <code>str()</code> function as it
+        returns the <code>int</code>.
+      </p>
+
+      <p>
+        <code
+          ><a
+            href="https://flask.palletsprojects.com/en/2.0.x/api/#flask.redirect"
+            >redirect()</a
+          ></code
+        >
+        method is used to redirect the URL for the given route. Let's add
+        <code>/about</code> route and redirect it to
+        <code>/&lt;id&gt;</code> route when visited in the browser.
+      </p>
+
+      <pre
+        data-line="9-11"
+      ><code class="language-py">from flask import Flask, jsonify
+
+app = Flask(__name__)
+
+@app.route('/&lt;id&gt;')
+def index(id):
+  return f&quot;The id is {id}&quot;
+
+@app.route('/about')
+def about():
+  return redirect('/github')
+
+@app.errorhandler(404)
+def file_not_found(error):
+  return str(error.description)</code></pre>
+
+      <p>
+        Before we go further and test in the browser, let's not forget to import
+        the
+        <code>redirect</code> method from <code>flask</code>.
+      </p>
+
+      <pre
+        data-line="1"
+      ><code class="language-py">from flask import Flask, jsonify, redirect
+
+app = Flask(__name__)
+
+@app.route('/&lt;id&gt;')
+def index(id):
+  return f&quot;The id is {id}&quot;
+
+@app.route('/about')
+def about():
+  return redirect('/github')
+
+@app.errorhandler(404)
+def file_not_found(error):
+  return str(error.description)</code></pre>
+
+      <p>
+        Now, visiting the <code>/about</code> redirect back to
+        <code>/github</code> as we have passed <code>github</code> as id to
+        <code>/</code> route.
+      </p>
+
+      <p class="note">
+        Note: Flask uses
+        <a href="https://werkzeug.palletsprojects.com/en/2.0.x/">Werkzeug</a> to
+        handle routing, and it give
+        <a href="https://stackoverflow.com/a/25011800/3776551"
+          >more weightage</a
+        >
+        on normal routes than one with dynamic parts.
+      </p>
+
+      <p>
+        You can directly write the URL as we wrote in
+        <code>redirect()</code> method or you can use
+        <code>url_for()</code> method also. The first argument of this method
+        should be the name of the function associated with the route and then
+        the optional dynamic route variable. Following these rules, we can write
+        the <code>/github</code> part of redirect(<code>/github</code>) as
+        <code>url_for(&quot;index&quot;, id=&quot;github&quot;)</code>.
+      </p>
+
+      <p>
+        Let's import <code>url_for</code> from <code>flask</code> and update the
+        body of <code>about()</code> function.
+      </p>
+
+      <pre
+        data-line="1,11"
+      ><code class="language-py">from flask import Flask, jsonify, redirect, url_for
+
+app = Flask(__name__)
+
+@app.route('/&lt;id&gt;')
+def index(id):
+  return f&quot;The id is {id}&quot;
+
+@app.route('/about')
+def about():
+  return redirect(url_for(&quot;index&quot;, id=&quot;github&quot;))
+
+@app.errorhandler(404)
+def file_not_found(error):
+  return str(error.description)</code></pre>
+
+      <p>
+        Once we are done with application development, we should always
+        deactivate the virtual environment using <code>deactivate</code> command
+        in the terminal.
+      </p>
+
+      <pre><code class="language-bash">$ deactivate</code></pre>
+
+      <p>
+        This command will deactivate the virtual environment for the application
+        and also remove the <code>venv</code> entry from the terminal prompt.
+      </p>
+
+      <p>
+        Now, if you run the <code>flask run</code> command, you will get the
+        following error.
+      </p>
+
+      <pre><code class="language-bash">$ flask run
+'flask' is not recognized as an internal or external command,
+operable program or batch file.</code></pre>
+
+      <p>
+        In this case, you first need to activate the virtual environment using
+        the command you already know (hint: mentioned in this article) now. Then
+        running the above command wouldn't throw the error. But, you'll not get
+        the development environment. That you need to set again (using the
+        command you already know).
+      </p>
+
+      <p>
+        That's it for this article. In next the article, we'll talk about the
+        templates(views) in Flask.
+      </p>
+    </main>
+
+    <hr />
+
+    <footer>
+      <a href="index.html">&#8592; Home</a>.
+      <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"
+        >CC BY-NC-ND 4.0</a
+      >
+    </footer>
+
+    <script src="prism.js"></script>
+  </body>
+</html>
