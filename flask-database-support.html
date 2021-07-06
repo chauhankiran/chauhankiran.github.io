@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flask: With Templates</title>
+
+    <link href="prism.css" rel="stylesheet" />
+    <style>
+      @import url("https://rsms.me/inter/inter.css");
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background-color: #fff;
+        color: #2e2e2e;
+        font-family: "Inter", sans-serif;
+        font-feature-settings: "ss03", "zero", "cv08", "cv11" 1;
+        font-size: 1.1rem;
+        font-style: normal;
+        font-weight: normal;
+        line-height: 1.5;
+        width: 100%;
+        max-width: 45rem;
+        margin: 8rem auto;
+        padding: 1rem;
+        transition: background-color 0.5s ease-out;
+      }
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+      }
+      h1 {
+        margin: 0;
+        font-weight: 900;
+        font-size: 3rem;
+        letter-spacing: 0;
+        background: linear-gradient(to left, #ff5c87 30%, #4762ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      h2 {
+        margin-top: 2rem;
+      }
+      p {
+        margin-top: 0;
+      }
+      a {
+        color: #0052cc;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      hr {
+        border: 0;
+        height: 1px;
+        background-image: linear-gradient(
+          to right,
+          rgba(33, 33, 33, 0),
+          rgba(33, 33, 33, 0.5),
+          rgba(33, 33, 33, 0)
+        );
+      }
+      pre,
+      code {
+        font-family: "Source Code Pro", monospace;
+      }
+      code {
+        color: rgb(124, 58, 237);
+      }
+      .note {
+        color: #929292;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Flask: The Database Support</h1>
+    </header>
+
+    <main>
+      <p>
+        In this article, we're going to talk about the database supports in Flask. We're not going to build anything interesting than a CRUD application using SQLite database. We'll build the amazing applications in future may be after 8-10 articles on Flask are written.
+      </p>
+
+      <p class="note">
+        Note: This article assume that you have installed the SQLite database on your system. Installing SQLite is simple. Due to this, I haven't mentioned the steps for the same.
+      </p>
+
+      <p>
+        Python already comes with default support for the SQLite via <code>sqlite3</code> module. So, we're going to use this <code>sqlite3</code> module in this article. Before we go further let's warm-up ourselves with this <code>sqlite3</code> module and write some queries.
+      </p>
+
+      <p>
+        Let's create a folder with name <code>database-support</code>.
+      </p>
+
+      <pre><code class="language-bash">$ mkdir database-support</code></pre>
+
+      <p>Go inside this created folder, and create yet another folder with name <code>db</code>.</p>
+
+      <pre><code class="language-bash">$ cd database-support
+$ mkdir db</code></pre>
+
+      <p>
+        Within this <code>db</code> folder, we're going to create a file with name <code>temp.sqlite3</code> and this will hold our SQLite database.
+      </p>
+
+      <pre><code class="language-bash">$ touch db/temp.sqlite3</code></pre>
+
+      <p>
+        Let's create a <code>users</code> table in <code>temp.sqlite3</code> database. We don't know how to do it yet in Python. So, we're going to do it manually via running SQL query using SQLite prompt in terminal.
+      </p>
+
+      <p>
+        Open the <code>temp.sqlite3</code> file using <code>sqlite3</code> command in terminal.
+      </p>
+
+      <pre><code class="language-bash">$ sqlite3 db/temp.sqlite3
+SQLite version 3.36.0 2021-06-18 18:36:39
+Enter &quot;.help&quot; for usage hints.
+sqlite&gt;</code></pre>
+
+      <p>
+        SQLite prompt is opened for us for the file <code>temp.sqlite3</code>. Whatever changes we're going to do now via this prompt session, go against this <code>temp.sqlite3</code> file.
+      </p>
+
+      <p>
+        Let's write a query to create a <code>users</code> table. You can copy the following query and run in the prompt.
+      </p>
+
+      <pre><code class="language-sql">CREATE TABLE users (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  email TEXT NOT NULL UNIQUE,
+  password TEXT NOT NULL
+);</code></pre>
+
+      <p>
+        If you don't get any output from SQLite then that means the query has been executed successfully. We can confirm the creation of table via running <code>.tables</code> command (it returns the list of tables).
+      </p>
+
+      <pre><code class="language-bash">sqlite&gt; .tables
+users</code></pre>
+
+      <p>
+        We get the <code>users</code> as one of the table name in output. That means the table <code>users</code> has created for us.
+      </p>
+
+      <p>
+        Now, let's insert few entries in this table. Copy the following queries one-by-one and run it in SQLite prompt.
+      </p>
+
+      <pre><code class="language-sql">INSERT INTO users(email, password) VALUES('alice@doe.com', '123456');
+INSERT INTO users(email, password) VALUES('bob@doe.com', '123456');
+INSERT INTO users(email, password) VALUES('charlie@doe.com', '123456');
+INSERT INTO users(email, password) VALUES('david@doe.com', '123456');</code></pre>
+
+      <p>
+        We now have data in <code>users</code> table. Let's confirm it by running the SELECT query. It should return the four inserted entries or rows.
+      </p>
+
+      <pre><code class="language-bash">sqlite&gt; SELECT * FROM users;
+1|alice@doe.com|123456
+2|bob@doe.com|123456
+3|charlie@doe.com|123456
+4|david@doe.com|123456</code></pre>
+
+      <p>
+        We now have database, table, and some data to work with. We can now move ahead on Python side to do the interaction with this database. Leave this SQLite prompt open in the terminal and open the new terminal tab or terminal window in same <code>database-support</code> folder and open the Python prompt using <code>python</code> command in terminal. At the end, you have two terminals - first is running the SQLite and second is running Python.
+      </p>
+
+      <pre><code class="language-bash">$ python
+Python 3.9.5 (tags/v3.9.5:0a7dcbd, May  3 2021, 17:27:52) [MSC v.1928 64 bit (AMD64)] on win32
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt;</code></pre>
+
+      <p>
+        As you can see from the terminal output, the Python prompt is opened and ready to interact. Let's import <code>sqlite3</code> module in this prompt.
+      </p>
+
+      <pre><code class="language-bash">&gt;&gt;&gt; import sqlite3
+&gt;&gt;&gt;</code></pre>
+
+      <p>
+        The <code>sqlite3</code> module is imported, that means we can now access all the methods from <code>sqlite3</code>. For example, to connect the database, we can use <code>.connect()</code> method.
+      </p>
+
+      <pre><code class="language-bash">&gt;&gt;&gt; connection = sqlite3.connect('./db/temp.sqlite3')
+&gt;&gt;&gt;</code></pre>
+
+      <p>
+        This <code>connection</code> object now has database connection or pointer to our <code>temp.sqlite3</code> database. Using this <code>connection</code>, we can execute the query using <code>.execute()</code> method. For example, to get the list of all users from the <code>users</code> table, we can write SELECT query as follows.
+      </p>
+
+      <pre><code class="language-bash">&gt;&gt;&gt; users = connection.execute('SELECT * FROM users')
+&gt;&gt;&gt;</code></pre>
+
+      <p>
+        This <code>users</code> variable hold the results set of SELECT query and if printed, it should return the list of users.
+      </p>
+
+      <pre><code class="language-bash">&gt;&gt;&gt; users
+&lt;sqlite3.Cursor object at 0x000001E67233EEA0&gt;</code></pre>
+
+      <p>
+        Interesting enough, it returns the cursor object. This is little bit confusing topic and we'll cover this topic in great details towards the end of this series. But, for now remember that you'll get cursor after each database interaction.
+      </p>
+
+      <p>
+        In case of SELECT query, we can get the result using <code>.fetchall()</code> method on this cursor.
+      </p>
+
+      <pre><code class="language-bash">&gt;&gt;&gt; users.fetchall()
+[(1, 'alice@doe.com', '123456'), (2, 'bob@doe.com', '123456'), (3, 'charlie@doe.com', '123456'), (4, 'david@doe.com', '123456')]
+&gt;&gt;&gt;</code></pre>
+
+      <p>
+        We can even chain this <code>.fetchall()</code> method directly on <code>.execute()</code> method as follows.
+      </p>
+
+      <pre><code class="language-bash">&gt;&gt;&gt; users = connection.execute('SELECT * FROM users').fetchall()
+&gt;&gt;&gt; users
+[(1, 'alice@doe.com', '123456'), (2, 'bob@doe.com', '123456'), (3, 'charlie@doe.com', '123456'), (4, 'david@doe.com', '123456')]
+&gt;&gt;&gt;</code></pre>
+
+      <p>Like <code>.fetchall()</code>, we have the <code>.fetchone()</code> method. And as name suggest, it return one result set.</p>
+
+      <pre><code class="language-bash">&gt;&gt;&gt; user = connection.execute('SELECT * FROM users').fetchone()
+&gt;&gt;&gt; user
+(1, 'alice@doe.com', '123456')</code></pre>
+
+      <p>
+        Above query is not practically useful. I mean why we should run the SELECT query against complete table and fetch only one result set from it? The normal scenario for fetching one result set would be SELECT with WHERE condition like WHERE id = 1 or WHERE email = alice@doe.com.
+      </p>
+
+      <p>
+        If the query includes the values that are going to be supplied, it'll not going to directly written. Instead it should be passed as separate parameter using placeholder such as <code>?</code>. Consider the example, where I want to write the following SELECT query.
+      </p>
+
+      <pre><code class="language-sql">SELECT * FROM users WHERE id = 1</code></pre>
+
+      <p>
+        As mentioned, we're not going to write 1 directly in this query. We'll write <code>?</code> as placeholder in this query.
+      </p>
+
+      <pre><code class="language-sql">SELECT * FROM users WHERE id = ?</code></pre>
+
+      <p>
+        We're now going to supply the value of this <code>id</code> separately in tuple as second argument.
+      </p>
+
+      <pre><code class="language-sql">SELECT * FROM users WHERE id = ?, (1, )</code></pre>
+
+      <p>
+        Wrap the query within double (or single) quotes.
+      </p>
+
+      <pre><code class="language-sql">&quot;SELECT * FROM users WHERE id = ?&quot;, (1, )</code></pre>
+
+      <p>
+        Now the query is ready to execute like this.
+      </p>
+
+      <pre><code class="language-bash">&gt;&gt;&gt; user = connection.execute(&quot;SELECT * FROM users WHERE id = ?&quot;, (1, )).fetchone()
+&gt;&gt;&gt; user
+(1, 'alice@doe.com', '123456')</code></pre>
+
+      <p>
+        How about INSERT? We're always going to use the same <code>.execute()</code> method. But, as we discussed, we're going to write <code>?</code> as placeholder because we're going to supply the values in INSERT query. Consider the example, where I want to write the following INSERT query.
+      </p>
+
+      <pre><code class="language-sql">INSERT INTO users(email, password) VALUES('eve@doe.com', '123456')</code></pre>
+
+      <p>
+        Let's replace the actual values with <code>?</code> as placeholder.
+      </p>
+
+      <pre><code class="language-sql">INSERT INTO users(email, password) VALUES(?, ?)</code></pre>
+
+      <p>
+        Now, we can define the supplied values in sequence in tuple.
+      </p>
+
+      <pre><code class="language-sql">INSERT INTO users(email, password) VALUES(?, ?), ('eve@doe.com', '12345')</code></pre>
+
+      <p>
+        Don't forget to wrap the query within double (or single) quotes.
+      </p>
+
+      <pre><code class="language-sql">&quot;INSERT INTO users(email, password) VALUES(?, ?)&quot;, ('eve@doe.com', '12345')</code></pre>
+
+      <p>
+        Finally, we can pass this query to our well known <code>.execute()</code> method.
+      </p>
+
+      <pre><code class="language-bash">&gt;&gt;&gt; connection.execute(&quot;INSERT INTO users(email, password) VALUES(?, ?)&quot;, (&quot;eve@doe.com&quot;, &quot;123456&quot;))
+&lt;sqlite3.Cursor object at 0x000001E67233ED50&gt;</code></pre>
+
+      <p>
+        As I mentioned earlier, it'll return the cursor on database interaction. This is useful and we're going to use this cursor later (after few minutes).
+      </p>
+
+      <p>
+        Let's run the SELECT query again and confirm that the new entry is added to <code>users</code> table or not.
+      </p>
+
+      <pre><code class="language-bash">&gt;&gt;&gt; users = connection.execute(&quot;SELECT * FROM users&quot;).fetchall()
+&gt;&gt;&gt; users
+[(1, 'alice@doe.com', '123456'), (2, 'bob@doe.com', '123456'), (3, 'charlie@doe.com', '123456'), (4, 'david@doe.com', '123456'), (5, 'eve@doe.com', '123456')]</code></pre>
+
+      <p>
+        Looks like the INSERT query ran successfully and added this new user. But, wait. I have surprise for you. Go to SQLite prompt terminal and run the SELECT query.
+      </p>
+
+      <pre><code class="language-bash">sqlite&gt; SELECT * FROM users;
+1|alice@doe.com|123456
+2|bob@doe.com|123456
+3|charlie@doe.com|123456
+4|david@doe.com|123456</code></pre>
+
+      <p>Notice? We're not seeing the lastly added <code>eve@doe.com</code> user in database even though it was displaying in SELECT query in Python. This is something that I want to point out. In order to actually save row in database, we need to commit the changes using <code>.commit()</code> method.</p>
+
+      <pre><code class="language-bash">&gt;&gt;&gt; connection.commit()
+&gt;&gt;&gt;</code></pre>
+
+      <p>
+        Now, our change is committed to actual database. We can confirm the same by running the SELECT query in SQLite prompt.
+      </p>
+
+      <p>
+        Although it is not required at this moment in Python terminal. But, we're always going to close the connection after we done with database interaction using <code>.close()</code> method.
+      </p>
+
+      <pre><code class="language-bash">&gt;&gt;&gt; connection.close()
+&gt;&gt;&gt;</code></pre>
+
+      <p>
+        Go back to SQLite prompt and run the SELECT query. It should return us the 5 results set now.
+      </p>
+
+      <pre><code class="language-bash">$ sqlite3 .\db\temp.sqlite3
+SQLite version 3.36.0 2021-06-18 18:36:39
+Enter &quot;.help&quot; for usage hints.
+sqlite&gt; SELECT * FROM users;
+1|alice@doe.com|123456
+2|bob@doe.com|123456
+3|charlie@doe.com|123456
+4|david@doe.com|123456
+5|eve@doe.com|123456</code></pre>
+
+      <p>
+        Yes, now we're seeing the <code>eve@doe.com</code> entry done via Python.
+      </p>
+
+      <p>
+        It is quite common scenario, where we're going to insert a new row in database and needed to get the <code>id</code> of inserted value for further operation/process. We can get the <code>id</code> (or primary key) using <code>lastrowid</code> cursor attribute.
+      </p>
+
+      <p>
+        For example, let's run the INSERT query again and save its cursor to a <code>user</code> variable.
+      </p>
+
+      <pre><code class="language-bash">&gt;&gt;&gt; user = connection.execute(&quot;INSERT INTO users(email, password) VALUES(?, ?)&quot;, (&quot;frank@doe.com&quot;, &quot;123456&quot;))
+&gt;&gt;&gt;</code></pre>
+
+      <p>
+        Don't forget to run the <code>.commit()</code> method to commit the actual changes to database.
+      </p>
+
+      <pre><code class="language-bash">&gt;&gt;&gt; connection.commit()
+&gt;&gt;&gt;</code></pre>
+
+      <p>
+        Now, the <code>user</code> variable is cursor points to INSERT query. We can run the <code>lastrowid</code> on it as
+      </p>
+
+<pre><code class="language-bash">&gt;&gt;&gt; user.lastrowid
+6</code></pre>
+
+      <p>
+        What about doing an UPDATE? It's same as writing the INSERT query with placeholder <code>?</code> for the supplied values. For example, if I want to update the password of row with <code>id</code> equals to <code>1</code>, then following is the UPDATE query that I need to write in <code>.execute()</code> method.
+      </p>
+
+      <pre><code class="language-bash">&gt;&gt;&gt; connection.execute(&quot;UPDATE users SET password = ? WHERE id = ?&quot;, (&quot;654321&quot;, 1))
+&lt;sqlite3.Cursor object at 0x0000025BF308EEA0&gt;</code></pre>
+
+      <p>
+        Again, we're doing modification in database. So, calling <code>.commit()</code> method is required.
+      </p>
+
+      <pre><code class="language-bash">&gt;&gt;&gt; connection.commit()</code></pre>
+
+      <p>
+        You can verify the operation by running the SELECT query in SQLite prompt.
+      </p>
+
+      <p>
+        Finally, doing DELETE is also the same as UPDATE where we need to pass the value of <code>id</code> (or any other column name that you want in WHERE condition) in second argument but as tuple. This is how you can write the DELETE query. For example, if I want to delete the row with <code>id</code> equals to <code>1</code>, then following is the DELETE query that I need to write in <code>.execute()</code> method.
+      </p>
+
+      <pre><code class="language-bash">&gt;&gt;&gt; connection.execute(&quot;DELETE FROM users WHERE id = ?&quot;, (1,))
+&lt;sqlite3.Cursor object at 0x00000251F1F8ED50&gt;
+&gt;&gt;&gt;</code></pre>
+
+      <p>
+        Again, don't forget to run the <code>.commit()</code> method to run the actual transaction on database as we did the modification.
+      </p>
+
+      <pre><code class="language-bash">&gt;&gt;&gt; connection.execute(&quot;DELETE FROM users WHERE id = ?&quot;, (1,))
+&lt;sqlite3.Cursor object at 0x00000253F310ED50&gt;
+&gt;&gt;&gt; connection.commit()
+&gt;&gt;&gt;</code></pre>
+
+      <p>
+        You can run the SELECT query here in Python prompt or in SQLite prompt and confirm that the first row is actually deleted.
+      </p>
+
+      <p>
+        Now, it is time to take a small break and then we'll move ahead with Flask code.
+      </p>
+    </main>
+
+    <hr />
+
+    <footer>
+      <a href="index.html">&#8592; Home</a>.
+      <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"
+        >CC BY-NC-ND 4.0</a
+      >
+    </footer>
+
+    <script src="prism.js"></script>
+  </body>
+</html>
