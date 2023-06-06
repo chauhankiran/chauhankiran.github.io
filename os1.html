@@ -6,7 +6,7 @@
     <link rel="icon" href="favicon.ico">
 
     <meta name="author" content="Kiran Chauhan">
-    <title>KC</title>
+    <title>Operating System Pt. 1</title>
 
     <style>
       @import url('https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');
@@ -36,6 +36,10 @@
         margin-block: .2rem;
         text-rendering: optimizelegibility;
       }
+      a {
+        color: #387ed1;
+        text-decoration: none;
+      }
       #peep {
         position: fixed;
         right: 0;
@@ -50,36 +54,30 @@
           display: none;
         }
       }
-      .first-name {
+      .first-word {
         font-weight: 400;
-      }
-      a {
-        color: #387ed1;
-        text-decoration: none;
-      }
-      ul {
-        list-style-type: none;
-        padding-left: 0;
-        margin-top: 4rem;
       }
     </style>
   </head>
   <body>
     <header>
-      <h1><span class="first-name">Kiran</span> Chauhan</h1>
+      <h1><span class="first-word">Operating</span> System Pt. 1</h1>
     </header>
 
     <main>
       <p>
-        I design software with and for people. I occasionally read and write. I know Gujarati, Node, React, and Python. 
+        Linux is the <a href="https://distrowatch.com">operating system</a>. This is actually incorrect. Linux is the <a href="https://kernel.org">kernel</a>, an important part of the operating system. This is similar to - <em>earth is home of us, the humans. Actually, the earth is home of other creatures as well. But, we're important ones!</em>
       </p>
 
-      <ul>
-        <li>
-          <time>2022-06</time>
-          <a href="os1.html">Operating System Pt. 1</a>
-        </li>
-      </ul>
+      <p>
+        Operating system is combination of many software including kernel. Many of those required software comes from <a href="https://www.gnu.org">GNU</a> project and due to this, sometime people use word GNU/Linux to correctly mention the name of the operating system. It is up to you on which word you use e.g. Linux or GNU/Linux. But, I have soft corner for GNU project and due to this, I'll suggest to use GNU/Linux.
+      </p>
+
+      <p>
+        Learning the operating system is daunting task as operating system itself is the complicated software on its own. Also, theory behind it is also lengthy (and sometimes complicated). To make this interesting, I'm going to use different approach, I'll throw you lots of small practical or &quot;to explore&quot; in between the theory sessions along with coding exercise. I hope, this will make things interesting and fun!
+      </p>
+
+      <a href="index.html">&larr; Back</a>
     </main>
 
     <img src="peep-91.svg" alt="Peep with mustache" id="peep" onClick="party()">
