@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.ico">
+
+    <meta name="author" content="Kiran Chauhan">
+    <title>Scala Tutorial Pt. 1</title>
+
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        padding: 0;
+        margin: 0;
+      }
+      body {
+        color: #222;
+        font-family: "PT Serif", "Georgia", "Helvetica Neue", Arial, sans-serif;
+        font-size: 1.3rem;
+        line-height: 1.42;
+        margin: 5rem auto;
+        width: 100%;
+        max-width: 42rem;
+        padding: 1.5rem;
+      }
+      h1 {
+        font-weight: 700;
+        font-size: 3rem;
+        margin-block: .2rem;
+        text-rendering: optimizelegibility;
+      }
+      a {
+        color: #387ed1;
+        text-decoration: none;
+      }
+      code,
+      pre {
+        font-size: inherit;
+        font-family: 'JetBrains Mono', monospace;
+        color: darkred;
+      }
+      pre {
+        overflow-x: auto;
+        border: 1px solid #eeeeef;
+        padding: .85rem .65rem;
+      }
+      hr {
+        margin: 1rem 0;
+        color: inherit;
+        border: 0;
+        border-top: 1px solid;
+        opacity: 0.25;
+      }
+      #peep {
+        position: fixed;
+        right: 0;
+        bottom: -3.5rem;
+        transform: scaleX(-1);
+      }
+      #peep:hover {
+        transform: scaleX(1);
+      }
+      @media only screen and (max-width: 768px) {
+        #peep {
+          display: none;
+        }
+      }
+      .first-word {
+        font-weight: 400;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1><span class="first-word">Scala</span> Tutorial Pt. 1</h1>
+    </header>
+
+    <main>
+      <p>
+        <a href="https://www.scala-lang.org">Scala</a> is both an object-oriented and functional programming language. It is based on the Java Virtual Machine (JVM) and supports seamless integration with Java. Visit the <a href="https://docs.scala-lang.org/getting-started/index.html">Getting Started</a> page to correctly install Scala on your computer, based on the operating system you have.
+      </p>
+
+      <p>
+        Once the installation is complete, run the following command in the terminal to confirm whether Scala has been installed correctly or not.
+      </p>
+
+      <pre><code class="language-sh">$ scala --version
+Scala code runner version 3.3.0 -- Copyright 2002-2023, LAMP/EPFL</code></pre>
+
+      <p>We're ready to go further!</p>
+
+      <hr>
+
+      <p>
+        Create a new file named <code>hello.scala</code> with the extension <code>.scala</code>, as it is the file extension used for Scala programs. We want to print the text <em>hello, world</em> on the terminal. To do this, let's write the <em>hello, world</em> text within double quotes, as strings in Scala are enclosed in double quotes. Single quotes are reserved for characters.
+      </p>
+
+      <pre><code class="language-scla">&quot;hello, world&quot;</code></pre>
+
+      <p>
+        <code>print()</code> method is used to print something on terminal.
+      </p>
+
+      <pre><code class="language-scala">print(&quot;hello, world&quot;)</code></pre>
+
+      <p>
+        In Scala, the execution of a program starts from the <code>main()</code> method, similar to other programming languages. However, defining the <code>main()</code> method in Scala is slightly different. Instead of a conventional <code>main()</code> method, you can define <em>any</em> method you prefer and annotate it as the entry point using the <code>@main</code> annotation.
+      </p>
+
+      <p>
+        To define a method in Scala, <code>def</code> keyword is used. Let's define the <code>hello()</code> method and put this <code>print()</code> statement within this <code>hello()</code> method.
+      </p>
+
+      <pre><code class="language-scala">def hello() = print(&quot;hello, world&quot;)</code></pre>
+
+      <p>
+        In Scala, the <code>=</code> sign is used to separate the method definition from the method body. Everything after the <code>=</code> sign represents the body of the <code>hello()</code> method.
+      </p>
+
+      <p>Mark this as <em>main</em> using <code>@main</code> annotation.</p>
+
+      <pre><code class="language-scala">@main def hello() = print(&quot;hello, world&quot;)</code></pre>
+
+      <p>Here we have the <em>hello, world</em> program in Scala!</p>
+      
+      <hr>
+
+      <p>
+        In Scala, the execution of the <code>hello.scala</code> program starts from the <code>hello()</code> method, which is designated as the main method for Scala.
+      </p>
+
+      <p>
+        In Scala, the execution of a program occurs in two steps. In the first step, we compile the program using the Scala compiler (<code>scalac</code>). After successful compilation, the Scala compiler generates the <code>hello.class</code> file (along with a few other files). In the second step, the created class is interpreted by the Scala interpreter (<code>scala</code>).
+      </p>
+
+      <p>
+        Following is the command for the step one.
+      </p>
+
+      <pre><code class="language-bash">$ scalac hello.scala</code></pre>
+
+      <p>
+        Following is the command for the step two.
+      </p>
+
+      <pre><code class="language-bash">$ scala hello
+hello, world</code></pre>
+
+      <p>We just wrote and run the <em>hello, world</em> program in Scala!</p>
+
+      <hr>
+
+      <p>
+        Instead of using the <code>print()</code> method, you can use the <code>println()</code> method in Scala to format the output nicely. This method appends the <code>\n</code> character at the end of the printed text, creating a new line.
+      </p>
+
+      <pre><code class="language-scala">@main def hello() = println(&quot;hello, world&quot;)</code></pre>
+
+      <p>Run the program again with above two commands and confirm the output.</p>
+
+      <hr>
+
+      <p>
+        In Scala, whitespace does not affect the code's functionality. The above code can be written in different ways, and the output will remain the same. For example,
+      </p>
+
+      <pre><code class="language-scala">@main def hello() = 
+  println(&quot;hello, world&quot;)</code></pre>
+
+      <p>
+        When your method contains more than one statement in its body, it is recommended to format the code in this way to achieve readability.
+      </p>
+
+      <p>
+        Run the program again and confirm the output. You should see the same identical <em>hello, world</em> text as the output.
+      </p>
+
+      <hr>
+
+      <p>
+        You can rename the <code>hello()</code> method to <code>main()</code> (or any other name) in Scala, and there won't be any issues with this change. Scala considers it as the <em>main</em> method. The only difference is that after compilation, <code>scalac</code> will generate <code>main.class</code> (along with a few other files) instead of <code>hello.class</code>.
+      </p>
+
+      <pre><code class="language-scala">@main def main() = 
+  println(&quot;hello, world&quot;)</code></pre>
+
+      <p>Following are the commands we need to run in order to see the output after this new change.</p>
+
+      <pre><code>$ scalac hello.scala</code></pre>
+
+      <pre><code>$ scala main
+hello, world</code></pre>
+
+      <a href="index.html">&larr; Back</a>
+    </main>
+
+    <img src="peep-91.svg" alt="Peep with mustache" id="peep" onClick="party()">
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+      function party() {
+        var count = 200;
+        var defaults = {
+          origin: { y: 0.7 }
+        };
+
+        function fire(particleRatio, opts) {
+          confetti(Object.assign({}, defaults, opts, {
+            particleCount: Math.floor(count * particleRatio)
+          }));
+        }
+
+        fire(0.25, {
+          spread: 26,
+          startVelocity: 55,
+        });
+
+        fire(0.2, {
+          spread: 60,
+        });
+
+        fire(0.35, {
+          spread: 100,
+          decay: 0.91,
+          scalar: 0.8
+        });
+
+        fire(0.1, {
+          spread: 120,
+          startVelocity: 25,
+          decay: 0.92,
+          scalar: 1.2
+        });
+
+        fire(0.1, {
+          spread: 120,
+          startVelocity: 45,
+        });
+      }
+    </script> 
+  </body>
+</html>
