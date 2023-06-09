@@ -8,6 +8,11 @@
     <meta name="author" content="Kiran Chauhan">
     <title>Scala Tutorial Pt. 2</title>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.8.0/styles/nord.css">
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/scala.min.js"></script>
+    <script>hljs.highlightAll();</script>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');
       @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
@@ -45,13 +50,8 @@
       code,
       pre {
         font-size: inherit;
-        font-family: 'JetBrains Mono', monospace;
+        font-family: 'JetBrains Mono', monospace !important;
         color: darkred;
-      }
-      pre {
-        overflow-x: auto;
-        border: 1px solid #eeeeef;
-        padding: .85rem .65rem;
       }
       hr {
         margin: 1rem 0;
@@ -213,7 +213,7 @@ String</code></pre>
 
       <p>We can now call the above method as,</p>
 
-      <pre><code>sum(20, 22)
+      <pre><code class="language-scala">sum(20, 22)
 sum(20)
 sum()</code></pre>
 
