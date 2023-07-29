@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="favicon.ico">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="favicon.ico" />
 
-    <meta name="author" content="Kiran Chauhan">
-    <meta name="description" content="Technical Lead with around 9 years of experience.">
+    <meta name="author" content="Kiran Chauhan" />
+    <meta name="description" content="Technical Lead with around 9 years of experience." />
     <title>KC</title>
 
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+      @import url("https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 
       *,
       *::before,
@@ -35,7 +35,7 @@
       h1 {
         font-weight: 700;
         font-size: 3rem;
-        margin-block: .2rem;
+        margin-block: 0.2rem;
         text-rendering: optimizelegibility;
       }
       #peep {
@@ -65,7 +65,7 @@
         margin-top: 4rem;
       }
       li {
-        margin-bottom: .6rem;
+        margin-bottom: 0.6rem;
       }
       .email {
         position: fixed;
@@ -80,7 +80,8 @@
 
     <main>
       <p>
-        I design software with and for people. I occasionally read and write. I know Gujarati, Node, React, and Python. 
+        I design software with and for people. I occasionally read and <a href="blog.html">write</a>. I know Gujarati,
+        Node, React, and Python.
       </p>
 
       <!-- <ul>
@@ -103,20 +104,22 @@
       <span class="email">kc@marichi.dev</span>
     </main>
 
-    <img src="peep-91.svg" alt="Peep with mustache" id="peep" onClick="party()">
+    <img src="peep-91.svg" alt="Peep with mustache" id="peep" onClick="party()" />
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script>
       function party() {
         var count = 200;
         var defaults = {
-          origin: { y: 0.7 }
+          origin: { y: 0.7 },
         };
 
         function fire(particleRatio, opts) {
-          confetti(Object.assign({}, defaults, opts, {
-            particleCount: Math.floor(count * particleRatio)
-          }));
+          confetti(
+            Object.assign({}, defaults, opts, {
+              particleCount: Math.floor(count * particleRatio),
+            })
+          );
         }
 
         fire(0.25, {
@@ -131,14 +134,14 @@
         fire(0.35, {
           spread: 100,
           decay: 0.91,
-          scalar: 0.8
+          scalar: 0.8,
         });
 
         fire(0.1, {
           spread: 120,
           startVelocity: 25,
           decay: 0.92,
-          scalar: 1.2
+          scalar: 1.2,
         });
 
         fire(0.1, {
@@ -146,6 +149,6 @@
           startVelocity: 45,
         });
       }
-    </script> 
+    </script>
   </body>
 </html>
