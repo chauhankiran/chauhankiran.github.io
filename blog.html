@@ -8,9 +8,9 @@
     <meta name="author" content="Kiran Chauhan" />
     <meta
       name="description"
-      content="Technical Lead with around 9 years of experience."
+      content="Page contains some of the articles I write"
     />
-    <title>KC</title>
+    <title>Blog | KC</title>
 
     <style>
       @import url('https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');
@@ -63,8 +63,6 @@
         text-decoration: none;
       }
       ul {
-        list-style-type: none;
-        padding-left: 0;
         margin-top: 4rem;
       }
       li {
@@ -78,69 +76,25 @@
   </head>
   <body>
     <header>
-      <h1><span class="first-name">Kiran</span> Chauhan</h1>
+      <h1><span class="first-name">Blog</span></h1>
     </header>
 
     <main>
-      <p>
-        I design software with and for people. I occasionally
-        <a href="read.html">read</a> and <a href="blog.html">write</a>. I know
-        Gujarati, Node, React, and Python.
-      </p>
+      <p>This page contains some of the articles I write.</p>
+
+      <ul>
+        <li>
+          <time>Aug 2023</time> ::
+          <a href="scala2.html">Scala Tutorial Pt. 2</a>
+        </li>
+
+        <li>
+          <time>Aug 2023</time> ::
+          <a href="scala1.html">Scala Tutorial Pt. 1</a>
+        </li>
+      </ul>
 
       <span class="email">kiran@mailfence.com</span>
     </main>
-
-    <img
-      src="peep-91.svg"
-      alt="Peep with mustache"
-      id="peep"
-      onClick="party()"
-    />
-
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    <script>
-      function party() {
-        var count = 200;
-        var defaults = {
-          origin: { y: 0.7 },
-        };
-
-        function fire(particleRatio, opts) {
-          confetti(
-            Object.assign({}, defaults, opts, {
-              particleCount: Math.floor(count * particleRatio),
-            })
-          );
-        }
-
-        fire(0.25, {
-          spread: 26,
-          startVelocity: 55,
-        });
-
-        fire(0.2, {
-          spread: 60,
-        });
-
-        fire(0.35, {
-          spread: 100,
-          decay: 0.91,
-          scalar: 0.8,
-        });
-
-        fire(0.1, {
-          spread: 120,
-          startVelocity: 25,
-          decay: 0.92,
-          scalar: 1.2,
-        });
-
-        fire(0.1, {
-          spread: 120,
-          startVelocity: 45,
-        });
-      }
-    </script>
   </body>
 </html>

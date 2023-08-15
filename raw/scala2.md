@@ -1,8 +1,4 @@
----
-layout: post
-title: "Scala Tutorial Pt. 2"
-tags: scala
----
+# Scala Tutorial Pt. 2
 
 For the next few minutes, I won't be writing the entire Scala program. Instead, I'll show you a portion of the program (a few lines of code) to explain the syntax and elements of the language. I'll provide you with various syntax examples and information.
 
@@ -19,19 +15,24 @@ But, this is not syntactically correct because variables need to be defined with
 Following are the few of may types Scala by default provides you.
 
 ```
-Byte
-Short
-Int
-Long
+// Integer data types.
+* Byte
+* Short
+* Int
+* Long
 
-Float
-Double
+// Floating point number data types.
+* Float
+* Double
 
-Char
+// Character data type.
+* Char
 
-Boolean
+// Boolean data type.
+* Boolean
 
-String
+// String data type.
+* String
 ```
 
 Following is the correct way to define variable `amount` in Scala with type.
@@ -42,7 +43,7 @@ var amount: Float
 
 The type of a variable is specified after its name, followed by a colon. This syntax is inspired by Haskell, a well-known functional programming language. Go also use the same syntax and so as TypeScript. Some language designers think that this is more easy to read like, _define a variable `amount` with type float_.
 
-You can optionally assign the initial value to the variables you're going to create with assignment operator (`=`).
+You can optionally assign an initial value to the variables you're creating using the assignment operator (=).
 
 ```scala
 var amount: Float = 3.29
@@ -82,6 +83,8 @@ def hello(): String =
   return "hello, world"
 ```
 
+The return keyword is often optional, especially when the method's last expression is the value you want to return.
+
 Notice the type we've mentioned after colon(`:`) and before the assignment operator (`=`). Yes, if we're returning something we need to define the return type for the method like above.
 
 For the method that return nothing, `Unit` should be used but optionally.
@@ -113,7 +116,7 @@ sum(20, 22)
 
 This call return the same of these two numbers.
 
-Scala supports the optional parameter by providing the default value.
+Scala supports optional parameters by allowing you to provide default values.
 
 ```scala
 def sum(x: Int = 0, y: Int = 0): Int =

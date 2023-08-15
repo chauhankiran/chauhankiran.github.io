@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="favicon.ico" />
+
+    <meta name="author" content="Kiran Chauhan" />
+    <meta
+      name="description"
+      content="In this article, we cover the data types and basics of methods in Scala."
+    />
+    <title>Scala Tutorial Pt. 2 | KC</title>
+
+    <link rel="stylesheet" href="prism.css" />
+  </head>
+  <body>
+    <header>
+      <h1><span class="first-name">Scala</span> Tutorial Pt. 2</h1>
+    </header>
+
+    <main>
+      <p>
+        Prefer offline?
+        <a href="raw/scala2.pdf" target="_blank"
+          >Download PDF of Scala Tutorial Pt. 2</a
+        >.
+      </p>
+
+      <p>
+        For the next few minutes, I won't be writing the entire Scala program.
+        Instead, I'll show you a portion of the program (a few lines of code) to
+        explain the syntax and elements of the language. I'll provide you with
+        various syntax examples and information.
+      </p>
+      <p>
+        I don't expect you to learn and remember every syntax and detail I
+        discuss. Just read and try to remember as much as you can, but don't
+        worry too much because you'll eventually become familiar with all of
+        these through practice. Now, let's begin with variables
+        (<code>var</code>) and constants (<code>val</code>).
+      </p>
+      <p>Variables are created using <code>var</code> keyword.</p>
+      <pre><code class="language-scala">var amount
+</code></pre>
+      <p>
+        But, this is not syntactically correct because variables need to be
+        defined with a type since Scala is a <em>typed</em> programming
+        language.
+      </p>
+      <p>Following are the few of may types Scala by default provides you.</p>
+      <pre><code>// Integer data types.
+* Byte
+* Short
+* Int
+* Long
+
+// Floating point number data types.
+* Float
+* Double
+
+// Character data type.
+* Char
+
+// Boolean data type.
+* Boolean
+
+// String data type.
+* String
+</code></pre>
+      <p>
+        Following is the correct way to define variable <code>amount</code> in
+        Scala with type.
+      </p>
+      <pre><code class="language-scala">var amount: Float
+</code></pre>
+      <p>
+        The type of a variable is specified after its name, followed by a colon.
+        This syntax is inspired by Haskell, a well-known functional programming
+        language. Go also use the same syntax and so as TypeScript. Some
+        language designers think that this is more easy to read like,
+        <em>define a variable <code>amount</code> with type float</em>.
+      </p>
+      <p>
+        You can optionally assign an initial value to the variables you're
+        creating using the assignment operator (=).
+      </p>
+      <pre><code class="language-scala">var amount: Float = 3.29
+</code></pre>
+      <p>
+        Scala is an intelligent programming language, which means that if you
+        provide an initial value to a variable, it will automatically determine
+        or &quot;infer&quot; the type of the variable based on that initial
+        value. In such cases, you don't have to explicitly mention the type of
+        the variable.
+      </p>
+      <pre><code class="language-scala">var amount = 3.29
+</code></pre>
+      <p>
+        In the code mentioned above, Scala will assign the type
+        <code>Double</code> to the variable <code>amount</code>. Scala has
+        multiple types for floating point numbers and integers, and it needs to
+        decide on a default initial type. For floating point numbers, Scala has
+        chosen <code>Double</code>, and for integers, it has chosen
+        <code>Int</code>. However, for types like <code>Char</code>,
+        <code>Boolean</code>, <code>String</code>, and others, there is no need
+        for Scala or us to make a choice because there are no other options
+        available. Additionally, it's worth noting that all types in Scala are
+        capitalized.
+      </p>
+      <p>
+        Similar to variables, we can define constants using the same syntax,
+        with one difference: instead of using the keyword var, we use val, which
+        stands for &quot;value&quot; or constant. The rule for constants is that
+        you cannot change their value once they are assigned.
+      </p>
+      <pre><code class="language-scala">val price = 49
+</code></pre>
+      <p>
+        Nowadays, developers use word <em>immutable variables</em> instead of
+        constants. So, with this new trend, we just defined the immutable
+        variable <code>price</code> with initial value of <code>49</code> using
+        <code>val</code> keyword.
+      </p>
+      <p>
+        Most of the time, I'm going to use <code>val</code> keyword as that's
+        what community prefer and suggest. Also, if you know the initial value,
+        you don't have to worry about the types!
+      </p>
+      <hr />
+      <p>
+        Let's talk about the methods as you already know the part of it as we
+        have already defined method in previous article. Let me copy the same
+        method here for the further discussion.
+      </p>
+      <pre><code class="language-scala">def hello() =
+  println(&quot;hello, world&quot;)
+</code></pre>
+      <p>
+        Using <code>return</code> statement, we can return something from the
+        method.
+      </p>
+      <pre><code class="language-scala">def hello(): String =
+  return &quot;hello, world&quot;
+</code></pre>
+      <p>
+        The return keyword is often optional, especially when the method's last
+        expression is the value you want to return.
+      </p>
+      <p>
+        Notice the type we've mentioned after colon(<code>:</code>) and before
+        the assignment operator (<code>=</code>). Yes, if we're returning
+        something we need to define the return type for the method like above.
+      </p>
+      <p>
+        For the method that return nothing, <code>Unit</code> should be used but
+        optionally.
+      </p>
+      <pre><code class="language-scala">def hello(): Unit =
+  println(&quot;hello, world&quot;)
+</code></pre>
+      <p>
+        Method by default return the result of last expression. In such a case,
+        you can omit the <code>return</code> keyword.
+      </p>
+      <pre><code class="language-scala">def hello(): String =
+  &quot;hello, world&quot;
+</code></pre>
+      <p>
+        If method accepts the parameters, those parameters also needs to defined
+        with type.
+      </p>
+      <pre><code class="language-scala">def sum(x: Int, y: Int): Int =
+  return x + y
+</code></pre>
+      <p>
+        This method accepts <code>x</code> and <code>y</code> both as the
+        integer type and return the integer. It is mandatory to define the
+        parameters of the method with type like we did for <code>x</code> and
+        <code>y</code>. Calling this method is as usual as,
+      </p>
+      <pre><code class="language-scala">sum(20, 22)
+</code></pre>
+      <p>This call return the same of these two numbers.</p>
+      <p>
+        Scala supports optional parameters by allowing you to provide default
+        values.
+      </p>
+      <pre><code class="language-scala">def sum(x: Int = 0, y: Int = 0): Int =
+  return x + y
+</code></pre>
+      <p>We can now call the above method as,</p>
+      <pre><code class="language-scala">sum(20, 22)
+sum(20)
+sum()
+</code></pre>
+      <p>
+        The first call return <code>42</code>. Second call returns the
+        <code>20</code> as value of <code>x</code> is 20 and <code>y</code> is 0
+        as default value. Third call returns 0 as <code>x</code> and
+        <code>y</code> are default to <code>0</code>.
+      </p>
+
+      <script src="prism.js"></script>
+    </main>
+  </body>
+</html>

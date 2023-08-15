@@ -1,8 +1,4 @@
----
-layout: post
-title: "Scala Tutorial Pt. 1"
-tags: scala
----
+# Scala Tutorial Pt. 1
 
 [Scala](https://www.scala-lang.org) is both an object-oriented and functional programming language. It is based on the Java Virtual Machine (JVM) and supports seamless integration with Java. Visit the [Getting Started](https://docs.scala-lang.org/getting-started/index.html) page to correctly install Scala on your computer, based on the operating system you have.
 
