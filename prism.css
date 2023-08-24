@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&family=Source+Code+Pro:ital@0;1&display=swap');
-
 *,
 *::before,
 *::after {
@@ -12,7 +10,8 @@ body {
 }
 body {
   color: #222;
-  font-family: 'PT Serif', 'Georgia', 'Helvetica Neue', Arial, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-size: 1.3rem;
   line-height: 1.42;
   margin: 5rem auto;
@@ -20,6 +19,15 @@ body {
   max-width: 42rem;
   padding: 1.5rem;
 }
+
+hr {
+  margin: 2rem 0 1rem 0;
+  color: inherit;
+  border: 0;
+  border-top: 1px solid;
+  opacity: 0.25;
+}
+
 h1 {
   font-weight: 700;
   font-size: 3rem;
@@ -43,10 +51,6 @@ h1 {
 .first-name {
   font-weight: 400;
 }
-a {
-  color: #0000ff;
-  text-decoration: none;
-}
 ul {
   margin-top: 4rem;
 }
@@ -54,21 +58,17 @@ li {
   margin-bottom: 0.6rem;
 }
 code {
-  font-family: 'Source Code Pro', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono',
-    monospace;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
   color: #905;
 }
-
 /* PrismJS 1.29.0
-https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript+ada+apacheconf+apl+aql+arduino+arff+armasm+arturo+asciidoc+aspnet+asm6502+avro-idl+awk+bash+basic+batch+bison+bnf+bqn+brainfuck+bsl+c+csharp+cpp+cil+cilkc+cilkcpp+clojure+cmake+cobol+coffeescript+csp+crystal+css-extras+csv+cue+cypher+d+dart+dataweave+diff+django+dns-zone-file+docker+eiffel+ejs+elixir+elm+etlua+erb+erlang+excel-formula+fsharp+false+flow+fortran+gml+gettext+git+linker-script+go+go-module+gradle+graphql+groovy+haml+handlebars+haskell+haxe+hcl+hlsl+hoon+http+hpkp+hsts+ichigojam+icon+icu-message-format+idris+ignore+inform7+ini+io+j+java+javadoc+javadoclike+javastacktrace+jolie+jq+jsdoc+js-extras+json+json5+jsonp+jsstacktrace+js-templates+julia+keyman+kotlin+latex+less+lilypond+liquid+lisp+livescript+llvm+log+lua+magma+makefile+markdown+markup-templating+mata+matlab+mel+metafont+mongodb+monkey+moonscript+nand2tetris-hdl+nasm+nginx+nim+nix+objectivec+ocaml+opencl+oz+parser+perl+php+phpdoc+php-extras+plsql+powerquery+powershell+processing+prolog+properties+python+r+racket+cshtml+jsx+tsx+reason+regex+rest+roboconf+robotframework+ruby+rust+sas+sass+scss+scala+scheme+shell-session+sml+solidity+solution-file+soy+sql+squirrel+iecst+stylus+swift+systemd+tcl+textile+toml+typescript+typoscript+uorazor+uri+v+vala+vim+visual-basic+wasm+wiki+wolfram+wren+xml-doc+yaml+zig&plugins=line-highlight+toolbar+copy-to-clipboard */
+https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+clike+javascript+abap+abnf+actionscript+ada+agda+al+antlr4+apacheconf+apex+apl+applescript+aql+arduino+arff+armasm+arturo+asciidoc+aspnet+asm6502+asmatmel+autohotkey+autoit+avisynth+avro-idl+awk+bash+basic+batch+bbcode+bbj+bicep+birb+bison+bnf+bqn+brainfuck+brightscript+bro+bsl+c+csharp+cpp+cfscript+chaiscript+cil+cilkc+cilkcpp+clojure+cmake+cobol+coffeescript+concurnas+csp+cooklang+coq+crystal+css-extras+csv+cue+cypher+d+dart+dataweave+dax+dhall+diff+django+dns-zone-file+docker+dot+ebnf+editorconfig+eiffel+ejs+elixir+elm+etlua+erb+erlang+excel-formula+fsharp+factor+false+firestore-security-rules+flow+fortran+ftl+gml+gap+gcode+gdscript+gedcom+gettext+gherkin+git+glsl+gn+linker-script+go+go-module+gradle+graphql+groovy+haml+handlebars+haskell+haxe+hcl+hlsl+hoon+http+hpkp+hsts+ichigojam+icon+icu-message-format+idris+ignore+inform7+ini+io+j+java+javadoc+javadoclike+javastacktrace+jexl+jolie+jq+jsdoc+js-extras+json+json5+jsonp+jsstacktrace+js-templates+julia+keepalived+keyman+kotlin+kumir+kusto+latex+latte+less+lilypond+liquid+lisp+livescript+llvm+log+lolcode+lua+magma+makefile+markdown+markup-templating+mata+matlab+maxscript+mel+mermaid+metafont+mizar+mongodb+monkey+moonscript+n1ql+n4js+nand2tetris-hdl+naniscript+nasm+neon+nevod+nginx+nim+nix+nsis+objectivec+ocaml+odin+opencl+openqasm+oz+parigp+parser+pascal+pascaligo+psl+pcaxis+peoplecode+perl+php+phpdoc+php-extras+plant-uml+plsql+powerquery+powershell+processing+prolog+promql+properties+protobuf+pug+puppet+pure+purebasic+purescript+python+qsharp+q+qml+qore+r+racket+cshtml+jsx+tsx+reason+regex+rego+renpy+rescript+rest+rip+roboconf+robotframework+ruby+rust+sas+sass+scss+scala+scheme+shell-session+smali+smalltalk+smarty+sml+solidity+solution-file+soy+sparql+splunk-spl+sqf+sql+squirrel+stan+stata+iecst+stylus+supercollider+swift+systemd+t4-templating+t4-cs+t4-vb+tap+tcl+tt2+textile+toml+tremor+turtle+twig+typescript+typoscript+unrealscript+uorazor+uri+v+vala+vbnet+velocity+verilog+vhdl+vim+visual-basic+warpscript+wasm+web-idl+wgsl+wiki+wolfram+wren+xeora+xml-doc+xojo+xquery+yaml+yang+zig&plugins=line-highlight+line-numbers+toolbar+copy-to-clipboard */
 code[class*='language-'],
 pre[class*='language-'] {
-  color: #000;
+  color: #ccc;
   background: 0 0;
-  text-shadow: 0 1px #fff;
-  font-family: 'Source Code Pro', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono',
-    monospace;
-  font-size: 14px;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  font-size: 1em;
   text-align: left;
   white-space: pre;
   word-spacing: normal;
@@ -83,26 +83,6 @@ pre[class*='language-'] {
   -ms-hyphens: none;
   hyphens: none;
 }
-code[class*='language-'] ::-moz-selection,
-code[class*='language-']::-moz-selection,
-pre[class*='language-'] ::-moz-selection,
-pre[class*='language-']::-moz-selection {
-  text-shadow: none;
-  background: #b3d4fc;
-}
-code[class*='language-'] ::selection,
-code[class*='language-']::selection,
-pre[class*='language-'] ::selection,
-pre[class*='language-']::selection {
-  text-shadow: none;
-  background: #b3d4fc;
-}
-@media print {
-  code[class*='language-'],
-  pre[class*='language-'] {
-    text-shadow: none;
-  }
-}
 pre[class*='language-'] {
   padding: 1em;
   margin: 0.5em 0;
@@ -110,62 +90,61 @@ pre[class*='language-'] {
 }
 :not(pre) > code[class*='language-'],
 pre[class*='language-'] {
-  background: #f5f2f0;
+  background: #2d2d2d;
 }
 :not(pre) > code[class*='language-'] {
   padding: 0.1em;
   border-radius: 0.3em;
   white-space: normal;
 }
+.token.block-comment,
 .token.cdata,
 .token.comment,
 .token.doctype,
 .token.prolog {
-  color: #708090;
-}
-.token.punctuation {
   color: #999;
 }
-.token.namespace {
-  opacity: 0.7;
-}
-.token.boolean,
-.token.constant,
-.token.deleted,
-.token.number,
-.token.property,
-.token.symbol,
-.token.tag {
-  color: #905;
+.token.punctuation {
+  color: #ccc;
 }
 .token.attr-name,
-.token.builtin,
-.token.char,
-.token.inserted,
-.token.selector,
-.token.string {
-  color: #690;
+.token.deleted,
+.token.namespace,
+.token.tag {
+  color: #e2777a;
 }
-.language-css .token.string,
-.style .token.string,
+.token.function-name {
+  color: #6196cc;
+}
+.token.boolean,
+.token.function,
+.token.number {
+  color: #f08d49;
+}
+.token.class-name,
+.token.constant,
+.token.property,
+.token.symbol {
+  color: #f8c555;
+}
+.token.atrule,
+.token.builtin,
+.token.important,
+.token.keyword,
+.token.selector {
+  color: #cc99cd;
+}
+.token.attr-value,
+.token.char,
+.token.regex,
+.token.string,
+.token.variable {
+  color: #7ec699;
+}
 .token.entity,
 .token.operator,
 .token.url {
-  color: #9a6e3a;
-}
-.token.atrule,
-.token.attr-value,
-.token.keyword {
-  color: #07a;
-}
-.token.class-name,
-.token.function {
-  color: #dd4a68;
-}
-.token.important,
-.token.regex,
-.token.variable {
-  color: #e90;
+  color: #67cdcc;
 }
 .token.bold,
 .token.important {
@@ -176,6 +155,9 @@ pre[class*='language-'] {
 }
 .token.entity {
   cursor: help;
+}
+.token.inserted {
+  color: green;
 }
 pre[data-line] {
   position: relative;
@@ -200,7 +182,7 @@ pre[data-line] {
 @media print {
   .line-highlight {
     -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
+    color-adjust: exact;
   }
 }
 .line-highlight:before,
@@ -238,6 +220,40 @@ pre[id].linkable-line-numbers span.line-numbers-rows > span:before {
 pre[id].linkable-line-numbers span.line-numbers-rows > span:hover:before {
   background-color: rgba(128, 128, 128, 0.2);
 }
+pre[class*='language-'].line-numbers {
+  position: relative;
+  padding-left: 3.8em;
+  counter-reset: linenumber;
+}
+pre[class*='language-'].line-numbers > code {
+  position: relative;
+  white-space: inherit;
+}
+.line-numbers .line-numbers-rows {
+  position: absolute;
+  pointer-events: none;
+  top: 0;
+  font-size: 100%;
+  left: -3.8em;
+  width: 3em;
+  letter-spacing: -1px;
+  border-right: 1px solid #999;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.line-numbers-rows > span {
+  display: block;
+  counter-increment: linenumber;
+}
+.line-numbers-rows > span:before {
+  content: counter(linenumber);
+  color: #999;
+  display: block;
+  padding-right: 0.8em;
+  text-align: right;
+}
 div.code-toolbar {
   position: relative;
 }
@@ -272,7 +288,6 @@ div.code-toolbar > .toolbar > .toolbar-item > button {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  user-select: none;
 }
 div.code-toolbar > .toolbar > .toolbar-item > a,
 div.code-toolbar > .toolbar > .toolbar-item > button,
