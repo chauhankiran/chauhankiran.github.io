@@ -13,8 +13,6 @@
     <title>KC</title>
 
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&display=swap");
-
       *,
       *::before,
       *::after {
@@ -27,31 +25,16 @@
       }
       body {
         color: #222;
-        font-family: "PT Serif", serif;
-        font-size: 1.3rem;
+        font-family: Arial, serif;
+        font-size: 1rem;
         line-height: 1.42;
         margin: 5rem auto;
         width: 100%;
         max-width: 42rem;
         padding: 1.5rem;
       }
-      h1 {
-        font-weight: 700;
-        font-size: 3rem;
-        margin-bottom: 0.2rem;
-        text-rendering: optimizelegibility;
-      }
-      .first-name {
-        font-weight: 400;
-      }
-      .last-name {
-        color: darkred;
-      }
-      p {
-        margin-top: 0;
-      }
-      .email {
-        margin-top: 4rem;
+      blockquote {
+        margin-left: 0;
       }
       footer {
         position: fixed;
@@ -70,20 +53,21 @@
     </script>
   </head>
   <body>
-    <header>
-      <h1>
-        <span class="first-name">Kiran</span> 
-        <span class="last-name">Chauhan</span>
-      </h1>
-    </header>
-
     <main>
-      <p>I design software with and for people.</p>
-      <p class="email">kc@marichi.dev</p>
+      <blockquote>
+        <p>
+          I think that it's extraordinarily important that we in computer science keep fun in computing. When it started out, it was an awful lot of fun. Of course, the paying customers got shafted every now and then, and after a while we began to take their complaints seriously. We began to feel as if we really were responsible for the successful, error-free perfect use of these machines. I don't think we are. I think we're responsible for stretching them, setting them off in new directions, and keeping fun in the house. I hope the field of computer science never loses its sense of fun. Above all, I hope we don't become missionaries. Don't feel as if you're Bible salesmen. The world has too many of those already. What you know about computing other people will learn. Don't feel as if the key to successful computing is only in your hands. What's in your hands, I think and hope, is intelligence: the ability to see the machine as more than when you were first led up to it, that you can make it more.
+        </p>
+        <cite>
+          Alan J. Perlis (April 1, 1922-February 7, 1990)          
+        </cite>
+      </blockquote>
     </main>
 
     <footer>
-      <a href="quotes.html">quotes</a>
+      <address>
+        kc@marichi.dev
+      </address>
     </footer>
   </body>
 </html>
